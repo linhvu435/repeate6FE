@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home/home.component';
 import { NavbarComponent } from './navbar/navbar/navbar.component';
 import { ShowfooterComponent } from './footer/showfooter/showfooter.component';
 import {HttpClientModule} from "@angular/common/http";
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import {HttpClientModule} from "@angular/common/http";
     HomeComponent,
     NavbarComponent,
     ShowfooterComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,
