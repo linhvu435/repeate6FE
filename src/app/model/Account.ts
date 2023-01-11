@@ -8,7 +8,7 @@ export class Account {
   password!:string;
   phoneNumber! :string;
   name!:string;
-
+  address!: string;
   birthday!:Date;
 
   date!:Date;
