@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {Bill} from "../../model/Bill";
 import {ProductInBillDTO} from "../../model/DTO/ProductInBillDTO";
-import {ShopService} from "../../service/shopservice/shop.service";
+import {ShopService} from "../../service/shopserviceM/shop.service";
 import {Router} from "@angular/router";
 
 @Component({
