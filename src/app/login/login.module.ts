@@ -4,18 +4,26 @@ import { CommonModule } from '@angular/common';
 import { LoginRoutingModule } from './login-routing.module';
 import {LoginComponent} from "./login/login.component";
 import {RegisterComponent} from "./register/register.component";
-import {CheckoutComponent} from "./checkout/checkout.component";
+import {ReactiveFormsModule} from "@angular/forms";
+import {HttpClientModule} from "@angular/common/http";
+import { ViewAccountComponent } from './view-account/view-account.component';
 
 
 @NgModule({
-  declarations: [
-    LoginComponent,
-    RegisterComponent,
-    CheckoutComponent,
-  ],
-  imports: [
-    CommonModule,
-    LoginRoutingModule
-  ]
+    declarations: [
+        LoginComponent,
+        RegisterComponent,
+        ViewAccountComponent,
+
+    ],
+    exports: [
+        RegisterComponent
+    ],
+    imports: [
+        CommonModule,
+        LoginRoutingModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+    ]
 })
 export class LoginModule { }
