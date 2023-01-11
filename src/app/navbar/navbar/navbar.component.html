@@ -6,12 +6,12 @@
       <div class="header-top-inner">
         <div class="cnt-account">
           <ul class="list-unstyled">
-            <li *ngIf="token != null"><a routerLink="/login/view" ><i class="icon fa fa-user" ></i>My Account</a></li>
+            <li ><a routerLink="/login/view" ><i class="icon fa fa-user" ></i>My Account</a></li>
             <li><a href="#"><i class="icon fa fa-heart"></i>Wishlist</a></li>
             <li><a href="#"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
-            <li><a (click)="logout()"><i class="icon fa fa-check"></i>Checkout</a></li>
+            <li *ngIf="token!= null"><a (click)="logout()"><i class="icon fa fa-check"></i>Checkout</a></li>
             <li><a routerLink="/login/create"><i class="icon fa fa-heart"></i>Register</a></li>
-            <li><a routerLink="/login"><i class="icon fa fa-lock"></i>Login</a></li>
+            <li *ngIf="token == null"><a routerLink="/login"><i class="icon fa fa-lock"></i>Login</a></li>
           </ul>
         </div>
         <!-- /.cnt-account -->

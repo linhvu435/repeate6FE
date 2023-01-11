@@ -18,7 +18,8 @@
             <div class="col-md-12"><label class="labels" readonly="">Address</label><input readonly type="text" class="form-control"  [value]="address"></div>
             <div class="col-md-12"><label class="labels" readonly="">Birthday</label><input  readonly type="text" class="form-control" [value]="birthday"></div>
             <div class="col-md-12"><label class="labels" readonly="">Gender</label><input readonly type="text" class="form-control"  [value]="gender"></div>
-            <div *ngIf="shopAddress!= null" class="col-md-12"><label class="labels" readonly="">ShopIMG</label><input readonly type="text" class="form-control"  [value]="imgShop"></div>
+            <div *ngIf="shopAddress!= null" class="col-md-12">
+              <label class="labels" readonly="">ShopIMG</label><input readonly type="text" class="form-control"  [value]="imgShop"></div>
             <div *ngIf="shopName!=null" class="col-md-12"><label class="labels" readonly="">Shop Name</label><input readonly type="text" class="form-control"  [value]="shopName"></div>
             <div *ngIf="shopAddress!=null"class="col-md-12"><label class="labels" readonly="">Shop Address</label><input readonly type="text" class="form-control"  [value]="shopAddress"></div>
           </div>

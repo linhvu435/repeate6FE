@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Shop} from "../../model/Shop";
 import {LoginService} from "../../service/LoginService/login.service";
 import {Router} from "@angular/router";
@@ -11,12 +11,17 @@ import Swal from "sweetalert2";
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnChanges {
   shop!: Shop
   id!: any
 
-  constructor(private loginService:LoginService, private router: Router,private shopService : ShopService) {
+
+  constructor(private loginService: LoginService, private router: Router, private shopService: ShopService) {
   }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.login();
+    }
   loginForm = new FormGroup({
     username: new FormControl("",Validators.required),
     password: new FormControl("",Validators.required)
@@ -34,13 +39,13 @@ export class LoginComponent {
       this.loginService.setGenger(data.gender);
       this.loginService.setDate(data.date);
       this.loginService.setBirthday(data.birthday)
-      this.shopService.setAddressShop(data.shopAddress)
       this.loginService.setRole(JSON.stringify(data.roles[0].id));
       this.id = localStorage.getItem("id")
       this.shopService.findById(this.id).subscribe((data)=>{
         this.shopService.setIdShop(data.id);
         this.shopService.setImgShop(data.img);
         this.shopService.setNameShop(data.name);
+        this.shopService.setAddressShop(data.shopAddress.name);
       })
         Swal.fire(
           ' OK!! ',

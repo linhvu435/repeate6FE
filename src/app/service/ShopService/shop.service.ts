@@ -11,7 +11,8 @@ export class ShopService {
 
   constructor(private http: HttpClient) { }
   findById(id: number): Observable<Shop> {
-    return this.http.get<Shop>(`${API_URL}/shop/${id}`);
+      return this.http.get<Shop>(`${API_URL}/shop/${id}`);
+
   }
   findShopById(id: number): Observable<Shop> {
     return this.http.get<Shop>(`${API_URL}/shop/shop/${id}`);
