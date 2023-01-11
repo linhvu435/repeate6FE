@@ -8,6 +8,7 @@ import { NavbarComponent } from './navbar/navbar/navbar.component';
 import { ShowfooterComponent } from './footer/showfooter/showfooter.component';
 import {HttpClientModule} from "@angular/common/http";
 import { SearchComponent } from './search/search.component';
+import { ShopComponent } from './shop/shop.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { SearchComponent } from './search/search.component';
     NavbarComponent,
     ShowfooterComponent,
     SearchComponent,
+    ShopComponent,
   ],
   imports: [
     BrowserModule,
@@ -23,6 +25,9 @@ import { SearchComponent } from './search/search.component';
     HttpClientModule
   ],
   providers: [],
+  exports: [
+    ShopComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
