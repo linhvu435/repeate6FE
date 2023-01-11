@@ -15,7 +15,7 @@
                     <div class="row">
                       <div class="col-sm-12 col-md-3">
                         <ul class="links list-unstyled">
-                          <li><a routerLink="myshop">Thông tin cá nhân</a></li>
+                          <li><a routerLink="/shop/myshop">Thông tin cá nhân</a></li>
                           <li><a routerLink="">Khách hàng thân thiet</a></li>
 
                         </ul>
@@ -37,7 +37,7 @@
                     <div class="row">
                       <div class="col-sm-12 col-md-3">
                         <ul class="links list-unstyled">
-                          <li><a routerLink="myproductshop">Taast cả sản phẩm</a></li>
+                          <li><a routerLink="/shop/myproductshop">Taast cả sản phẩm</a></li>
                           <li><a routerLink="">Khách hàng thân thiet</a></li>
                         </ul>
                       </div>
@@ -59,7 +59,7 @@
                     <div class="row">
                       <div class="col-sm-12 col-md-3">
                         <ul class="links list-unstyled">
-                          <li><a routerLink="mybillshop">Toàn bộ đơn hàng</a></li>
+                          <li><a routerLink="/shop/mybillshop">Toàn bộ đơn hàng</a></li>
                           <li><a routerLink="">Đánh giá đơn hàng</a></li>
                           <li><a routerLink="">Đơn hàng chưa được xử lí</a></li>
                         </ul>
@@ -225,6 +225,66 @@
         </div>
 
       </div>
+      <div class="col-xs-12 col-sm-12 col-md-9 homebanner-holder" style="margin-top: 50px">
+
+        <!-- ============================================== SCROLL TABS ============================================== -->
+        <div id="product-tabs-slider1" class="scroll-tabs outer-top-vs wow fadeInUp">
+          <div class="more-info-tab clearfix ">
+            <h3 class="new-product-title pull-left">Đơn hàng của shop</h3>
+            <div class="search-box" style="margin-left: 500px">
+
+              <input type="text" placeholder="Tìm kiếm theo người mua" #name id="textsearch">
+              <a ><img src="/assets/images/search.png" alt="" ></a>
+            </div>
+
+          </div>
+        </div>
+
+        <div *ngFor="let b of bills"  >
+          <div id="product-tabs-slider" class="scroll-tabs outer-top-vs wow fadeInUp" >
+            <div class="more-info-tab clearfix ">
+              <h3 class="new-product-title pull-left">Người mua : {{b.account.name}}    </h3>
+            </div>
+            <div class="tab-content outer-top-xs" >
+              <div class="tab-pane in active" id="all">
+                <div class="product-slider">
+                  <!-- /.home-owl-carousel -->
+                </div>
+                <!-- /.product-slider -->
+              </div>
+              <!-- /.tab-pane -->
+              <div style="margin-bottom: 10px" >
+                <h4>Ngày mua:  {{b.date}}</h4>
+                <div id="thongtin{{b.id}}"></div>
+                <div id="{{b.id}}">
+
+                </div>
+                <h4>Trạng thái : {{b.billStatus.name}}</h4>
+                <h4>Tổng tiền : {{b.totalprice}}</h4>
+              </div>
+
+              <div class="d-grid gap-2" (click)="showbillbyidbill(b.id)">
+                <button class="btn btn-primary" type="button" style="width: 98%" >Xem chi tiết đơn hàng</button>
+                <h3>  </h3>
+                <div *ngIf="b.billStatus.id==1">
+                  <button class="btn btn-success" type="button" style="width: 98%" (click)="this.setbillshop(2,b.id)">Xác nhận đơn hàng</button>
+                  <h3></h3>
+                  <button class="btn btn-warning" type="button" style="width: 98%" (click)="this.setbillshop(5,b.id)">Hủy đơn hàng</button>
+                  <h3></h3>
+                </div>
+                <div *ngIf="b.billStatus.id==2">
+                  <button class="btn btn-warning" type="button" style="width: 98%" (click)="this.setbillshop(3,b.id)">Đánh dấu đã giao thành công</button>
+                  <h3></h3>
+                </div>
+              </div>
+
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
