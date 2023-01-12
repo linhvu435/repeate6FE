@@ -7,14 +7,14 @@ export const environment = {
   apiUrl: 'http://localhost:8080',
 
   firebaseConfig : {
-    apiKey: "AIzaSyB5AGoncucmVwqq-XxKw5do1Jg_Y_WYGjA",
-    authDomain: "module6-e6af1.firebaseapp.com",
-    databaseURL:"https://module6-e6af1-default-rtdb.firebaseio.com/",
-    projectId: "module6-e6af1",
-    storageBucket: "module6-e6af1.appspot.com",
-    messagingSenderId: "626314778454",
-    appId: "1:626314778454:web:4bba2e83c94ee6d50de8f7",
-    measurementId: "G-0QZC92ECEZ"
+    apiKey: "AIzaSyCGKxD6T4SQLPOiu7-ZnrUU9J48X0EbQP4",
+    authDomain: "uploadfine.firebaseapp.com",
+    projectId: "uploadfine",
+    storageBucket: "uploadfine.appspot.com",
+    messagingSenderId: "543325461252",
+    appId: "1:543325461252:web:b47ff38c4fda86d42b4e51",
+    measurementId: "G-W141434N98"
+
   }
 };
 

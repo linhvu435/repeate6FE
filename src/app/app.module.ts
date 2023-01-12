@@ -7,6 +7,9 @@ import { HomeComponent } from './home/home/home.component';
 import { NavbarComponent } from './navbar/navbar/navbar.component';
 import { ShowfooterComponent } from './footer/showfooter/showfooter.component';
 import {HttpClientModule} from "@angular/common/http";
+import {environment} from "../environments/environment";
+import {AngularFireStorageModule} from "@angular/fire/compat/storage";
+import {AngularFireModule} from "@angular/fire/compat";
 
 @NgModule({
   declarations: [
@@ -18,7 +21,10 @@ import {HttpClientModule} from "@angular/common/http";
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularFireStorageModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig, "cloud")
+
   ],
   providers: [],
   bootstrap: [AppComponent]

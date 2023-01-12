@@ -7,12 +7,14 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { NgxPaginationModule } from 'ngx-pagination';
 import { EditAdminComponent } from './edit-admin/edit-admin.component';
+import { ProductComponent } from './product/product.component';
 
 
 @NgModule({
   declarations: [
     ShowAdminComponent,
-    EditAdminComponent
+    EditAdminComponent,
+    ProductComponent
   ],
     imports: [
         CommonModule,

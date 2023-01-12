@@ -3,6 +3,8 @@ import {AdminService} from "../../service/adminService/admin.service";
 import {Roles} from "../../model/Roles";
 import {Account} from "../../model/Account";
 import {Router} from "@angular/router";
+import {Product} from "../../model/Product";
+import {ProductDTO} from "../../model/Dtos/ProductDTO";
 
 
 @Component({
@@ -18,6 +20,7 @@ constructor(private adminservice : AdminService,private router: Router) {
   S: number = 1;
   role!: Array<Roles>
   account!: Account[]
+  productDTO!: ProductDTO[];
 
   ngOnInit(): void {
     this.adminservice.showroles().subscribe((data) => {
@@ -25,6 +28,7 @@ constructor(private adminservice : AdminService,private router: Router) {
       this.role = data
     })
     this.showAccount()
+    this. showProduct()
   }
   showAccount() {
     this.adminservice.showAccountRoles(this.id).subscribe((data) => {
@@ -33,6 +37,14 @@ constructor(private adminservice : AdminService,private router: Router) {
 
     })
   }
+  showProduct() {
+    this.adminservice.showProduct().subscribe((data) => {
+      console.log(this.id)
+      this.productDTO = data
+      console.log(data);
+    })
+  }
+
   updateStatus(id:number,idStatus:number) {
     this.adminservice.updateStatus(id, idStatus).subscribe((data) => {
       this. showAccount();
