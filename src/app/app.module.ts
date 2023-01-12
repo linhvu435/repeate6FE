@@ -37,9 +37,10 @@ import {AngularFireModule} from "@angular/fire/compat";
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig, "cloud")
   ],
-  // @ts-ignore
-
-  provide: 'SocialAuthServiceConfig',
+  providers: [
+    [
+      {
+        provide: 'SocialAuthServiceConfig',
         useValue: {
           autoLogin: false,
           providers: [
@@ -54,6 +55,9 @@ import {AngularFireModule} from "@angular/fire/compat";
             console.error(err);
           }
         } as SocialAuthServiceConfig,
+      }
+    ]
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
