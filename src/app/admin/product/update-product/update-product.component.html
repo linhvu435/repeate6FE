@@ -1,0 +1,19 @@
+<!--  <title>Thông tin sản phẩm</title>-->
+<!--  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">-->
+
+<body>
+<form  class="decor" [formGroup]="editForm" (ngSubmit)="edit()">
+
+  <div class="form-left-decoration"></div>
+  <div class="form-right-decoration"></div>
+  <div class="circle"></div>
+  <div class="form-inner">
+    <h1>Thông tin sản phẩm sửa</h1>
+    <input type="text" placeholder="Tên Sản Phẩm" formControlName="name">
+    <input type="number" placeholder="Giá sản phẩm" formControlName="price">
+    <input type="number" placeholder="Số luong" formControlName="amount">
+    <textarea placeholder="thông tin chi tiết..." rows="5" formControlName="detail" ></textarea>
+    <button type="submit" [routerLink]="'list'">Hoàn thành</button>
+  </div>
+</form>
+</body>
