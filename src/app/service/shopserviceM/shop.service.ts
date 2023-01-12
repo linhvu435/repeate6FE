@@ -32,4 +32,5 @@ export class ShopService {
   showbillbyidbill(id:number):Observable<ProductInBillDTO[]>{
     return this.http.get<ProductInBillDTO[]>(`${API_URL}/order/showBillShopbyidbill/${id}`);
   }
+
 }

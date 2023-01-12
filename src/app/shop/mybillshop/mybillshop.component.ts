@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Bill} from "../../model/Bill";
 import {ProductInBillDTO} from "../../model/DTO/ProductInBillDTO";
 import {ShopService} from "../../service/shopserviceM/shop.service";
@@ -9,10 +9,12 @@ import {Router} from "@angular/router";
   templateUrl: './mybillshop.component.html',
   styleUrls: ['./mybillshop.component.css']
 })
-export class MybillshopComponent {
+export class MybillshopComponent implements OnInit{
   bills :Bill[]=[];
 
   product:ProductInBillDTO[]=[];
+
+  titlee = "Quản lí đơn hàng";
 
   product1!:any;
 
@@ -21,7 +23,12 @@ export class MybillshopComponent {
   }
 
   ngOnInit() {
-    this.showbillshop1
+    this.showbillshop.getAllBillshop().subscribe((data) => {
+      this.bills = data
+      this.titlee
+    })
+    console.log(this.bills)
+
   }
 
   showbillshop1():void{
@@ -29,7 +36,6 @@ export class MybillshopComponent {
       this.bills = data
     })
   }
-
   setbillshop(idstatus:number,idbill:number):void {
     this.showbillshop.setbill(idbill, idstatus).subscribe((data) => {
       this.showbillshop1()

@@ -8,8 +8,10 @@ import { NavbarComponent } from './navbar/navbar/navbar.component';
 import { ShowfooterComponent } from './footer/showfooter/showfooter.component';
 import { SearchComponent } from './search/search.component';
 import { ShopComponent } from './shop/shop.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { FooterComponent } from './footer/footer/footer.component';
+import {ShopModule} from "./shop/shop.module";
+import {AuthInterceptor} from "./auth/auth.interceptor";
 
 @NgModule({
   declarations: [
@@ -19,17 +21,23 @@ import { FooterComponent } from './footer/footer/footer.component';
     ShowfooterComponent,
     SearchComponent,
     ShopComponent,
-
     FooterComponent
 
 
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+
+    ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
-  providers: [],
   exports: [
     ShopComponent
   ],

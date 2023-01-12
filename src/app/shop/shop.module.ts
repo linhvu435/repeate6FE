@@ -5,15 +5,16 @@ import { ShopRoutingModule } from './shop-routing.module';
 import { MyshopComponent } from './myshop/myshop.component';
 import { MyproductshopComponent } from './myproductshop/myproductshop.component';
 import { MybillshopComponent } from './mybillshop/mybillshop.component';
-import {AppModule} from "../app.module";
-
 
 @NgModule({
-  declarations: [
-    MyshopComponent,
-    MyproductshopComponent,
-    MybillshopComponent
-  ],
+    declarations: [
+        MyshopComponent,
+        MyproductshopComponent,
+        MybillshopComponent
+
+    ],
+    exports: [
+    ],
     imports: [
         CommonModule,
         ShopRoutingModule
