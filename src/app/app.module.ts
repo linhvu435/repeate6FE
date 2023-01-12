@@ -21,6 +21,8 @@ import {AngularFireModule} from "@angular/fire/compat";
 
 
 
+import { ShopComponent } from './shop/shop.component';
+
 
 @NgModule({
   declarations: [
@@ -29,7 +31,7 @@ import {AngularFireModule} from "@angular/fire/compat";
     NavbarComponent,
     ShowfooterComponent,
     SearchComponent,
-
+    ShopComponent,
     FooterComponent
 
   ],
@@ -46,26 +48,30 @@ import {AngularFireModule} from "@angular/fire/compat";
       useClass: AuthInterceptor,
       multi: true
     },
-      {
-        provide: 'SocialAuthServiceConfig',
-        useValue: {
-          autoLogin: false,
-          providers: [
-            {
-              id: GoogleLoginProvider.PROVIDER_ID,
-              provider: new GoogleLoginProvider(
-                '877009480286-6ijvu977i6empufg3a1ib43uvm8psj25.apps.googleusercontent.com'
-              )
-            }
-          ],
-          onError: (err) => {
-            console.error(err);
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '877009480286-6ijvu977i6empufg3a1ib43uvm8psj25.apps.googleusercontent.com'
+            )
           }
-        } as SocialAuthServiceConfig,
-      }
+        ],
+        onError: (err) => {
+          console.error(err);
+        }
+      } as SocialAuthServiceConfig,
+    }
 
 
   ],
+  exports: [
+    ShopComponent
+  ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

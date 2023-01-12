@@ -8,7 +8,6 @@ import {
 import { Observable } from 'rxjs';
 import {LoginService} from "../service/LoginService/login.service";
 
-
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 

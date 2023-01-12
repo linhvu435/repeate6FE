@@ -16,11 +16,17 @@ const routes: Routes = [
   },{
     path: 'product',
     loadChildren: () => import('./product/product.module').then(module => module.ProductModule)
+  },
+  {
+    path: 'shop',
+    loadChildren: () => import('./shop/shop.module').then(module => module.ShopModule)
   }
 ];
 
+// @ts-ignore
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
+
 export class AppRoutingModule { }

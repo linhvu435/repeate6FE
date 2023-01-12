@@ -1,0 +1,164 @@
+
+<!-- ============================================== HEADER ============================================== -->
+
+
+<!-- ============================================== HEADER : END ============================================== -->
+<div class="body-content outer-top-xs" id="top-banner-and-menu">
+  <div class="container">
+    <div class="row">
+      <!-- ============================================== SIDEBAR ============================================== -->
+
+      <!-- ================================== TOP NAVIGATION ================================== -->
+
+
+      <div class="col-xs-12 col-sm-12 col-md-3 sidebar" style="margin-top: 50px">
+
+        <!-- ================================== TOP NAVIGATION ================================== -->
+
+
+        <div class="side-menu animate-dropdown outer-bottom-xs">
+          <div class="head"><i class="icon fa fa-align-justify fa-fw"></i>Quản lí bán hàng</div>
+          <div class="sidebar-widget" >
+
+            <div class="sidebar-widget-body outer-top-xs" >
+              <div>
+                <nav class="yamm megamenu-horizontal">
+                  <ul class="nav">
+                    <li class="dropdown menu-item"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon fa fa-shopping-bag" aria-hidden="true"></i>Thông tin bán hàng</a>
+                      <ul class="dropdown-menu mega-menu">
+                        <li class="yamm-content">
+                          <div class="row">
+                            <div class="col-sm-12 col-md-3">
+                              <ul class="links list-unstyled">
+                                <li><a routerLink="/shop/myshop">Thông tin cá nhân</a></li>
+                                <li><a routerLink="">Khách hàng thân thiet</a></li>
+
+                              </ul>
+                            </div>
+                            <!-- /.col -->
+
+                            <!-- /.col -->
+                          </div>
+                          <!-- /.row -->
+                        </li>
+                        <!-- /.yamm-content -->
+                      </ul>
+                      <!-- /.dropdown-menu --> </li>
+                    <!-- /.menu-item -->
+
+                    <li class="dropdown menu-item"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" ><i class="icon fa fa-laptop" aria-hidden="true" ></i>Quản lí sản phẩm</a>
+                      <ul class="dropdown-menu mega-menu">
+                        <li class="yamm-content">
+                          <div class="row">
+                            <div class="col-sm-12 col-md-3">
+                              <ul class="links list-unstyled">
+                                <li><a routerLink="/shop/myproductshop">Taast cả sản phẩm</a></li>
+                                <li><a routerLink="">Khách hàng thân thiet</a></li>
+                              </ul>
+                            </div>
+                            <!-- /.col -->
+
+                            <!-- /.col -->
+                          </div>
+                          <!-- /.row -->
+                        </li>
+                        <!-- /.yamm-content -->
+                      </ul>
+
+                    </li>
+
+
+                    <li class="dropdown menu-item"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon fa fa-paw" aria-hidden="true"></i>Quản lí đơn hàng</a>
+                      <ul class="dropdown-menu mega-menu">
+                        <li class="yamm-content">
+                          <div class="row">
+                            <div class="col-sm-12 col-md-3">
+                              <ul class="links list-unstyled">
+                                <li>
+                                  <a routerLink="/shop/mybillshop">Toàn bộ đơn hàng
+                                  </a>
+                                </li>
+
+                              </ul>
+                            </div>
+                            <!-- /.col -->
+
+                            <!-- /.col -->
+                          </div>
+                          <!-- /.row -->
+                        </li>
+                        <!-- /.yamm-content -->
+                      </ul>
+                    </li>
+
+
+                  </ul>
+
+
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-xs-12 col-sm-12 col-md-9 homebanner-holder" style="margin-top: 50px">
+
+        <!-- ============================================== SCROLL TABS ============================================== -->
+        <div id="product-tabs-slider1" class="scroll-tabs outer-top-vs wow fadeInUp">
+          <div class="more-info-tab clearfix ">
+            <h3 class="new-product-title pull-left">{{titlee}}</h3>
+          </div>
+        </div>
+
+
+        <div *ngFor="let b of bills"  >
+          <div id="product-tabs-slider" class="scroll-tabs outer-top-vs wow fadeInUp" >
+            <div class="more-info-tab clearfix ">
+              <h3 class="new-product-title pull-left">Người mua : {{b.account.name}}    </h3>
+            </div>
+            <div class="tab-content outer-top-xs" >
+              <div class="tab-pane in active" id="all">
+                <div class="product-slider">
+                  <!-- /.home-owl-carousel -->
+                </div>
+                <!-- /.product-slider -->
+              </div>
+              <!-- /.tab-pane -->
+              <div style="margin-bottom: 10px" >
+                <h4>Ngày mua:  {{b.date}}</h4>
+                <div id="thongtin{{b.id}}"></div>
+                <div id="{{b.id}}">
+
+                </div>
+                <h4>Trạng thái : {{b.billStatus.name}}</h4>
+                <h4>Tổng tiền : {{b.totalprice}}</h4>
+              </div>
+
+              <div class="d-grid gap-2" (click)="showbillbyidbill(b.id)">
+                <button class="btn btn-primary" type="button" style="width: 98%" >Xem chi tiết đơn hàng</button>
+                <h3>  </h3>
+                <div *ngIf="b.billStatus.id==1">
+                  <button class="btn btn-success" type="button" style="width: 98%" (click)="this.setbillshop(2,b.id)">Xác nhận đơn hàng</button>
+                  <h3></h3>
+                  <button class="btn btn-warning" type="button" style="width: 98%" (click)="this.setbillshop(5,b.id)">Hủy đơn hàng</button>
+                  <h3></h3>
+                </div>
+                <div *ngIf="b.billStatus.id==2">
+                  <button class="btn btn-warning" type="button" style="width: 98%" (click)="this.setbillshop(3,b.id)">Đánh dấu đã giao thành công</button>
+                  <h3></h3>
+                </div>
+              </div>
+
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+
