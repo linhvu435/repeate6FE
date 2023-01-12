@@ -11,9 +11,13 @@ import {HttpClientModule} from "@angular/common/http";
 import { FooterComponent } from './footer/footer/footer.component';
 import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
 import {
-  GoogleLoginProvider
+  GoogleLoginProvider} from '@abacritt/angularx-social-login';
 
-} from '@abacritt/angularx-social-login';
+import {environment} from "../environments/environment";
+import {AngularFireStorageModule} from "@angular/fire/compat/storage";
+import {AngularFireModule} from "@angular/fire/compat";
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,13 +33,13 @@ import {
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
-
+    HttpClientModule,
+    AngularFireStorageModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig, "cloud")
   ],
-  providers: [
-    [
-      {
-        provide: 'SocialAuthServiceConfig',
+  // @ts-ignore
+
+  provide: 'SocialAuthServiceConfig',
         useValue: {
           autoLogin: false,
           providers: [
@@ -50,9 +54,6 @@ import {
             console.error(err);
           }
         } as SocialAuthServiceConfig,
-      }
-    ]
-  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -5,6 +5,8 @@ import {Observable} from "rxjs";
 import {Roles} from "../../model/Roles";
 import {Account} from "../../model/Account";
 import {FormControl, ɵFormGroupValue, ɵTypedOrUntyped} from "@angular/forms";
+import {Product} from "../../model/Product";
+import {ProductDTO} from "../../model/Dtos/ProductDTO";
 const API_URL = `${environment.apiUrl}`;
 @Injectable({
   providedIn: 'root'
@@ -35,5 +37,9 @@ export class AdminService {
 
   updateStatus(id: number, idstt : number): Observable<Account>{
     return this.http.get<Account>(`${API_URL}/admin/User/update/${id}/${idstt}`);
+  }
+
+  showProduct(): Observable<ProductDTO[]> {
+    return this.http.get<ProductDTO[]>(API_URL +  '/admin/product');
   }
 }
