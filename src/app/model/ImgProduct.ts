@@ -1,4 +1,7 @@
+import {Product} from "./Product";
+
 export class ImgProduct {
   id!: number
-  name! :string
+  name!: string
+  product!: Product
 }

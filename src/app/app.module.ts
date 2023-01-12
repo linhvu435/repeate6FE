@@ -7,15 +7,19 @@ import { HomeComponent } from './home/home/home.component';
 import { NavbarComponent } from './navbar/navbar/navbar.component';
 import { ShowfooterComponent } from './footer/showfooter/showfooter.component';
 import { SearchComponent } from './search/search.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { FooterComponent } from './footer/footer/footer.component';
 import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
 import {
   GoogleLoginProvider} from '@abacritt/angularx-social-login';
 
-import {environment} from "../environments/environment";
+import {AuthInterceptor} from "./auth/auth.interceptor";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
+import {AngularFireAuthModule} from "@angular/fire/compat/auth";
+import {environment} from "../environments/environment";
 import {AngularFireModule} from "@angular/fire/compat";
+
+
 
 
 @NgModule({
@@ -28,7 +32,6 @@ import {AngularFireModule} from "@angular/fire/compat";
 
     FooterComponent
 
-
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,11 @@ import {AngularFireModule} from "@angular/fire/compat";
     AngularFireModule.initializeApp(environment.firebaseConfig, "cloud")
   ],
   providers: [
-    [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
       {
         provide: 'SocialAuthServiceConfig',
         useValue: {
@@ -56,7 +63,8 @@ import {AngularFireModule} from "@angular/fire/compat";
           }
         } as SocialAuthServiceConfig,
       }
-    ]
+
+
   ],
   bootstrap: [AppComponent]
 })
