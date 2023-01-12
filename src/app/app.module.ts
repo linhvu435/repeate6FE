@@ -9,7 +9,11 @@ import { ShowfooterComponent } from './footer/showfooter/showfooter.component';
 import { SearchComponent } from './search/search.component';
 import {HttpClientModule} from "@angular/common/http";
 import { FooterComponent } from './footer/footer/footer.component';
+import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
+import {
+  GoogleLoginProvider
 
+} from '@abacritt/angularx-social-login';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,8 +30,29 @@ import { FooterComponent } from './footer/footer/footer.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule
+
   ],
-  providers: [],
+  providers: [
+    [
+      {
+        provide: 'SocialAuthServiceConfig',
+        useValue: {
+          autoLogin: false,
+          providers: [
+            {
+              id: GoogleLoginProvider.PROVIDER_ID,
+              provider: new GoogleLoginProvider(
+                '877009480286-6ijvu977i6empufg3a1ib43uvm8psj25.apps.googleusercontent.com'
+              )
+            }
+          ],
+          onError: (err) => {
+            console.error(err);
+          }
+        } as SocialAuthServiceConfig,
+      }
+    ]
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

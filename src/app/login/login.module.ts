@@ -7,6 +7,7 @@ import {RegisterComponent} from "./register/register.component";
 import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { ViewAccountComponent } from './view-account/view-account.component';
+import {SocialLoginModule} from "@abacritt/angularx-social-login";
 
 
 @NgModule({
@@ -19,11 +20,12 @@ import { ViewAccountComponent } from './view-account/view-account.component';
     exports: [
         RegisterComponent
     ],
-    imports: [
-        CommonModule,
-        LoginRoutingModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-    ]
+  imports: [
+    CommonModule,
+    LoginRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    SocialLoginModule
+  ]
 })
 export class LoginModule { }

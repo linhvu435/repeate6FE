@@ -5,19 +5,30 @@ import {Router} from "@angular/router";
 import {ShopService} from "../../service/ShopService/shop.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import Swal from "sweetalert2";
+import {SocialAuthService} from "@abacritt/angularx-social-login";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnChanges {
+export class LoginComponent implements OnChanges,OnInit {
   shop!: Shop
   id!: any
 
+  user:any;
 
-  constructor(private loginService: LoginService, private router: Router, private shopService: ShopService) {
+  loggedIn:any;
+  constructor(private authService: SocialAuthService,private loginService: LoginService, private router: Router, private shopService: ShopService) { }
+
+  ngOnInit() {
+    this.authService.authState.subscribe((user) => {
+      this.user = user;
+      this.loggedIn = (user != null);
+      console.log(this.user);
+    });
   }
+
 
   ngOnChanges(changes: SimpleChanges): void {
     this.login();
