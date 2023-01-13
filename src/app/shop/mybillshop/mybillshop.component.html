@@ -1,7 +1,132 @@
 
 <!-- ============================================== HEADER ============================================== -->
 
+<style>
+  .stars {
+    display: flex;
+    position: relative;
+    white-space: nowrap;
+    margin-top: -40px;
+    margin-bottom: -50px;
+  }
+  .stars svg {
+    width: 35px;
+  }
 
+  .overlay {
+    background: #fff;
+    height: 70%;
+    overflow: hidden;
+    mix-blend-mode: color;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  svg {
+    fill: gold;
+  }
+  .product-list img{
+    width: 100%;
+    border-radius: 4px 4px 0 0;
+    -webkit-border-radius: 4px 4px 0 0;
+  }
+
+  .product-list .pro-img-box {
+    position: relative;
+  }
+  .adtocart {
+    background: #fc5959;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    color: #fff;
+    display: inline-block;
+    text-align: center;
+    border: 3px solid #fff;
+    left: 45%;
+    bottom: -25px;
+    position: absolute;
+  }
+
+  .adtocart i{
+    color: #fff;
+    font-size: 25px;
+    line-height: 42px;
+  }
+
+  .pro-title {
+    color: #5A5A5A;
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 16px;
+  }
+
+  .product-list .price {
+    color:#fc5959 ;
+    font-size: 15px;
+  }
+
+  .pro-img-details {
+    margin-left: -15px;
+  }
+
+  .pro-img-details img {
+    width: 100%;
+  }
+
+  .pro-d-title {
+    font-size: 16px;
+    margin-top: 0;
+  }
+
+  .product_meta {
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+    margin: 15px 0;
+  }
+
+  .product_meta span {
+    display: block;
+    margin-bottom: 10px;
+  }
+  .product_meta a, .pro-price{
+    color:#fc5959 ;
+  }
+
+  .pro-price, .amount-old {
+    font-size: 18px;
+    padding: 0 10px;
+  }
+
+  .amount-old {
+    text-decoration: line-through;
+  }
+
+  .quantity {
+    width: 120px;
+  }
+
+  .pro-img-list {
+    margin: 10px 0 0 -15px;
+    width: 100%;
+    display: inline-block;
+  }
+
+  .pro-img-list a {
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+
+  .pro-d-head {
+    font-size: 18px;
+    font-weight: 300;
+  }
+</style>
+<body>
 <!-- ============================================== HEADER : END ============================================== -->
 <div class="body-content outer-top-xs" id="top-banner-and-menu">
   <div class="container">
@@ -73,7 +198,7 @@
         <div *ngFor="let b of bills"  >
           <div id="product-tabs-slider" class="scroll-tabs outer-top-vs wow fadeInUp" >
             <div class="more-info-tab clearfix ">
-              <h3 class="new-product-title pull-left">Người mua : {{b.account.name}}    </h3>
+              <h3 class="new-product-title pull-left"><b>Người mua : {{b.account.name}}   </b> </h3>
             </div>
             <div class="tab-content outer-top-xs" >
               <div class="tab-pane in active" id="all">
@@ -86,15 +211,12 @@
               <div style="margin-bottom: 10px" >
                 <h4>Ngày mua:  {{b.date}}</h4>
                 <div id="thongtin{{b.id}}"></div>
-                <div id="{{b.id}}">
-
-                </div>
                 <h4>Trạng thái : {{b.billStatus.name}}</h4>
                 <h4>Tổng tiền : {{b.totalprice}}</h4>
               </div>
 
               <div class="d-grid gap-2" >
-                <button class="btn btn-primary" type="button" style="width: 98%" (click)="showbillbyidbill(b.id)" data-toggle="modal" data-target="#cartModal">Xem chi tiết đơn hàng</button>
+                <button class="btn btn-primary" type="button" style="width: 98%"  (click)="this.showbillbyidbill(b.id)" data-toggle="modal" data-target="#cartModal">Xem chi tiết đơn hàng</button>
                 <h3>  </h3>
                 <div *ngIf="b.billStatus.id==1">
                   <button class="btn btn-success" type="button" style="width: 98%" (click)="this.setbillshop(2,b.id)">Xác nhận đơn hàng</button>
@@ -120,48 +242,60 @@
 </div>
 
 
-<div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="cartModal" *ngIf="product!=null" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header border-bottom-0">
-        <h5 class="modal-title" id="exampleModalLabel">
-          Your Shopping Cart
+        <h5 class="modal-title" id="exampleModalLabel" >
+          Người mua :{{this.product.name}}
+          <button class="btn btn-white" ><i class="fa fa-arrow-right"></i>Xem thông tin cá nhân</button>
         </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
       </div>
       <div class="modal-body">
-        <table class="table table-image">
-          <thead>
-          <tr>
-            <th scope="col"></th>
-            <th scope="col">Product</th>
-            <th scope="col">Price</th>
-            <th scope="col">Qty</th>
-            <th scope="col">Total</th>
-            <th scope="col">Actions</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td class="w-25">
-              <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/vans.png" class="img-fluid img-thumbnail" alt="Sheep">
-            </td>
-            <td>Vans Sk8-Hi MTE Shoes</td>
-            <td>89$</td>
-            <td class="qty"><input type="number" class="form-control"  value="2"></td>
-            <td>178$</td>
-            <td>
-              <a href="#" class="btn btn-danger btn-sm">
-                <i class="fa fa-times"></i>
-              </a>
-            </td>
-          </tr>
-          </tbody>
-        </table>
+        <div class="col-md-9">
+          <div class="row product-list" >
+            <div class="col-md-4"  *ngFor="let c of product.products">
+              <section class="panel">
+                <div class="pro-img-box">
+                  <img src="{{c.img}}" alt="" />
+
+                </div>
+                <div class="panel-body text-center"><div class="stars">
+                  <svg width="120" height="100" viewBox="0 0 940.688 940.688">
+                    <path d="M885.344,319.071l-258-3.8l-102.7-264.399c-19.8-48.801-88.899-48.801-108.6,0l-102.7,264.399l-258,3.8 c-53.4,3.101-75.1,70.2-33.7,103.9l209.2,181.4l-71.3,247.7c-14,50.899,41.1,92.899,86.5,65.899l224.3-122.7l224.3,122.601 c45.4,27,100.5-15,86.5-65.9l-71.3-247.7l209.2-181.399C960.443,389.172,938.744,322.071,885.344,319.071z" />
+                  </svg>
+                  <svg width="120" height="100" viewBox="0 0 940.688 940.688">
+                    <path d="M885.344,319.071l-258-3.8l-102.7-264.399c-19.8-48.801-88.899-48.801-108.6,0l-102.7,264.399l-258,3.8 c-53.4,3.101-75.1,70.2-33.7,103.9l209.2,181.4l-71.3,247.7c-14,50.899,41.1,92.899,86.5,65.899l224.3-122.7l224.3,122.601 c45.4,27,100.5-15,86.5-65.9l-71.3-247.7l209.2-181.399C960.443,389.172,938.744,322.071,885.344,319.071z" />
+                  </svg>
+                  <svg width="120" height="100" viewBox="0 0 940.688 940.688">
+                    <path d="M885.344,319.071l-258-3.8l-102.7-264.399c-19.8-48.801-88.899-48.801-108.6,0l-102.7,264.399l-258,3.8 c-53.4,3.101-75.1,70.2-33.7,103.9l209.2,181.4l-71.3,247.7c-14,50.899,41.1,92.899,86.5,65.899l224.3-122.7l224.3,122.601 c45.4,27,100.5-15,86.5-65.9l-71.3-247.7l209.2-181.399C960.443,389.172,938.744,322.071,885.344,319.071z" />
+                  </svg>
+                  <svg width="120" height="100" viewBox="0 0 940.688 940.688">
+                    <path d="M885.344,319.071l-258-3.8l-102.7-264.399c-19.8-48.801-88.899-48.801-108.6,0l-102.7,264.399l-258,3.8 c-53.4,3.101-75.1,70.2-33.7,103.9l209.2,181.4l-71.3,247.7c-14,50.899,41.1,92.899,86.5,65.899l224.3-122.7l224.3,122.601 c45.4,27,100.5-15,86.5-65.9l-71.3-247.7l209.2-181.399C960.443,389.172,938.744,322.071,885.344,319.071z" />
+                  </svg>
+                  <svg width="120" height="100" viewBox="0 0 940.688 940.688">
+                    <path d="M885.344,319.071l-258-3.8l-102.7-264.399c-19.8-48.801-88.899-48.801-108.6,0l-102.7,264.399l-258,3.8 c-53.4,3.101-75.1,70.2-33.7,103.9l209.2,181.4l-71.3,247.7c-14,50.899,41.1,92.899,86.5,65.899l224.3-122.7l224.3,122.601 c45.4,27,100.5-15,86.5-65.9l-71.3-247.7l209.2-181.399C960.443,389.172,938.744,322.071,885.344,319.071z" />
+                  </svg>
+                  <div class="overlay" style="width: 100%"></div>
+                </div>
+                  <h4>
+                    <a href="#" class="pro-title">
+                      {{c.name}}
+                    </a>
+                  </h4>
+                  <p class="price">{{c.price}}</p>
+                  <button class="btn btn-white" style="margin-left: -25px">Xem trực tiếp sản phẩm<i class="fa fa-arrow-right"></i></button>
+
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
         <div class="d-flex justify-content-end">
-          <h5>Total: <span class="price text-success">89$</span></h5>
+          <h5>Ngày mua:  {{bills[0].date}}</h5>
+          <h5>Trạng thái : {{bills[0].billStatus.name}}</h5>
+          <h5>Tổng :  {{product.products.length}} sản phẩm </h5>
+          <h5>Thành tiền : <span class="price text-success">{{product.total}}</span></h5>
         </div>
       </div>
       <div class="modal-footer border-top-0 d-flex justify-content-between">
@@ -174,7 +308,7 @@
 
 
 
-
+</body>
 
 
 
@@ -185,4 +319,7 @@
   $(document).ready(function() {
     $('#cartModal1').modal('show');
   });
+
+  const percentage = Math.round((value / max) * 100);
+  document.querySelector('.overlay').style.width = `${100 - percentage}%`;
 </script>

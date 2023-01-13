@@ -1,11 +1,13 @@
 import {Roles} from "../Roles";
+import {Product} from "../Product";
 
 export class ProductInBillDTO {
   id!: number
 
   name!:string;
 
-  price!:number;
+  products!:Product[];
 
-  img!:string;
+  total!:number;
+
 }

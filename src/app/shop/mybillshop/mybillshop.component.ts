@@ -4,6 +4,7 @@ import {ProductInBillDTO} from "../../model/DTO/ProductInBillDTO";
 import {ShopService} from "../../service/shopserviceM/shop.service";
 import {Router} from "@angular/router";
 import {BillStatus} from "../../model/BillStatus";
+import {Product} from "../../model/Product";
 
 @Component({
   selector: 'app-mybillshop',
@@ -13,12 +14,7 @@ import {BillStatus} from "../../model/BillStatus";
 export class MybillshopComponent implements OnInit{
   bills :Bill[]=[];
 
-  product:ProductInBillDTO[]=[];
-
-
-  titlee = "Quản lí đơn hàng";
-
-  product1!:any;
+  product!:ProductInBillDTO;
 
   billstatus!:BillStatus[];
 
@@ -31,12 +27,8 @@ export class MybillshopComponent implements OnInit{
       this.bills = data
       this.showbillshop.getallBillStatus().subscribe((data) => {
         this.billstatus = data
-        if (this.billstatus==this.billstatus){
-          console.log("ok")
-        }
       })
     })
-
   }
 
   showbillbystatus(id:number):void{

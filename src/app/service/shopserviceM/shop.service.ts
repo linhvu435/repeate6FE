@@ -42,8 +42,8 @@ export class ShopService {
   showbillbystatus(id:number):Observable<Bill[]>{
     return this.http.get<Bill[]>(`${API_URL}/order/showBillShop/${id}`);
   }
-  showbillbyidbill(id:number):Observable<ProductInBillDTO[]>{
-    return this.http.get<ProductInBillDTO[]>(`${API_URL}/order/showBillShopbyidbill/${id}`);
+  showbillbyidbill(id:number):Observable<ProductInBillDTO>{
+    return this.http.get<ProductInBillDTO>(`${API_URL}/order/showBillShopbyidbill/${id}`);
   }
 
   searchbycategory(category_id:number):Observable<Product[]>{
