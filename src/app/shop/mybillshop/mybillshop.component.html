@@ -17,101 +17,58 @@
 
 
         <div class="side-menu animate-dropdown outer-bottom-xs">
-          <div class="head"><i class="icon fa fa-align-justify fa-fw"></i>Quản lí bán hàng</div>
-          <div class="sidebar-widget" >
+          <div class="head"><i class="icon fa fa-align-justify fa-fw"></i>Đơn hàng của tôi</div>
 
+
+
+          <div class="sidebar-widget" >
+            <h3 class="section-title">Trạng thái đơn hàng</h3>
             <div class="sidebar-widget-body outer-top-xs" >
-              <div>
+
+              <nav class="yamm megamenu-horizontal">
+                <ul class="nav">
+                  <li> <a  style="color: red" (click)="showbillshop1()"><b style="color: black">Toàn bộ đơn hàng </b> <b></b> </a> </li>
+
+                </ul>
+                <!-- /.nav -->
+              </nav>
+
+              <div *ngFor="let m of billstatus" >
                 <nav class="yamm megamenu-horizontal">
                   <ul class="nav">
-                    <li class="dropdown menu-item"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon fa fa-shopping-bag" aria-hidden="true"></i>Thông tin bán hàng</a>
-                      <ul class="dropdown-menu mega-menu">
-                        <li class="yamm-content">
-                          <div class="row">
-                            <div class="col-sm-12 col-md-3">
-                              <ul class="links list-unstyled">
-                                <li><a routerLink="/shop/myshop">Thông tin cá nhân</a></li>
-                                <li><a routerLink="">Khách hàng thân thiet</a></li>
-
-                              </ul>
-                            </div>
-                            <!-- /.col -->
-
-                            <!-- /.col -->
-                          </div>
-                          <!-- /.row -->
-                        </li>
-                        <!-- /.yamm-content -->
-                      </ul>
-                      <!-- /.dropdown-menu --> </li>
-                    <!-- /.menu-item -->
-
-                    <li class="dropdown menu-item"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" ><i class="icon fa fa-laptop" aria-hidden="true" ></i>Quản lí sản phẩm</a>
-                      <ul class="dropdown-menu mega-menu">
-                        <li class="yamm-content">
-                          <div class="row">
-                            <div class="col-sm-12 col-md-3">
-                              <ul class="links list-unstyled">
-                                <li><a routerLink="/shop/myproductshop">Taast cả sản phẩm</a></li>
-                                <li><a routerLink="">Khách hàng thân thiet</a></li>
-                              </ul>
-                            </div>
-                            <!-- /.col -->
-
-                            <!-- /.col -->
-                          </div>
-                          <!-- /.row -->
-                        </li>
-                        <!-- /.yamm-content -->
-                      </ul>
-
-                    </li>
-
-
-                    <li class="dropdown menu-item"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon fa fa-paw" aria-hidden="true"></i>Quản lí đơn hàng</a>
-                      <ul class="dropdown-menu mega-menu">
-                        <li class="yamm-content">
-                          <div class="row">
-                            <div class="col-sm-12 col-md-3">
-                              <ul class="links list-unstyled">
-                                <li>
-                                  <a routerLink="/shop/mybillshop">Toàn bộ đơn hàng
-                                  </a>
-                                </li>
-
-                              </ul>
-                            </div>
-                            <!-- /.col -->
-
-                            <!-- /.col -->
-                          </div>
-                          <!-- /.row -->
-                        </li>
-                        <!-- /.yamm-content -->
-                      </ul>
-                    </li>
-
+                    <li>  <a  style="color: red" (click)="showbillbystatus(m.id)"> <b style="color: black" > {{m.name}} </b>
+                      <b>
+                      </b></a></li>
 
                   </ul>
-
-
                 </nav>
               </div>
+
+
+
             </div>
           </div>
+
+
+
+
         </div>
+        <!-- /.sidebar-widget -->
+
+
+
       </div>
+
 
 
       <div class="col-xs-12 col-sm-12 col-md-9 homebanner-holder" style="margin-top: 50px">
 
         <!-- ============================================== SCROLL TABS ============================================== -->
-        <div id="product-tabs-slider1" class="scroll-tabs outer-top-vs wow fadeInUp">
+        <div class="scroll-tabs outer-top-vs wow fadeInUp">
           <div class="more-info-tab clearfix ">
-            <h3 class="new-product-title pull-left">{{titlee}}</h3>
+            <h3 class="new-product-title pull-left">Đơn hàng của shop</h3>
           </div>
         </div>
-
 
         <div *ngFor="let b of bills"  >
           <div id="product-tabs-slider" class="scroll-tabs outer-top-vs wow fadeInUp" >
@@ -136,8 +93,8 @@
                 <h4>Tổng tiền : {{b.totalprice}}</h4>
               </div>
 
-              <div class="d-grid gap-2" (click)="showbillbyidbill(b.id)">
-                <button class="btn btn-primary" type="button" style="width: 98%" >Xem chi tiết đơn hàng</button>
+              <div class="d-grid gap-2" >
+                <button class="btn btn-primary" type="button" style="width: 98%" (click)="showbillbyidbill(b.id)" data-toggle="modal" data-target="#cartModal">Xem chi tiết đơn hàng</button>
                 <h3>  </h3>
                 <div *ngIf="b.billStatus.id==1">
                   <button class="btn btn-success" type="button" style="width: 98%" (click)="this.setbillshop(2,b.id)">Xác nhận đơn hàng</button>
@@ -157,8 +114,75 @@
           </div>
         </div>
       </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header border-bottom-0">
+        <h5 class="modal-title" id="exampleModalLabel">
+          Your Shopping Cart
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-image">
+          <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Product</th>
+            <th scope="col">Price</th>
+            <th scope="col">Qty</th>
+            <th scope="col">Total</th>
+            <th scope="col">Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td class="w-25">
+              <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/vans.png" class="img-fluid img-thumbnail" alt="Sheep">
+            </td>
+            <td>Vans Sk8-Hi MTE Shoes</td>
+            <td>89$</td>
+            <td class="qty"><input type="number" class="form-control"  value="2"></td>
+            <td>178$</td>
+            <td>
+              <a href="#" class="btn btn-danger btn-sm">
+                <i class="fa fa-times"></i>
+              </a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <div class="d-flex justify-content-end">
+          <h5>Total: <span class="price text-success">89$</span></h5>
+        </div>
+      </div>
+      <div class="modal-footer border-top-0 d-flex justify-content-between">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success">Checkout</button>
       </div>
     </div>
   </div>
+</div>
 
 
+
+
+
+
+
+<script>
+  $(document).ready(function() {
+    $('#cartModal').modal('show');
+  });
+  $(document).ready(function() {
+    $('#cartModal1').modal('show');
+  });
+</script>

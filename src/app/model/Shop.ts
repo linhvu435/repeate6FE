@@ -7,4 +7,5 @@ export class Shop {
   name! :string
   shopAddress!:ShopAddress;
   account!: Account;
+
 }

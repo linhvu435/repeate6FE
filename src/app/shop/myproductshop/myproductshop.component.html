@@ -1,101 +1,286 @@
 
-<div class="body-content outer-top-xs" id="top-banner-and-menu">
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-3 sidebar" style="margin-top: 50px">
+<style>
+  @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+  /*reset css*/
 
-        <!-- ================================== TOP NAVIGATION ================================== -->
+  #rating{border:none;float:left;}
+  #rating>input{display:none;}/*ẩn input radio - vì chúng ta đã có label là GUI*/
+  #rating>label:before{margin:5px;font-size:1.25em;font-family:FontAwesome;display:inline-block;content:"\f005";}/*1 ngôi sao*/
+  #rating>.half:before{content:"\f089";position:absolute;}/*0.5 ngôi sao*/
+  #rating>label{color:#ddd;float:right;}/*float:right để lật ngược các ngôi sao lại đúng theo thứ tự trong thực tế*/
+  /*thêm màu cho sao đã chọn và các ngôi sao phía trước*/
+  #rating>input:checked~label,
+  #rating:not(:checked)>label:hover,
+  #rating:not(:checked)>label:hover~label{color:#FFD700;}
+  /* Hover vào các sao phía trước ngôi sao đã chọn*/
+  #rating>input:checked+label:hover,
+  #rating>input:checked~label:hover,
+  #rating>label:hover~input:checked~label,
+  #rating>input:checked~label:hover~label{color:#FFED85;}
+  body {margin-top:20px;
+    background:#f1f2f7;
+  }
 
+  /*panel*/
+  .panel {
+    border: none;
+    box-shadow: none;
+  }
 
-        <div class="side-menu animate-dropdown outer-bottom-xs">
-          <div class="head"><i class="icon fa fa-align-justify fa-fw"></i>Quản lí bán hàng</div>
+  .panel-heading {
+    border-color: yellow ;
+    font-size: 16px;
+    font-weight: 300;
+  }
 
-          <div class="sidebar-widget" >
-            <h3 class="section-title">Trạng thái đơn hàng</h3>
-            <div class="sidebar-widget-body outer-top-xs" >
-
-                <nav class="yamm megamenu-horizontal">
-                  <ul class="nav">
-                    <li class="dropdown menu-item"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon fa fa-shopping-bag" aria-hidden="true"></i>Thông tin bán hàng</a>
-                      <ul class="dropdown-menu mega-menu">
-                        <li class="yamm-content">
-                          <div class="row">
-                            <div class="col-sm-12 col-md-3">
-                              <ul class="links list-unstyled">
-                                <li><a routerLink="/shop/myshop">Thông tin cá nhân</a></li>
-                                <li><a routerLink="">Khách hàng thân thiet</a></li>
-
-                              </ul>
-                            </div>
-                            <!-- /.col -->
-
-                            <!-- /.col -->
-                          </div>
-                          <!-- /.row -->
-                        </li>
-                        <!-- /.yamm-content -->
-                      </ul>
-                      <!-- /.dropdown-menu --> </li>
-                    <!-- /.menu-item -->
-
-                    <li class="dropdown menu-item"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" ><i class="icon fa fa-laptop" aria-hidden="true" ></i>Quản lí sản phẩm</a>
-                      <ul class="dropdown-menu mega-menu">
-                        <li class="yamm-content">
-                          <div class="row">
-                            <div class="col-sm-12 col-md-3">
-                              <ul class="links list-unstyled">
-                                <li><a routerLink="/shop/myproductshop">Taast cả sản phẩm</a></li>
-                                <li><a routerLink="">Khách hàng thân thiet</a></li>
-                              </ul>
-                            </div>
-                            <!-- /.col -->
-
-                            <!-- /.col -->
-                          </div>
-                          <!-- /.row -->
-                        </li>
-                        <!-- /.yamm-content -->
-                      </ul>
-
-                    </li>
+  .panel-title {
+    color: #2A3542;
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 0;
+    margin-top: 0;
+    font-family: 'Open Sans', sans-serif;
+  }
 
 
-                    <li class="dropdown menu-item"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon fa fa-paw" aria-hidden="true"></i>Quản lí đơn hàng</a>
-                      <ul class="dropdown-menu mega-menu">
-                        <li class="yamm-content">
-                          <div class="row">
-                            <div class="col-sm-12 col-md-3">
-                              <ul class="links list-unstyled">
-                                <li>
-                                  <a routerLink="/shop/mybillshop">Toàn bộ đơn hàng
-                                  </a>
-                                </li>
+  /*product list*/
 
-                              </ul>
-                            </div>
-                            <!-- /.col -->
+  .prod-cat li a{
+    border-bottom: 1px dashed #d9d9d9;
+  }
 
-                            <!-- /.col -->
-                          </div>
-                          <!-- /.row -->
-                        </li>
-                        <!-- /.yamm-content -->
-                      </ul>
-                    </li>
+  .prod-cat li a {
+    color: #3b3b3b;
+  }
 
+  .prod-cat li ul {
+    margin-left: 30px;
+  }
 
-                  </ul>
+  .prod-cat li ul li a{
+    border-bottom:none;
+  }
+  .prod-cat li ul li a:hover,.prod-cat li ul li a:focus, .prod-cat li ul li.active a , .prod-cat li a:hover,.prod-cat li a:focus, .prod-cat li a.active{
+    background: none;
+    color: #ff7261;
+  }
 
+  .pro-lab{
+    margin-right: 20px;
+    font-weight: normal;
+  }
 
-                </nav>
-            </div>
+  .pro-sort {
+    padding-right: 20px;
+    float: left;
+  }
+
+  .pro-page-list {
+    margin: 5px 0 0 0;
+  }
+
+  .product-list img{
+    width: 100%;
+    border-radius: 4px 4px 0 0;
+    -webkit-border-radius: 4px 4px 0 0;
+  }
+
+  .product-list .pro-img-box {
+    position: relative;
+  }
+  .adtocart {
+    background: #fc5959;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    color: #fff;
+    display: inline-block;
+    text-align: center;
+    border: 3px solid #fff;
+    left: 45%;
+    bottom: -25px;
+    position: absolute;
+  }
+
+  .adtocart i{
+    color: #fff;
+    font-size: 25px;
+    line-height: 42px;
+  }
+
+  .pro-title {
+    color: #5A5A5A;
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 16px;
+  }
+
+  .product-list .price {
+    color:#fc5959 ;
+    font-size: 15px;
+  }
+
+  .pro-img-details {
+    margin-left: -15px;
+  }
+
+  .pro-img-details img {
+    width: 100%;
+  }
+
+  .pro-d-title {
+    font-size: 16px;
+    margin-top: 0;
+  }
+
+  .product_meta {
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+    margin: 15px 0;
+  }
+
+  .product_meta span {
+    display: block;
+    margin-bottom: 10px;
+  }
+  .product_meta a, .pro-price{
+    color:#fc5959 ;
+  }
+
+  .pro-price, .amount-old {
+    font-size: 18px;
+    padding: 0 10px;
+  }
+
+  .amount-old {
+    text-decoration: line-through;
+  }
+
+  .quantity {
+    width: 120px;
+  }
+
+  .pro-img-list {
+    margin: 10px 0 0 -15px;
+    width: 100%;
+    display: inline-block;
+  }
+
+  .pro-img-list a {
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+
+  .pro-d-head {
+    font-size: 18px;
+    font-weight: 300;
+  }
+</style>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
+<div class="container bootdey" style="margin-top: 50px">
+  <div class="col-md-3">
+    <section class="panel">
+      <div class="panel-body">
+        <input type="text" placeholder="Tìm kiếm theo từ khóa" class="form-control" #name/>
+      </div>
+    </section>
+    <section class="panel">
+      <header class="panel-heading" style="background-color: yellow">
+        <i class="icon fa fa-align-justify fa-fw"></i>         <b> Danh mục</b>
+
+      </header>
+      <div class="panel-body">
+        <ul class="yamm megamenu-horizontal" *ngFor="let i of category">
+          <ul class="nav">
+            <li> <a  style="color: red" class="active"><input type="checkbox" value="{{i.id}}" #category_id><b style="color: black">{{i.name}}</b> <b></b> </a> </li>
+
+          </ul>
+
+        </ul>
+      </div>
+    </section>
+
+    <section class="panel">
+      <header class="panel-heading" style="background-color: yellow">
+
+        <b>Lọc theo khoảng giá</b>
+      </header>
+      <div class="panel-body sliders">
+        <div class="sidebar-widget-body outer-top-xs">
+          <div class="tag-list">
+           <b>Từ </b>  <input type="number" class="item"  placeholder="Nhập giá min" style="width: 70px" [ngModel]="min">
+            <b>  Đến </b>   <input type="number" class="item"  placeholder="Nhập giá max" style="width: 70px" #max>
           </div>
+          <!-- /.tag-list -->
         </div>
       </div>
+    </section>
+    <section class="panel">
+      <header class="panel-heading" style="background-color: yellow">
+        <b>Lọc theo đánh giá sản phẩm</b>
+      </header>
+      <div class="panel-body">
+
+        <div id="rating">
+          <input type="radio" id="star5" name="rating" value="5" #star1/>
+          <label class = "full" for="star5" title="Awesome - 5 stars"></label>
+
+          <input type="radio" id="star4" name="rating" value="4" #star2/>
+          <label class = "full" for="star4" title="Pretty good - 4 stars" ></label>
+
+          <input type="radio" id="star3" name="rating" value="3" #star3/>
+          <label class = "full" for="star3" title="Meh - 3 stars"></label>
+
+          <input type="radio" id="star2" name="rating" value="2" #star4/>
+          <label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+
+          <input type="radio" id="star1" name="rating" value="1" #star5/>
+          <label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+        </div>
+        <!-- /.sidebar-widget-body -->
+
+      </div>
+    </section>
+    <section class="panel">
+      <div align="center" style="margin-top: 20px;" >
+        <button type="button" class="btn btn-warning" style="width: 100%" ><b>Áp dụng</b></button>
+      </div>
+    </section>
+
+  </div>
+  <div class="col-md-9">
 
 
+    <div class="row product-list" >
+      <div class="col-md-4" *ngFor="let c of products">
+        <section class="panel">
+          <div class="pro-img-box">
+            <img src="{{c.img}}" alt="" />
+            <a href="#" class="adtocart">
+              <i class="fa fa-shopping-cart"></i>
+            </a>
+          </div>
 
-
+          <div class="panel-body text-center">
+            <h4>
+              <a href="#" class="pro-title">
+                {{c.name}}
+              </a>
+            </h4>
+            <p class="price">{{c.price}}</p>
+          </div>
+        </section>
+      </div>
     </div>
   </div>
 </div>
+<script>
+  function calcRate(r) {
+    const f = ~~r,//Tương tự Math.floor(r)
+      id = 'star' + f + (r % f ? 'half' : '')
+    id && (document.getElementById(id).checked = !0)
+  }
+</script>

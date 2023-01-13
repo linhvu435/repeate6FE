@@ -3,6 +3,7 @@ import {Bill} from "../../model/Bill";
 import {ProductInBillDTO} from "../../model/DTO/ProductInBillDTO";
 import {ShopService} from "../../service/shopserviceM/shop.service";
 import {Router} from "@angular/router";
+import {BillStatus} from "../../model/BillStatus";
 
 @Component({
   selector: 'app-mybillshop',
@@ -14,9 +15,12 @@ export class MybillshopComponent implements OnInit{
 
   product:ProductInBillDTO[]=[];
 
+
   titlee = "Quản lí đơn hàng";
 
   product1!:any;
+
+  billstatus!:BillStatus[];
 
 
   constructor(private showbillshop: ShopService ,private router:Router) {
@@ -25,12 +29,22 @@ export class MybillshopComponent implements OnInit{
   ngOnInit() {
     this.showbillshop.getAllBillshop().subscribe((data) => {
       this.bills = data
-      this.titlee
+      this.showbillshop.getallBillStatus().subscribe((data) => {
+        this.billstatus = data
+        if (this.billstatus==this.billstatus){
+          console.log("ok")
+        }
+      })
     })
-    console.log(this.bills)
 
   }
 
+  showbillbystatus(id:number):void{
+    this.showbillshop.showbillbystatus(id).subscribe((data) => {
+      this.bills=data;
+    })
+
+  }
   showbillshop1():void{
     this.showbillshop.getAllBillshop().subscribe((data) => {
       this.bills = data
@@ -38,44 +52,16 @@ export class MybillshopComponent implements OnInit{
   }
   setbillshop(idstatus:number,idbill:number):void {
     this.showbillshop.setbill(idbill, idstatus).subscribe((data) => {
-      this.showbillshop1()
+      this.showbillshop.showbillbystatus(idstatus).subscribe((data) => {
+        this.bills=data;
+      })
     })
-    this.router.navigate(["/bill"])
   }
 
   showbillbyidbill(id:number):void{
     this.showbillshop.showbillbyidbill(id).subscribe((data) => {
       this.product = data
-      console.log(this.product);
-      let str = ""
-      let str1=`<h4>Thông tin đơn hàng :</h4>`
-
-      for (let i = 0; i < this.product.length; i++) {
-        str += `
-                    <table style="margin-left: 50px">
-                      <hr>
-                      <tr>
-                      <th>Sản phẩm :</th>
-</tr>
-                      <tr  >
-                        <td>Tên : ${this.product[i].name} </td>
-
-                        <td>Ảnh sp : <img src="${this.product[i].img} " style="width: 100px;height: 50px" alt=""></td>
-                                                <td> </td>
-
-                        <td>Giá : ${this.product[i].price} </td>
-                    </tr>
-                    </table>
-                    <hr>
-
-`
-      }
-      // @ts-ignore
-      document.getElementById(id).innerHTML = str;
-      // @ts-ignore
-      document.getElementById("thongtin"+id).innerHTML = str1;
     })
-
   }
 
 }

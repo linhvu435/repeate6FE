@@ -1,0 +1,268 @@
+<style>
+  .container {
+    padding: 2rem 0rem;
+  }
+
+  .qty{
+    width: 200px;
+  }
+  .table-image thead td,
+  .table-image thead th {
+    border: 0;
+    color: #666;
+    font-size: 0.8rem;
+  }
+  .table-image td,
+  .table-image th {
+    vertical-align: middle;
+    text-align: center;
+  }
+
+
+  .price {
+    margin-left: 1rem;
+  }
+
+  .modal-footer {
+    padding-top: 0rem;
+  }
+  body{margin-top:20px;
+    background:#eee;
+  }
+  h3 {
+    font-size: 16px;
+  }
+  .text-navy {
+    color: #1ab394;
+  }
+  .cart-product-imitation {
+    text-align: center;
+    padding-top: 30px;
+    height: 80px;
+    width: 80px;
+    background-color: #f8f8f9;
+  }
+  .product-imitation.xl {
+    padding: 120px 0;
+  }
+  .product-desc {
+    padding: 20px;
+    position: relative;
+  }
+  .ecommerce .tag-list {
+    padding: 0;
+  }
+  .ecommerce .fa-star {
+    color: #d1dade;
+  }
+  .ecommerce .fa-star.active {
+    color: #f8ac59;
+  }
+  .ecommerce .note-editor {
+    border: 1px solid #e7eaec;
+  }
+  table.shoping-cart-table {
+    margin-bottom: 0;
+  }
+  table.shoping-cart-table tr td {
+    border: none;
+    text-align: right;
+  }
+  table.shoping-cart-table tr td.desc,
+  table.shoping-cart-table tr td:first-child {
+    text-align: left;
+  }
+  table.shoping-cart-table tr td:last-child {
+    width: 80px;
+  }
+  .ibox {
+    clear: both;
+    margin-bottom: 25px;
+    margin-top: 0;
+    padding: 0;
+  }
+  .ibox.collapsed .ibox-content {
+    display: none;
+  }
+  .ibox:after,
+  .ibox:before {
+    display: table;
+  }
+  .ibox-title {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #ffffff;
+    border-color: #e7eaec;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 3px 0 0;
+    color: inherit;
+    margin-bottom: 0;
+    padding: 14px 15px 7px;
+    min-height: 48px;
+  }
+  .ibox-content {
+    background-color: #ffffff;
+    color: inherit;
+    padding: 15px 20px 20px 20px;
+    border-color: #e7eaec;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 1px 0;
+  }
+  .ibox-footer {
+    color: inherit;
+    border-top: 1px solid #e7eaec;
+    font-size: 90%;
+    background: #ffffff;
+    padding: 10px 15px;
+  }
+</style>
+
+  <div class="container">
+  <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+      <div class="col-md-9">
+        <div class="ibox">
+          <div class="ibox-title">
+            <span class="pull-right">(<strong>5</strong>) sản phẩm</span>
+            <h5>Sản phẩm trong giỏ hàng </h5>
+          </div>
+          <div class="ibox-content">
+            <div class="table-responsive">
+              <table class="table shoping-cart-table">
+                <tbody>
+                <tr>
+                  <td width="90">
+                    <div class="cart-product-imitation">
+                    </div>
+                  </td>
+                  <td class="desc">
+                    <h3>
+                      <a href="#" class="text-navy">
+                        Desktop publishing software
+                      </a>
+                    </h3>
+                    <div class="m-t-sm">
+                      |
+                      <a href="#" class="text-muted"><i class="fa fa-trash"></i> Remove item</a>
+                    </div>
+                  </td>
+
+                  <td>
+                    $180,00
+                  </td>
+                  <td class="qty"><input type="number" class="form-control"  value="2"></td>
+
+                  <td>
+                    <h4>
+                      $180,00
+                    </h4>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+
+          <div class="ibox-content">
+            <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#cartModal"><i class="fa fa fa-shopping-cart" ></i> Thanh toán</button>
+            <button class="btn btn-white"><i class="fa fa-arrow-left"></i>Quay về trang chủ </button>
+
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-3">
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>Trang thanh toán</h5>
+          </div>
+          <div class="ibox-content">
+                    <span>
+                        Tổng tiền
+                    </span>
+            <h2 class="font-bold">
+              $390,00
+            </h2>
+
+            <hr>
+
+            <div class="m-t-sm">
+              <div class="btn-group">
+                <a  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#cartModal"><i class="fa fa-shopping-cart"></i> Thanh toán </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header border-bottom-0">
+        <h5 class="modal-title" id="exampleModalLabel">
+          Your Shopping Cart
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-image">
+          <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Product</th>
+            <th scope="col">Price</th>
+            <th scope="col">Qty</th>
+            <th scope="col">Total</th>
+            <th scope="col">Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td class="w-25">
+              <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/vans.png" class="img-fluid img-thumbnail" alt="Sheep">
+            </td>
+            <td>Vans Sk8-Hi MTE Shoes</td>
+            <td>89$</td>
+            <td class="qty"><input type="number" class="form-control"  value="2"></td>
+            <td>178$</td>
+            <td>
+              <a href="#" class="btn btn-danger btn-sm">
+                <i class="fa fa-times"></i>
+              </a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <div class="d-flex justify-content-end">
+          <h5>Total: <span class="price text-success">89$</span></h5>
+        </div>
+      </div>
+      <div class="modal-footer border-top-0 d-flex justify-content-between">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success">Checkout</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function() {
+    $('#cartModal').modal('show');
+  });
+</script>

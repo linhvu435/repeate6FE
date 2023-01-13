@@ -5,6 +5,7 @@ import { ShopRoutingModule } from './shop-routing.module';
 import { MyshopComponent } from './myshop/myshop.component';
 import { MyproductshopComponent } from './myproductshop/myproductshop.component';
 import { MybillshopComponent } from './mybillshop/mybillshop.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
     declarations: [
@@ -17,7 +18,8 @@ import { MybillshopComponent } from './mybillshop/mybillshop.component';
     ],
     imports: [
         CommonModule,
-        ShopRoutingModule
+        ShopRoutingModule,
+        FormsModule
     ]
 })
 export class ShopModule { }

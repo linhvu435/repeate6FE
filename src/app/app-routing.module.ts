@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {HomeComponent} from "./home/home/home.component";
+import {CartComponent} from "./cart/cart.component";
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
 
   { path: '', component: HomeComponent },
+
+  { path: 'cart', component: CartComponent },
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then(module => module.LoginModule)
@@ -23,7 +26,6 @@ const routes: Routes = [
   }
 ];
 
-// @ts-ignore
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

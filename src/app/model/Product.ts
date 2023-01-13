@@ -1,6 +1,7 @@
 
 import {Category} from "./Category";
 import {Shop} from "./Shop";
+import {ImgProduct} from "./ImgProduct";
 
 export class Product {
   id!: number
@@ -12,4 +13,6 @@ export class Product {
   category!: Category;
 
   shop!: Shop;
+
+  listimg!:ImgProduct[];
 }

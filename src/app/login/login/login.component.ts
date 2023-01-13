@@ -18,6 +18,7 @@ export class LoginComponent implements OnChanges,OnInit {
 
   user:any;
 
+  idroles:any;
   loggedIn:any;
   constructor(private authService: SocialAuthService,private loginService: LoginService, private router: Router, private shopService: ShopService) { }
 
@@ -58,12 +59,20 @@ export class LoginComponent implements OnChanges,OnInit {
         this.shopService.setNameShop(data.name);
         this.shopService.setAddressShop(data.shopAddress.name);
       })
+      this.idroles=localStorage.getItem("roles");
+      if (this.idroles==1){
+        Swal.fire(
+          ' Chào mừng admin!! ',
+          '<h2 style="color: green; font-size: 32px">Successfully </h2>',
+          'success')
+        this.router.navigate(["/admin"]);
+      }else {
         Swal.fire(
           ' OK!! ',
           '<h2 style="color: green; font-size: 32px">Successfully </h2>',
           'success')
         this.router.navigate(["/home"]);
-
+    }
     })
 
   }
