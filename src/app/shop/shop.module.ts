@@ -6,12 +6,14 @@ import { MyshopComponent } from './myshop/myshop.component';
 import { MyproductshopComponent } from './myproductshop/myproductshop.component';
 import { MybillshopComponent } from './mybillshop/mybillshop.component';
 import {FormsModule} from "@angular/forms";
+import { EditshopComponent } from './myshop/editshop/editshop.component';
 
 @NgModule({
     declarations: [
         MyshopComponent,
         MyproductshopComponent,
-        MybillshopComponent
+        MybillshopComponent,
+        EditshopComponent
 
     ],
     exports: [
