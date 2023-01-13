@@ -68,6 +68,9 @@ export class ShopService {
 
 
 
+  FindIdShopByProductId(id : number): Observable<number> {
+    return this.http.get<number>(`${API_URL}/shop/shopId/${id}`,);
+  }
 
   getProductByIdShop(id : number): Observable<Product[]> {
     return this.http.get<Product[]>(`${API_URL}/products/${id}`,);

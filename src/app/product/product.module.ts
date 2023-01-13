@@ -6,13 +6,15 @@ import {ViewComponent} from "./view/view.component";
 import { CreateComponent } from './create/create.component';
 import { EditComponent } from './edit/edit.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import {ViewproductshopComponent} from "./viewproductshop/viewproductshop.component";
 
 
 @NgModule({
   declarations: [
     ViewComponent,
     CreateComponent,
-    EditComponent
+    EditComponent,
+    ViewproductshopComponent
   ],
     imports: [
         CommonModule,

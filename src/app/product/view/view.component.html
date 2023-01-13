@@ -500,9 +500,11 @@
                     </div>
 
                     <div class="col-sm-7">
-                      <a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</a><br>
+                      <button  class="btn btn-primary" (click)="pushInCart(product)"><i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</button><br>
                       <br>
-                      <a href="/" class="btn btn-primary">Back Home</a>
+                      <a href="/" class="btn btn-primary">Back Home</a><br>
+                      <br>
+                      <a [routerLink]="'/product/viewShop/'+idShop" class="btn btn-primary">Go To Shop</a>
                     </div>
 
 
