@@ -34,7 +34,6 @@ export class MybillComponent implements OnInit{
     this.showbillshop.showbillbystatus(id).subscribe((data) => {
       this.bills=data;
     })
-
   }
   showbillshop1():void{
     this.showbillshop.getAllBillshop().subscribe((data) => {
