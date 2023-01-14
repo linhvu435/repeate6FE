@@ -191,14 +191,14 @@
         <!-- ============================================== SCROLL TABS ============================================== -->
         <div class="scroll-tabs outer-top-vs wow fadeInUp">
           <div class="more-info-tab clearfix ">
-            <h3 class="new-product-title pull-left">Đơn hàng của shop</h3>
+            <h3 class="new-product-title pull-left">Đơn hàng của tôi</h3>
           </div>
         </div>
 
         <div *ngFor="let b of bills"  >
           <div id="product-tabs-slider" class="scroll-tabs outer-top-vs wow fadeInUp" >
             <div class="more-info-tab clearfix ">
-              <h3 class="new-product-title pull-left"><b>Người mua : {{b.account.name}}   </b> </h3>
+              <h3 class="new-product-title pull-left"><b>Người bán : {{b.product[0].shop.name}}   </b> </h3>
             </div>
             <div class="tab-content outer-top-xs" >
               <div class="tab-pane in active" id="all">
@@ -219,13 +219,19 @@
                 <button class="btn btn-primary" type="button" style="width: 98%"  (click)="this.showbillbyidbill(b.id)" data-toggle="modal" data-target="#cartModal">Xem chi tiết đơn hàng</button>
                 <h3>  </h3>
                 <div *ngIf="b.billStatus.id==1">
-                  <button class="btn btn-success" type="button" style="width: 98%" (click)="this.setbillshop(2,b.id)">Xác nhận đơn hàng</button>
-                  <h3></h3>
                   <button class="btn btn-warning" type="button" style="width: 98%" (click)="this.setbillshop(5,b.id)">Hủy đơn hàng</button>
                   <h3></h3>
                 </div>
-                <div *ngIf="b.billStatus.id==2">
-                  <button class="btn btn-warning" type="button" style="width: 98%" (click)="this.setbillshop(3,b.id)">Đánh dấu đã giao thành công</button>
+                <div *ngIf="b.billStatus.id==3">
+                  <button class="btn btn-warning" type="button" style="width: 98%" (click)="this.setbillshop(4,b.id)">Đã nhận được hàng</button>
+                  <h3></h3>
+                </div>
+                <div *ngIf="b.billStatus.id==4">
+                  <button class="btn btn-warning" type="button" style="width: 98%" >Đánh giá</button>
+                  <h3></h3>
+                </div>
+                <div *ngIf="b.billStatus.id==5">
+                  <button class="btn btn-warning" type="button" style="width: 98%" >Mua lại</button>
                   <h3></h3>
                 </div>
               </div>

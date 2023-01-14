@@ -22,7 +22,7 @@ export class MybillComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.showbillshop.getAllBillshop().subscribe((data) => {
+    this.showbillshop.getAllBillshop1().subscribe((data) => {
       this.bills = data
       this.showbillshop.getallBillStatus().subscribe((data) => {
         this.billstatus = data
@@ -31,7 +31,7 @@ export class MybillComponent implements OnInit{
   }
 
   showbillbystatus(id:number):void{
-    this.showbillshop.showbillbystatus(id).subscribe((data) => {
+    this.showbillshop.showbillbystatus1(id).subscribe((data) => {
       this.bills=data;
     })
   }
@@ -49,7 +49,7 @@ export class MybillComponent implements OnInit{
   }
 
   showbillbyidbill(id:number):void{
-    this.showbillshop.showbillbyidbill(id).subscribe((data) => {
+    this.showbillshop.showbillbyidbill1(id).subscribe((data) => {
       this.product = data
     })
   }
