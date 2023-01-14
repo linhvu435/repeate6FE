@@ -42,8 +42,8 @@ export class ShopService {
   showbillbystatus(id:number):Observable<Bill[]>{
     return this.http.get<Bill[]>(`${API_URL}/order/showBillShop/${id}`);
   }
-  showbillbyidbill(id:number):Observable<ProductInBillDTO[]>{
-    return this.http.get<ProductInBillDTO[]>(`${API_URL}/order/showBillShopbyidbill/${id}`);
+  showbillbyidbill(id:number):Observable<ProductInBillDTO>{
+    return this.http.get<ProductInBillDTO>(`${API_URL}/order/showBillShopbyidbill/${id}`);
   }
 
   searchbycategory(category_id:number):Observable<Product[]>{
@@ -68,9 +68,16 @@ export class ShopService {
 
 
 
+  FindIdShopByProductId(id : number): Observable<number> {
+    return this.http.get<number>(`${API_URL}/shop/shopId/${id}`,);
+  }
 
   getProductByIdShop(id : number): Observable<Product[]> {
     return this.http.get<Product[]>(`${API_URL}/products/${id}`,);
+  }
+
+  danhdaulahethang(id : number): Observable<Product> {
+    return this.http.get<Product>(`${API_URL}/showproduct/hethang/${id}`,);
   }
 
   getAll(): Observable<Product[]> {
@@ -105,10 +112,11 @@ export class ShopService {
   getCartTotalPrice(){
     let carts : any = this.GetCarts();
     let total : number = 0;
-    carts.forEach((item: any)=>{
-      total += item.amount*item.price
-    })
+    if (carts!=null){
+      carts.forEach((item: any)=>{
+        total += item.amount*item.price
+      })
+    }
     return total;
   }
-
 }

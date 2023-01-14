@@ -1,268 +1,245 @@
-<style>
-  .container {
-    padding: 2rem 0rem;
-  }
 
-  .qty{
-    width: 200px;
-  }
-  .table-image thead td,
-  .table-image thead th {
-    border: 0;
-    color: #666;
-    font-size: 0.8rem;
-  }
-  .table-image td,
-  .table-image th {
-    vertical-align: middle;
-    text-align: center;
-  }
-
-
-  .price {
-    margin-left: 1rem;
-  }
-
-  .modal-footer {
-    padding-top: 0rem;
-  }
-  body{margin-top:20px;
-    background:#eee;
-  }
-  h3 {
-    font-size: 16px;
-  }
-  .text-navy {
-    color: #1ab394;
-  }
-  .cart-product-imitation {
-    text-align: center;
-    padding-top: 30px;
-    height: 80px;
-    width: 80px;
-    background-color: #f8f8f9;
-  }
-  .product-imitation.xl {
-    padding: 120px 0;
-  }
-  .product-desc {
-    padding: 20px;
-    position: relative;
-  }
-  .ecommerce .tag-list {
-    padding: 0;
-  }
-  .ecommerce .fa-star {
-    color: #d1dade;
-  }
-  .ecommerce .fa-star.active {
-    color: #f8ac59;
-  }
-  .ecommerce .note-editor {
-    border: 1px solid #e7eaec;
-  }
-  table.shoping-cart-table {
-    margin-bottom: 0;
-  }
-  table.shoping-cart-table tr td {
-    border: none;
-    text-align: right;
-  }
-  table.shoping-cart-table tr td.desc,
-  table.shoping-cart-table tr td:first-child {
-    text-align: left;
-  }
-  table.shoping-cart-table tr td:last-child {
-    width: 80px;
-  }
-  .ibox {
-    clear: both;
-    margin-bottom: 25px;
-    margin-top: 0;
-    padding: 0;
-  }
-  .ibox.collapsed .ibox-content {
-    display: none;
-  }
-  .ibox:after,
-  .ibox:before {
-    display: table;
-  }
-  .ibox-title {
-    -moz-border-bottom-colors: none;
-    -moz-border-left-colors: none;
-    -moz-border-right-colors: none;
-    -moz-border-top-colors: none;
-    background-color: #ffffff;
-    border-color: #e7eaec;
-    border-image: none;
-    border-style: solid solid none;
-    border-width: 3px 0 0;
-    color: inherit;
-    margin-bottom: 0;
-    padding: 14px 15px 7px;
-    min-height: 48px;
-  }
-  .ibox-content {
-    background-color: #ffffff;
-    color: inherit;
-    padding: 15px 20px 20px 20px;
-    border-color: #e7eaec;
-    border-image: none;
-    border-style: solid solid none;
-    border-width: 1px 0;
-  }
-  .ibox-footer {
-    color: inherit;
-    border-top: 1px solid #e7eaec;
-    font-size: 90%;
-    background: #ffffff;
-    padding: 10px 15px;
-  }
-</style>
-
+<!-- ============================================== HEADER : END ============================================== -->
+<div class="breadcrumb" >
   <div class="container">
-  <div class="wrapper wrapper-content animated fadeInRight">
-    <div class="row">
-      <div class="col-md-9">
-        <div class="ibox">
-          <div class="ibox-title">
-            <span class="pull-right">(<strong>5</strong>) sản phẩm</span>
-            <h5>Sản phẩm trong giỏ hàng </h5>
-          </div>
-          <div class="ibox-content">
-            <div class="table-responsive">
-              <table class="table shoping-cart-table">
-                <tbody>
-                <tr>
-                  <td width="90">
-                    <div class="cart-product-imitation">
+    <div class="breadcrumb-inner">
+      <ul class="list-inline list-unstyled">
+        <li><a href="#">Home</a></li>
+        <li class='active'>Shopping Cart</li>
+      </ul>
+    </div><!-- /.breadcrumb-inner -->
+  </div><!-- /.container -->
+</div><!-- /.breadcrumb -->
+
+<div class="body-content outer-top-xs">
+  <div class="container">
+    <div class="row ">
+      <div class="shopping-cart">
+        <div class="shopping-cart-table ">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+              <tr>
+                <th class="cart-romove item">Remove</th>
+                <th class="cart-description item">Image</th>
+                <th class="cart-product-name item">Product Name</th>
+<!--                 <th class="cart-edit item">Edit</th>-->
+                <th class="cart-qty item">Quantity</th>
+                <th class="cart-sub-total item">Subtotal</th>
+              </tr>
+              </thead><!-- /thead -->
+              <tfoot>
+              <tr>
+                <td colspan="7">
+                  <div class="shopping-cart-btn">
+							<span class="">
+								<a href="/" class="btn btn-upper btn-primary outer-left-xs">Continue Shopping</a>
+								<a href="#" class="btn btn-upper btn-primary pull-right outer-right-xs">Update shopping cart</a>
+							</span>
+                  </div><!-- /.shopping-cart-btn -->
+                </td>
+              </tr>
+              </tfoot>
+              <tbody>
+              <tr *ngFor="let c of carts, index as i">
+                <td class="romove-item"><button (click)="removeCart(i)" title="cancel" class="icon"><i class="fa fa-trash-o"></i></button></td>
+                <td class="cart-image">
+                  <a class="entry-thumbnail" href="detail.html">
+                    <img src="{{c.img}}"style="width: 200px;height: 200px">
+                  </a>
+                </td>
+                <td class="cart-product-name-info">
+                  <h4 class='cart-product-description'><a href="detail.html">{{c.name}}</a></h4>
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="rating rateit-small"></div>
                     </div>
-                  </td>
-                  <td class="desc">
-                    <h3>
-                      <a href="#" class="text-navy">
-                        Desktop publishing software
-                      </a>
-                    </h3>
-                    <div class="m-t-sm">
-                      |
-                      <a href="#" class="text-muted"><i class="fa fa-trash"></i> Remove item</a>
+                    <div class="col-sm-8">
+                      <div class="reviews">
+                        (06 Reviews)
+                      </div>
                     </div>
-                  </td>
+                  </div><!-- /.row -->
+                  <div class="cart-product-info">
+                    <span class="product-color">COLOR:<span>Blue</span></span>
+                  </div>
+                </td>
+<!--                <td class="cart-product-edit"><a href="#" class="product-edit">Edit</a></td>-->
+                <td class="cart-product-quantity">
+                  <input (change)="updatePrice(i, $event)" type="number" [value]="c.amount"style="width: 60px">
+                </td>
+                <td class="cart-product-sub-total"><span class="cart-sub-total-price">{{subTotal(c)}}</span></td>
+              </tr>
 
-                  <td>
-                    $180,00
-                  </td>
-                  <td class="qty"><input type="number" class="form-control"  value="2"></td>
-
-                  <td>
-                    <h4>
-                      $180,00
-                    </h4>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-
+              </tbody><!-- /tbody -->
+            </table><!-- /table -->
           </div>
+        </div><!-- /.shopping-cart-table -->				<div class="col-md-4 col-sm-12 estimate-ship-tax">
+        <table class="table">
 
-          <div class="ibox-content">
-            <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#cartModal"><i class="fa fa fa-shopping-cart" ></i> Thanh toán</button>
-            <button class="btn btn-white"><i class="fa fa-arrow-left"></i>Quay về trang chủ </button>
-
-          </div>
-        </div>
-
-      </div>
-      <div class="col-md-3">
-        <div class="ibox">
-          <div class="ibox-title">
-            <h5>Trang thanh toán</h5>
-          </div>
-          <div class="ibox-content">
-                    <span>
-                        Tổng tiền
-                    </span>
-            <h2 class="font-bold">
-              $390,00
-            </h2>
-
-            <hr>
-
-            <div class="m-t-sm">
-              <div class="btn-group">
-                <a  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#cartModal"><i class="fa fa-shopping-cart"></i> Thanh toán </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-
-
-
-<div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header border-bottom-0">
-        <h5 class="modal-title" id="exampleModalLabel">
-          Your Shopping Cart
-        </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <table class="table table-image">
           <thead>
           <tr>
-            <th scope="col"></th>
-            <th scope="col">Product</th>
-            <th scope="col">Price</th>
-            <th scope="col">Qty</th>
-            <th scope="col">Total</th>
-            <th scope="col">Actions</th>
+            <th>
+              <span class="estimate-title">Estimate shipping and tax</span>
+              <p>Enter your destination to get shipping and tax.</p>
+            </th>
           </tr>
-          </thead>
+          </thead><!-- /thead -->
           <tbody>
           <tr>
-            <td class="w-25">
-              <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/vans.png" class="img-fluid img-thumbnail" alt="Sheep">
-            </td>
-            <td>Vans Sk8-Hi MTE Shoes</td>
-            <td>89$</td>
-            <td class="qty"><input type="number" class="form-control"  value="2"></td>
-            <td>178$</td>
             <td>
-              <a href="#" class="btn btn-danger btn-sm">
-                <i class="fa fa-times"></i>
-              </a>
+              <div class="form-group">
+                <label class="info-title control-label">Country <span>*</span></label>
+                <select class="form-control unicase-form-control selectpicker">
+                  <option>--Select options--</option>
+                  <option>India</option>
+                  <option>SriLanka</option>
+                  <option>united kingdom</option>
+                  <option>saudi arabia</option>
+                  <option>united arab emirates</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="info-title control-label">State/Province <span>*</span></label>
+                <select class="form-control unicase-form-control selectpicker">
+                  <option>--Select options--</option>
+                  <option>TamilNadu</option>
+                  <option>Kerala</option>
+                  <option>Andhra Pradesh</option>
+                  <option>Karnataka</option>
+                  <option>Madhya Pradesh</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="info-title control-label">Zip/Postal Code</label>
+                <input type="text" class="form-control unicase-form-control text-input" placeholder="">
+              </div>
+              <div class="pull-right">
+                <button type="submit" class="btn-upper btn btn-primary">GET A QOUTE</button>
+              </div>
             </td>
           </tr>
           </tbody>
         </table>
-        <div class="d-flex justify-content-end">
-          <h5>Total: <span class="price text-success">89$</span></h5>
-        </div>
-      </div>
-      <div class="modal-footer border-top-0 d-flex justify-content-between">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-success">Checkout</button>
-      </div>
-    </div>
-  </div>
-</div>
+      </div><!-- /.estimate-ship-tax -->
 
-<script>
-  $(document).ready(function() {
-    $('#cartModal').modal('show');
-  });
-</script>
+        <div class="col-md-4 col-sm-12 estimate-ship-tax">
+          <table class="table">
+            <thead>
+            <tr>
+              <th>
+                <span class="estimate-title">Mã giảm giá</span>
+                <p>Nhập mã giảm giá nếu có ...</p>
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>
+                <div class="form-group">
+                  <input type="text" class="form-control unicase-form-control text-input" placeholder="Nhập mã giảm giá ...">
+                </div>
+                <div class="clearfix pull-right">
+                  <button type="submit" class="btn-upper btn btn-primary">Xác nhận</button>
+                </div>
+              </td>
+            </tr>
+            </tbody><!-- /tbody -->
+          </table><!-- /table -->
+        </div><!-- /.estimate-ship-tax -->
+
+        <div class="col-md-4 col-sm-12 cart-shopping-total">
+          <table class="table">
+            <thead>
+            <tr>
+              <th>
+                <div class="cart-grand-total">
+                  Grand Total<span class="inner-left-md">{{totalPrice}}</span>
+                </div>
+              </th>
+            </tr>
+            </thead><!-- /thead -->
+            <tbody>
+            <tr>
+              <td>
+                <div class="cart-checkout-btn pull-right" >
+                  <button type="submit" class="btn btn-primary checkout-btn" style="margin-right: 70px" (click)="createBill()">Thanh toán ngay</button>
+                </div>
+              </td>
+            </tr>
+            </tbody><!-- /tbody -->
+          </table><!-- /table -->
+        </div><!-- /.cart-shopping-total -->
+      </div><!-- /.shopping-cart -->
+    </div> <!-- /.row -->
+    <!-- ============================================== BRANDS CAROUSEL ============================================== -->
+    <div id="brands-carousel" class="logo-slider wow fadeInUp">
+
+      <div class="logo-slider-inner">
+        <div id="brand-slider" class="owl-carousel brand-slider custom-carousel owl-theme">
+          <div class="item m-t-15">
+            <a href="#" class="image">
+              <img data-echo="assets/images/brands/brand1.png" src="assets\images\blank.gif" alt="">
+            </a>
+          </div><!--/.item-->
+
+          <div class="item m-t-10">
+            <a href="#" class="image">
+              <img data-echo="assets/images/brands/brand2.png" src="assets\images\blank.gif" alt="">
+            </a>
+          </div><!--/.item-->
+
+          <div class="item">
+            <a href="#" class="image">
+              <img data-echo="assets/images/brands/brand3.png" src="assets\images\blank.gif" alt="">
+            </a>
+          </div><!--/.item-->
+
+          <div class="item">
+            <a href="#" class="image">
+              <img data-echo="assets/images/brands/brand4.png" src="assets\images\blank.gif" alt="">
+            </a>
+          </div><!--/.item-->
+
+          <div class="item">
+            <a href="#" class="image">
+              <img data-echo="assets/images/brands/brand5.png" src="assets\images\blank.gif" alt="">
+            </a>
+          </div><!--/.item-->
+
+          <div class="item">
+            <a href="#" class="image">
+              <img data-echo="assets/images/brands/brand6.png" src="assets\images\blank.gif" alt="">
+            </a>
+          </div><!--/.item-->
+
+          <div class="item">
+            <a href="#" class="image">
+              <img data-echo="assets/images/brands/brand2.png" src="assets\images\blank.gif" alt="">
+            </a>
+          </div><!--/.item-->
+
+          <div class="item">
+            <a href="#" class="image">
+              <img data-echo="assets/images/brands/brand4.png" src="assets\images\blank.gif" alt="">
+            </a>
+          </div><!--/.item-->
+
+          <div class="item">
+            <a href="#" class="image">
+              <img data-echo="assets/images/brands/brand1.png" src="assets\images\blank.gif" alt="">
+            </a>
+          </div><!--/.item-->
+
+          <div class="item">
+            <a href="#" class="image">
+              <img data-echo="assets/images/brands/brand5.png" src="assets\images\blank.gif" alt="">
+            </a>
+          </div><!--/.item-->
+        </div><!-- /.owl-carousel #logo-slider -->
+      </div><!-- /.logo-slider-inner -->
+
+    </div><!-- /.logo-slider -->
+    <!-- ============================================== BRANDS CAROUSEL : END ============================================== -->	</div><!-- /.container -->
+</div><!-- /.body-content -->
+

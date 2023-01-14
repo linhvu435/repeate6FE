@@ -1,17 +1,16 @@
 import {Component, OnInit} from '@angular/core';
-import {Bill} from "../../model/Bill";
-import {ProductInBillDTO} from "../../model/DTO/ProductInBillDTO";
-import {ShopService} from "../../service/shopserviceM/shop.service";
+import {Bill} from "../model/Bill";
+import {ProductInBillDTO} from "../model/DTO/ProductInBillDTO";
+import {BillStatus} from "../model/BillStatus";
+import {ShopService} from "../service/shopserviceM/shop.service";
 import {Router} from "@angular/router";
-import {BillStatus} from "../../model/BillStatus";
-import {Product} from "../../model/Product";
 
 @Component({
-  selector: 'app-mybillshop',
-  templateUrl: './mybillshop.component.html',
-  styleUrls: ['./mybillshop.component.css']
+  selector: 'app-mybill',
+  templateUrl: './mybill.component.html',
+  styleUrls: ['./mybill.component.css']
 })
-export class MybillshopComponent implements OnInit{
+export class MybillComponent implements OnInit{
   bills :Bill[]=[];
 
   product!:ProductInBillDTO;
@@ -35,7 +34,6 @@ export class MybillshopComponent implements OnInit{
     this.showbillshop.showbillbystatus(id).subscribe((data) => {
       this.bills=data;
     })
-
   }
   showbillshop1():void{
     this.showbillshop.getAllBillshop().subscribe((data) => {
@@ -55,5 +53,4 @@ export class MybillshopComponent implements OnInit{
       this.product = data
     })
   }
-
 }

@@ -24,6 +24,7 @@ import {AngularFireModule} from "@angular/fire/compat";
 import { ShopComponent } from './shop/shop.component';
 import { CartComponent } from './cart/cart.component';
 import { CommentandstarComponent } from './commentandstar/commentandstar/commentandstar.component';
+import { MybillComponent } from './mybill/mybill.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { CommentandstarComponent } from './commentandstar/commentandstar/comment
     ShopComponent,
     FooterComponent,
     CartComponent,
-    CommentandstarComponent
+    CommentandstarComponent,
+    MybillComponent
 
   ],
   imports: [
