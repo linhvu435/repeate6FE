@@ -4,6 +4,7 @@ import {ProductInBillDTO} from "../model/DTO/ProductInBillDTO";
 import {BillStatus} from "../model/BillStatus";
 import {ShopService} from "../service/shopserviceM/shop.service";
 import {Router} from "@angular/router";
+import {CommentService} from "../service/commentservice/comment.service";
 
 @Component({
   selector: 'app-mybill',
@@ -13,16 +14,19 @@ import {Router} from "@angular/router";
 export class MybillComponent implements OnInit{
   bills :Bill[]=[];
 
-  product!:ProductInBillDTO;
+  product:ProductInBillDTO = {id: 0, name:'', total: 0, products: []};
 
-  billstatus!:BillStatus[];
+  billstatus:BillStatus[] = [];
+
+  comment = {productId: 0, star: 0, content: ''}
 
 
-  constructor(private showbillshop: ShopService ,private router:Router) {
+
+  constructor(private showbillshop: ShopService ,private router:Router, private commentService: CommentService) {
   }
 
-  ngOnInit() {
-    this.showbillshop.getAllBillshop().subscribe((data) => {
+  ngOnInit(): void {
+    this.showbillshop.getAllBillshop1().subscribe((data) => {
       this.bills = data
       this.showbillshop.getallBillStatus().subscribe((data) => {
         this.billstatus = data
@@ -30,8 +34,10 @@ export class MybillComponent implements OnInit{
     })
   }
 
+
+
   showbillbystatus(id:number):void{
-    this.showbillshop.showbillbystatus(id).subscribe((data) => {
+    this.showbillshop.showbillbystatus1(id).subscribe((data) => {
       this.bills=data;
     })
   }
@@ -49,8 +55,16 @@ export class MybillComponent implements OnInit{
   }
 
   showbillbyidbill(id:number):void{
-    this.showbillshop.showbillbyidbill(id).subscribe((data) => {
+    this.showbillshop.showbillbyidbill1(id).subscribe((data) => {
       this.product = data
+      this.comment.productId = this.product.id;
+    })
+  }
+
+
+  Comment(){
+    this.commentService.comment(this.comment).subscribe(res => {
+      console.log(res)
     })
   }
 }

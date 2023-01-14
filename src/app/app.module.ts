@@ -25,6 +25,7 @@ import { ShopComponent } from './shop/shop.component';
 import { CartComponent } from './cart/cart.component';
 import { CommentandstarComponent } from './commentandstar/commentandstar/commentandstar.component';
 import { MybillComponent } from './mybill/mybill.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -46,7 +47,9 @@ import { MybillComponent } from './mybill/mybill.component';
     AppRoutingModule,
     HttpClientModule,
     AngularFireStorageModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig, "cloud")
+    AngularFireModule.initializeApp(environment.firebaseConfig, "cloud"),
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
     {

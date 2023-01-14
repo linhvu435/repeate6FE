@@ -15,7 +15,12 @@ const API_URL = `${environment.apiUrl}`;
 })
 export class ShopService {
 
+
+
   constructor(private http:HttpClient) { }
+
+
+
   getAllBillshop(): Observable<Bill[]>{
     return this.http.get<Bill[]>(`${API_URL}/order/showBillShop`);
   }
@@ -39,12 +44,28 @@ export class ShopService {
     return this.http.get<Bill>(`${API_URL}/order/setbill/${idbill}/${idstatus}`);
   }
 
+  //trang bill người bán
   showbillbystatus(id:number):Observable<Bill[]>{
     return this.http.get<Bill[]>(`${API_URL}/order/showBillShop/${id}`);
   }
   showbillbyidbill(id:number):Observable<ProductInBillDTO>{
     return this.http.get<ProductInBillDTO>(`${API_URL}/order/showBillShopbyidbill/${id}`);
   }
+
+
+  //trang bill nguười mua
+  showbillbyidbill1(id:number):Observable<ProductInBillDTO>{
+    return this.http.get<ProductInBillDTO>(`${API_URL}/orderuser/showBillShopbyidbill/${id}`);
+  }
+
+  showbillbystatus1(id:number):Observable<Bill[]>{
+    return this.http.get<Bill[]>(`${API_URL}/orderuser/showBillShop/${id}`);
+  }
+
+  getAllBillshop1(): Observable<Bill[]>{
+    return this.http.get<Bill[]>(`${API_URL}/orderuser/showBillShop`);
+  }
+
 
   searchbycategory(category_id:number):Observable<Product[]>{
     return this.http.get<Product[]>(`${API_URL}/search/searchcategory/${category_id}`);

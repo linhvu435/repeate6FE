@@ -1,7 +1,21 @@
-
 <!-- ============================================== HEADER ============================================== -->
 
 <style>
+  #rating{border:none;float:left;}
+  #rating>input{display:none;}/*ẩn input radio - vì chúng ta đã có label là GUI*/
+  #rating>label:before{margin:5px;font-size:1.25em;font-family:FontAwesome;display:inline-block;content:"\f005";}/*1 ngôi sao*/
+  #rating>.half:before{content:"\f089";position:absolute;}/*0.5 ngôi sao*/
+  #rating>label{color:#ddd;float:right;}/*float:right để lật ngược các ngôi sao lại đúng theo thứ tự trong thực tế*/
+  /*thêm màu cho sao đã chọn và các ngôi sao phía trước*/
+  #rating>input:checked~label,
+  #rating:not(:checked)>label:hover,
+  #rating:not(:checked)>label:hover~label{color:#FFD700;}
+  /* Hover vào các sao phía trước ngôi sao đã chọn*/
+  #rating>input:checked+label:hover,
+  #rating>input:checked~label:hover,
+  #rating>label:hover~input:checked~label,
+  #rating>input:checked~label:hover~label{color:#FFED85;}
+
   .stars {
     display: flex;
     position: relative;
@@ -196,14 +210,14 @@
         <!-- ============================================== SCROLL TABS ============================================== -->
         <div class="scroll-tabs outer-top-vs wow fadeInUp">
           <div class="more-info-tab clearfix ">
-            <h3 class="new-product-title pull-left">Đơn hàng của shop</h3>
+            <h3 class="new-product-title pull-left">Đơn hàng của tôi</h3>
           </div>
         </div>
 
         <div *ngFor="let b of bills"  >
           <div id="product-tabs-slider" class="scroll-tabs outer-top-vs wow fadeInUp" >
             <div class="more-info-tab clearfix ">
-              <h3 class="new-product-title pull-left"><b>Người mua : {{b.account.name}}   </b> </h3>
+              <h3 class="new-product-title pull-left"><b>Người bán : {{b.product[0].shop.name}}   </b> </h3>
             </div>
             <div class="tab-content outer-top-xs" >
               <div class="tab-pane in active" id="all">
@@ -224,15 +238,23 @@
                 <button class="btn btn-primary" type="button" style="width: 98%"  (click)="this.showbillbyidbill(b.id)" data-toggle="modal" data-target="#cartModal">Xem chi tiết đơn hàng</button>
                 <h3>  </h3>
                 <div *ngIf="b.billStatus.id==1">
-                  <button class="btn btn-success" type="button" style="width: 98%" (click)="this.setbillshop(2,b.id)">Xác nhận đơn hàng</button>
-                  <h3></h3>
-                  <button class="btn btn-warning" type="button" style="width: 98%" (click)="this.setbillshop(5,b.id)">Hủy đơn hàng</button>
+                  <button class="btn btn-warning" type="button" style="width: 98%" (click)="this.setbillshop(6,b.id)">Hủy đơn hàng</button>
                   <h3></h3>
                 </div>
-                <div >
-                  <button class="btn btn-warning" type="button" style="width: 98%" data-toggle="modal" data-target="#cartModal1">Đánh giá </button>
+
+                <div *ngIf="b.billStatus.id==3">
+                  <button class="btn btn-warning" type="button" style="width: 98%" (click)="this.setbillshop(4,b.id)">Đã nhận được hàng</button>
                   <h3></h3>
                 </div>
+                <div *ngIf="b.billStatus.id==4">
+                  <button class="btn btn-warning" type="button" style="width: 98%" (click)="this.showbillbyidbill(b.id)"  data-toggle="modal" data-target="#cartModal1">Đánh giá</button>
+                  <h3></h3>
+                </div>
+                <div *ngIf="b.billStatus.id==5">
+                  <button class="btn btn-warning" type="button" style="width: 98%" >Mua lại</button>
+                  <h3></h3>
+                </div>
+
               </div>
 
 
@@ -314,7 +336,7 @@
 
 
 
-<div class="modal fade" id="cartModal1"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+<div class="modal fade" *ngIf="product!=null" id="cartModal1"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header border-bottom-0">
@@ -361,7 +383,7 @@
           </div>
 
           <div class="row" >
-            <div class="col-xl-3 col-sm-6" style="height: 400px; width: 350px" >
+            <div class="col-xl-3 col-sm-6" style="height: 400px; width: 350px" *ngFor="let p of product.products">
               <div class="card"  >
                 <div class="card-body">
                   <div class="dropdown float-end">
@@ -369,48 +391,48 @@
                     <div class="dropdown-menu dropdown-menu-end"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Action</a><a class="dropdown-item" href="#">Remove</a></div>
                   </div>
                   <div class="d-flex align-items-center">
-                    <div><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="avatar-md rounded-circle img-thumbnail" /></div>
+                    <div><img src="{{p.img}}" alt="" class="avatar-md rounded-circle img-thumbnail" /></div>
                     <div class="flex-1 ms-3">
-                      <h5 class="font-size-16 mb-1"><a href="#" class="text-dark">Phyllis Gatlin</a></h5>
-                      <span class="badge badge-soft-success mb-0">Full Stack Developer</span>
+                      <h5 class="font-size-16 mb-1"><a href="#" class="text-dark">{{p.name}}</a></h5>
+                      <span class="badge badge-soft-success mb-0">Đánh giá và bình luận sản phẩm</span>
                     </div>
                   </div>
-                  <div class="mt-3 pt-1">
-                    <p class="text-muted mb-0"><i class="mdi mdi-phone font-size-15 align-middle pe-2 text-primary"></i> 070 2860 5375</p>
-                    <p class="text-muted mb-0 mt-2"><i class="mdi mdi-email font-size-15 align-middle pe-2 text-primary"></i> PhyllisGatlin@spy.com</p>
-                    <p class="text-muted mb-0 mt-2"><i class="mdi mdi-google-maps font-size-15 align-middle pe-2 text-primary"></i> 52 Ilchester MYBSTER 9WX</p>
-                  </div>
-                  <div class="d-flex gap-2 pt-4">
-                    <button type="button" class="btn btn-soft-primary btn-sm w-50"><i class="bx bx-user me-1"></i> Profile</button>
-                    <button type="button" class="btn btn-primary btn-sm w-50"><i class="bx bx-message-square-dots me-1"></i> Contact</button>
-                  </div>
+
+
+                    <div class="mt-3 pt-1">
+                      <p class="text-muted mb-0 mt-2"><i class="mdi mdi-google-maps font-size-15 align-middle pe-2 text-primary"></i>{{p.shop.name}}</p>
+                    </div>
+                    <input hidden [(ngModel)]="comment.productId" [value]="p.id" >
+                    <!--                  đánh giá sao-->
+
+                    <div id="rating" [(ngModel)]="comment.star" >
+                      <input type="radio" id="star5" name="rating" value="5" #star1  (change)="comment.star = 5"/>
+                      <label class = "full" for="star5" title="Awesome - 5 stars"></label>
+
+                      <input type="radio" id="star4" name="rating" value="4" #star2 (change)="comment.star = 4" />
+                      <label class = "full" for="star4" title="Pretty good - 4 stars" ></label>
+
+                      <input type="radio" id="star3" name="rating" value="3" #star3 (change)="comment.star = 3" />
+                      <label class = "full" for="star3" title="Meh - 3 stars"></label>
+
+                      <input type="radio" id="star2" name="rating" value="2" #star4 (change)="comment.star = 2"/>
+                      <label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+
+                      <input type="radio" id="star1" name="rating" value="1" #star5 (change)="comment.star = 1"/>
+                      <label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                    </div> <br><br>
+                    <!--                  comment-->
+                    <input type="text" style="margin-right: 100px" [(ngModel)]="comment.content" > <br>
+                    <div class="d-flex gap-2 pt-4">
+                      <button type="button" class="btn btn-primary btn-sm w-50" (click)="Comment()"><i class="bx bx-message-square-dots me-1"></i>Phản Hồi</button>
+                    </div>
+
+
                 </div>
               </div>
             </div>
           </div>
 
-<!--          <div class="row g-0 align-items-center pb-4">-->
-<!--            <div class="col-sm-6">-->
-<!--              <div><p class="mb-sm-0">Showing 1 to 10 of 57 entries</p></div>-->
-<!--            </div>-->
-<!--            <div class="col-sm-6">-->
-<!--              <div class="float-sm-end">-->
-<!--                <ul class="pagination mb-sm-0">-->
-<!--                  <li class="page-item disabled">-->
-<!--                    <a href="#" class="page-link"><i class="mdi mdi-chevron-left"></i></a>-->
-<!--                  </li>-->
-<!--                  <li class="page-item active"><a href="#" class="page-link">1</a></li>-->
-<!--                  <li class="page-item"><a href="#" class="page-link">2</a></li>-->
-<!--                  <li class="page-item"><a href="#" class="page-link">3</a></li>-->
-<!--                  <li class="page-item"><a href="#" class="page-link">4</a></li>-->
-<!--                  <li class="page-item"><a href="#" class="page-link">5</a></li>-->
-<!--                  <li class="page-item">-->
-<!--                    <a href="#" class="page-link"><i class="mdi mdi-chevron-right"></i></a>-->
-<!--                  </li>-->
-<!--                </ul>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
         </div>
 <!--        hiển thị sản phẩm-->
 
@@ -439,4 +461,10 @@
 
   const percentage = Math.round((value / max) * 100);
   document.querySelector('.overlay').style.width = `${100 - percentage}%`;
+
+  function calcRate(r) {
+    const f = ~~r,//Tương tự Math.floor(r)
+      id = 'star' + f + (r % f ? 'half' : '')
+    id && (document.getElementById(id).checked = !0)
+  }
 </script>
