@@ -6,7 +6,6 @@ import {CategoryService} from "../../service/UserService/categoryservice/categor
 import {ShopService} from "../../service/ShopService/shop.service";
 import {Category} from "../../model/Category";
 import {ImgProduct} from "../../model/ImgProduct";
-import {finalize} from "rxjs";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {ImgproductService} from "../../service/UserService/imgproductservice/imgproduct.service";
 
@@ -29,20 +28,29 @@ export class CreateComponent implements OnInit{
 
   @ViewChild('uploadFile', {static: true}) public avatarDom1: ElementRef | undefined;
   selectedImage: any = null;
-  arrayPicture!: string;
-  submit(){
-    if(this.selectedImage !=null){
-      const filePath = this.selectedImage.name;
-      const fileRef = this.storage.ref(filePath);
-      this.storage.upload(filePath,this.selectedImage).snapshotChanges().pipe(
-        finalize(() => (fileRef.getDownloadURL().subscribe(url => { this.arrayPicture =url
-        })))
-      ).subscribe();
+  arrayPicture: string[]=[];
+  alreadyBoughtProduct: boolean = true;
+
+  async submit(selectedImgArray: any){
+    if (selectedImgArray.length > 0) {
+      for (let i = 0; i < selectedImgArray.length; i++) {
+        const filePath = selectedImgArray[i].name;
+        let ref = (await this.uploadFile(filePath, selectedImgArray[i]))
+        this.arrayPicture.push(await ref.getDownloadURL());
+      }
+      return this.arrayPicture;
+    } else {
+      return []
     }
   }
-  uploadFileImg(){
-    this.selectedImage = this.avatarDom1?.nativeElement.files[0];
-    this.submit();
+
+  async uploadFile(filePath:string,fileToUpload: any) {
+    return (await this.storage.upload(filePath, fileToUpload)).ref;
+  }
+
+  uploadFileImg() {
+    var selectedImgArray = this.avatarDom1?.nativeElement.files;
+    this.submit(selectedImgArray);
   }
   ngOnInit(): void {
     this.categoryService.getAll().subscribe((data)=>{
@@ -60,23 +68,31 @@ export class CreateComponent implements OnInit{
   }
 
   create() {
-    console.log(this.createForm.value)
-    this.productService.saveProduct(this.createForm.value).subscribe()
-    this.productService.findProductId().subscribe((data)=>{
-       this.idProduct =data;
+    var selectedImgArray = this.avatarDom1?.nativeElement.files;
+    const promise = Promise.resolve(this.submit(selectedImgArray));
+    promise.then((success: String[]) => {
+      success.forEach(x => console.log(x));
+      let formValue = this.createForm.value;
+      var request = {
+        name: formValue.name,
+        detail: formValue.detail,
+        price: formValue.price,
+        amount: formValue.amount,
+        imgs: success,
+        categoryId: formValue.category.id,
+        shopId: formValue.shop.id
+      }
+
+      console.log(request)
+      this.productService.saveProduct(request).subscribe(res => {
+        console.log(res)
+        this.createForm.reset();
+        this.createForm.setControl('shop', new FormGroup({
+          id: new FormControl(localStorage.getItem("idShop"))
+        }))
+        this.arrayPicture = [];
+        this.router.navigate(["/product/create"]);
       })
-    // this.imgProduct.product_id = this.idProduct
-    // this.imgProduct.name = this.arrayPicture
-    this.imgProductService.saveProductImg(this.imgProduct).subscribe((data)=>{
-      console.log(data ,"12")
     })
-    this.createForm.reset();
-    this.createForm.setControl('shop', new FormGroup({
-      id: new FormControl(localStorage.getItem("idShop"))
-    }))
-    this.router.navigate(["/product/create"]);
-
   }
-
-
 }
