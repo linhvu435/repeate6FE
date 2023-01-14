@@ -1,329 +1,368 @@
-<!--mở 2 dòng div đầu tiên-->
+<style>
+  @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+  /*reset css*/
 
-<!--<div class="container">-->
-<!--  <div class="bg-white rounded d-flex align-items-center justify-content-between" id="header">-->
+  #rating{border:none;float:left;}
+  #rating>input{display:none;}/*ẩn input radio - vì chúng ta đã có label là GUI*/
+  #rating>label:before{margin:5px;font-size:1.25em;font-family:FontAwesome;display:inline-block;content:"\f005";}/*1 ngôi sao*/
+  #rating>.half:before{content:"\f089";position:absolute;}/*0.5 ngôi sao*/
+  #rating>label{color:#ddd;float:right;}/*float:right để lật ngược các ngôi sao lại đúng theo thứ tự trong thực tế*/
+  /*thêm màu cho sao đã chọn và các ngôi sao phía trước*/
+  #rating>input:checked~label,
+  #rating:not(:checked)>label:hover,
+  #rating:not(:checked)>label:hover~label{color:#FFD700;}
+  /* Hover vào các sao phía trước ngôi sao đã chọn*/
+  #rating>input:checked+label:hover,
+  #rating>input:checked~label:hover,
+  #rating>label:hover~input:checked~label,
+  #rating>input:checked~label:hover~label{color:#FFED85;}
+  body {margin-top:20px;
+    background:#f1f2f7;
+  }
 
-    <!--PHÂN TRANG-->
+  .stars {
+    display: flex;
+    position: relative;
+    white-space: nowrap;
+    margin-top: -40px;
+    margin-bottom: -50px;
+    margin-left: 25px;
+    align-items: center;
+    text-align: center;
+  }
+  .stars svg {
+    width: 35px;
+  }
 
-    <!--    <div class="ml-auto mt-3 mr-2">-->
-    <!--      <nav aria-label="Page navigation example">-->
-    <!--        <ul class="pagination">-->
-    <!--          <li class="page-item"><a class="page-link" href="#" aria-label="Previous"> <span aria-hidden="true"-->
-    <!--                                                                                           class="font-weight-bold">&lt;</span>-->
-    <!--            <span class="sr-only">Previous</span> </a></li>-->
-    <!--          <li class="page-item active"><a class="page-link" href="#">1</a></li>-->
-    <!--          <li class="page-item"><a class="page-link" href="#">..</a></li>-->
-    <!--          <li class="page-item"><a class="page-link" href="#">24</a></li>-->
-    <!--          <li class="page-item"><a class="page-link" href="#" aria-label="Next"> <span aria-hidden="true"-->
-    <!--                                                                                       class="font-weight-bold">&gt;</span>-->
-    <!--            <span class="sr-only">Next</span> </a></li>-->
-    <!--        </ul>-->
-    <!--      </nav>-->
-    <!--    </div>-->
+  .overlay {
+    background: #fff;
+    height: 70%;
+    overflow: hidden;
+    mix-blend-mode: color;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  svg {
+    fill: gold;
+  }
+  /*panel*/
+  .panel {
+    border: none;
+    box-shadow: none;
+  }
+
+  .panel-heading {
+    border-color: yellow ;
+    font-size: 16px;
+    font-weight: 300;
+  }
+
+  .panel-title {
+    color: #2A3542;
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 0;
+    margin-top: 0;
+    font-family: 'Open Sans', sans-serif;
+  }
 
 
-<!--  </div>-->
-<!--  <div id="content" class="my-5">-->
-<!--    <div id="filterbar" class="collapse">-->
-<!--      <div class="box border-bottom">-->
-<!--        <div class="form-group text-center">-->
-<!--          <div class="btn-group" data-toggle="buttons"><label class="btn btn-success form-check-label"> <input-->
-<!--            class="form-check-input" type="radio"> Reset </label> <label-->
-<!--            class="btn btn-success form-check-label active"> <input class="form-check-input" type="radio" checked> Apply-->
-<!--          </label></div>-->
-<!--        </div>-->
-<!--        <div><label class="tick">New <input type="checkbox" checked="checked"> <span class="check"></span> </label>-->
-<!--        </div>-->
-<!--        <div><label class="tick">Sale <input type="checkbox"> <span class="check"></span> </label></div>-->
-<!--      </div>-->
-<!--      <div class="box border-bottom">-->
-<!--        <div class="box-label text-uppercase d-flex align-items-center">Outerwear-->
-<!--          <button class="btn ml-auto" type="button" data-toggle="collapse" data-target="#inner-box"-->
-<!--                  aria-expanded="false" aria-controls="inner-box" id="out" onclick="outerFilter()"><span-->
-<!--            class="fas fa-plus"></span></button>-->
-<!--        </div>-->
-<!--        <div id="inner-box" class="collapse mt-2 mr-1">-->
-<!--          <div class="my-1"><label class="tick">Windbreaker <input type="checkbox" checked="checked"> <span-->
-<!--            class="check"></span> </label></div>-->
-<!--          <div class="my-1"><label class="tick">Jumpsuit <input type="checkbox"> <span class="check"></span> </label>-->
-<!--          </div>-->
-<!--          <div class="my-1"><label class="tick">Jacket <input type="checkbox"> <span class="check"></span> </label>-->
-<!--          </div>-->
-<!--          <div class="my-1"><label class="tick">Coat <input type="checkbox"> <span class="check"></span> </label></div>-->
-<!--          <div class="my-1"><label class="tick">Raincoat <input type="checkbox"> <span class="check"></span> </label>-->
-<!--          </div>-->
-<!--          <div class="my-1"><label class="tick">Handbag <input type="checkbox" checked> <span class="check"></span>-->
-<!--          </label></div>-->
-<!--          <div class="my-1"><label class="tick">Warm vest <input type="checkbox"> <span class="check"></span> </label>-->
-<!--          </div>-->
-<!--          <div class="my-1"><label class="tick">Wallets <input type="checkbox" checked> <span class="check"></span>-->
-<!--          </label></div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="box border-bottom">-->
-<!--        <div class="box-label text-uppercase d-flex align-items-center">season-->
-<!--          <button class="btn ml-auto" type="button" data-toggle="collapse" data-target="#inner-box2"-->
-<!--                  aria-expanded="false" aria-controls="inner-box2"><span class="fas fa-plus"></span></button>-->
-<!--        </div>-->
-<!--        <div id="inner-box2" class="collapse mt-2 mr-1">-->
-<!--          <div class="my-1"><label class="tick">Spring <input type="checkbox" checked="checked"> <span-->
-<!--            class="check"></span> </label></div>-->
-<!--          <div class="my-1"><label class="tick">Summer <input type="checkbox"> <span class="check"></span> </label>-->
-<!--          </div>-->
-<!--          <div class="my-1"><label class="tick">Autumn <input type="checkbox" checked> <span class="check"></span>-->
-<!--          </label></div>-->
-<!--          <div class="my-1"><label class="tick">Winter <input type="checkbox"> <span class="check"></span> </label>-->
-<!--          </div>-->
-<!--          <div class="my-1"><label class="tick">Rainy <input type="checkbox"> <span class="check"></span> </label></div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="box border-bottom">-->
-<!--        <div class="box-label text-uppercase d-flex align-items-center">price-->
-<!--          <button class="btn ml-auto" type="button" data-toggle="collapse" data-target="#price" aria-expanded="false"-->
-<!--                  aria-controls="price"><span class="fas fa-plus"></span></button>-->
-<!--        </div>-->
-<!--        <div class="collapse" id="price">-->
-<!--          <div class="middle">-->
-<!--            <div class="multi-range-slider"><input type="range" id="input-left" min="0" max="100" value="10"> <input-->
-<!--              type="range" id="input-right" min="0" max="100" value="50">-->
-<!--              <div class="slider">-->
-<!--                <div class="track"></div>-->
-<!--                <div class="range"></div>-->
-<!--                <div class="thumb left"></div>-->
-<!--                <div class="thumb right"></div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          <div class="d-flex align-items-center justify-content-between mt-2">-->
-<!--            <div><span id="amount-left" class="font-weight-bold"></span> uah</div>-->
-<!--            <div><span id="amount-right" class="font-weight-bold"></span> uah</div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="box">-->
-<!--        <div class="box-label text-uppercase d-flex align-items-center">size-->
-<!--          <button class="btn ml-auto" type="button" data-toggle="collapse" data-target="#size" aria-expanded="false"-->
-<!--                  aria-controls="size"><span class="fas fa-plus"></span></button>-->
-<!--        </div>-->
-<!--        <div id="size" class="collapse">-->
-<!--          <div class="btn-group d-flex align-items-center flex-wrap" data-toggle="buttons"><label-->
-<!--            class="btn btn-success form-check-label"> <input class="form-check-input" type="checkbox"> 80 </label>-->
-<!--            <label class="btn btn-success form-check-label"> <input class="form-check-input" type="checkbox" checked> 92-->
-<!--            </label> <label class="btn btn-success form-check-label"> <input class="form-check-input" type="checkbox"-->
-<!--                                                                             checked> 102 </label> <label-->
-<!--              class="btn btn-success form-check-label"> <input class="form-check-input" type="checkbox" checked> 104-->
-<!--            </label> <label class="btn btn-success form-check-label"> <input class="form-check-input" type="checkbox"-->
-<!--                                                                             checked> 106 </label> <label-->
-<!--              class="btn btn-success form-check-label"> <input class="form-check-input" type="checkbox" checked> 108-->
-<!--            </label></div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <div id="products">-->
-<!--      <div class="row mx-0">-->
-<!--        <div class="col-lg-4 col-md-6">-->
-<!--          <div class="card d-flex flex-column align-items-center" *ngFor="let p of product, index as i">-->
-<!--            <div class="product-name">{{p.name}}</div>-->
-<!--            <div class="card-img"><img-->
-<!--              src="{{p.img}}"-->
-<!--              alt=""></div>-->
-<!--            <div class="card-body pt-5">-->
-<!--              <div class="text-muted text-center mt-auto"></div>-->
-<!--              <div class="d-flex align-items-center justify-content-center colors my-2">-->
-<!--              </div>-->
-<!--              <div class="d-flex align-items-center price">-->
-<!--                <div class="del mr-2"><span class="text-dark">5500 uah</span></div>-->
-<!--                <div class="font-weight-bold">{{p.price}}</div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
+  /*product list*/
+
+  .prod-cat li a{
+    border-bottom: 1px dashed #d9d9d9;
+  }
+
+  .prod-cat li a {
+    color: #3b3b3b;
+  }
+
+  .prod-cat li ul {
+    margin-left: 30px;
+  }
+
+  .prod-cat li ul li a{
+    border-bottom:none;
+  }
+  .prod-cat li ul li a:hover,.prod-cat li ul li a:focus, .prod-cat li ul li.active a , .prod-cat li a:hover,.prod-cat li a:focus, .prod-cat li a.active{
+    background: none;
+    color: #ff7261;
+  }
+
+  .pro-lab{
+    margin-right: 20px;
+    font-weight: normal;
+  }
+
+  .pro-sort {
+    padding-right: 20px;
+    float: left;
+  }
+
+  .pro-page-list {
+    margin: 5px 0 0 0;
+  }
+
+  .product-list img{
+    width: 100%;
+    border-radius: 4px 4px 0 0;
+    -webkit-border-radius: 4px 4px 0 0;
+  }
+
+  .product-list .pro-img-box {
+    position: relative;
+
+  }
+  .adtocart {
+    background: #fc5959;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    color: #fff;
+    display: inline-block;
+    text-align: center;
+    border: 3px solid #fff;
+    left: 45%;
+    bottom: -25px;
+    position: absolute;
+  }
+
+  .adtocart i{
+    color: #fff;
+    font-size: 25px;
+    line-height: 42px;
+  }
+
+  .pro-title {
+    color: #5A5A5A;
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 16px;
+  }
+
+  .product-list .price {
+    color:#fc5959 ;
+    font-size: 15px;
+  }
+
+  .pro-img-details {
+    margin-left: -15px;
+  }
+
+  .pro-img-details img {
+    width: 100%;
+  }
+
+  .pro-d-title {
+    font-size: 16px;
+    margin-top: 0;
+  }
+
+  .product_meta {
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+    margin: 15px 0;
+  }
+
+  .product_meta span {
+    display: block;
+    margin-bottom: 10px;
+  }
+  .product_meta a, .pro-price{
+    color:#fc5959 ;
+  }
+
+  .pro-price, .amount-old {
+    font-size: 18px;
+    padding: 0 10px;
+  }
+
+  .amount-old {
+    text-decoration: line-through;
+  }
+
+  .quantity {
+    width: 120px;
+  }
+
+  .pro-img-list {
+    margin: 10px 0 0 -15px;
+    width: 100%;
+    display: inline-block;
+  }
+
+  .pro-img-list a {
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+
+  .pro-d-head {
+    font-size: 18px;
+    font-weight: 300;
+  }
+</style>
+
 
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
 <div class="container bootdey">
   <div class="col-md-3">
     <section class="panel">
       <div class="panel-body">
-        <input type="text" placeholder="Keyword Search" class="form-control" />
+        <input type="text" placeholder="Tìm kiếm theo từ khóa" class="form-control" #name/>
       </div>
     </section>
     <section class="panel">
-      <header class="panel-heading">
-        Category
+      <header class="panel-heading" style="background-color: yellow">
+        <i class="icon fa fa-align-justify fa-fw"></i>         <b> Danh mục</b>
+
       </header>
       <div class="panel-body">
-        <ul class="nav prod-cat">
-          <li>
-            <a href="#" class="active"><i class="fa fa-angle-right"></i> Dress</a>
-            <ul class="nav">
-              <li class="active"><a href="#">- Shirt</a></li>
-              <li><a href="#">- Pant</a></li>
-              <li><a href="#">- Shoes</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="#"><i class="fa fa-angle-right"></i> Bags &amp; Purses</a>
-          </li>
-          <li>
-            <a href="#"><i class="fa fa-angle-right"></i> Beauty</a>
-          </li>
-          <li>
-            <a href="#"><i class="fa fa-angle-right"></i> Coat &amp; Jacket</a>
-          </li>
-          <li>
-            <a href="#"><i class="fa fa-angle-right"></i> Jeans</a>
-          </li>
-          <li>
-            <a href="#"><i class="fa fa-angle-right"></i> Jewellery</a>
-          </li>
-          <li>
-            <a href="#"><i class="fa fa-angle-right"></i> Electronics</a>
-          </li>
-          <li>
-            <a href="#"><i class="fa fa-angle-right"></i> Sports</a>
-          </li>
-          <li>
-            <a href="#"><i class="fa fa-angle-right"></i> Technology</a>
-          </li>
-          <li>
-            <a href="#"><i class="fa fa-angle-right"></i> Watches</a>
-          </li>
-          <li>
-            <a href="#"><i class="fa fa-angle-right"></i> Accessories</a>
-          </li>
+        <ul class="yamm megamenu-horizontal" *ngFor="let i of category">
+          <ul class="nav">
+            <li> <a  style="color: red" class="active"><input type="checkbox" value="{{i.id}}" #category_id><b style="color: black">{{i.name}}</b> <b></b> </a> </li>
+
+          </ul>
+
         </ul>
       </div>
     </section>
+
     <section class="panel">
-      <header class="panel-heading">
-        Price Range
+      <header class="panel-heading" style="background-color: yellow">
+
+        <b>Lọc theo khoảng giá</b>
       </header>
       <div class="panel-body sliders">
-        <div id="slider-range" class="slider"></div>
-        <div class="slider-info">
-          <span id="slider-range-amount"></span>
+        <div class="sidebar-widget-body outer-top-xs">
+          <div class="tag-list">
+            <b>Từ </b>  <input type="number" class="item"  placeholder="Nhập giá min" style="width: 70px" >
+            <b>  Đến </b>   <input type="number" class="item"  placeholder="Nhập giá max" style="width: 70px" #max>
+          </div>
+          <!-- /.tag-list -->
         </div>
       </div>
     </section>
     <section class="panel">
-      <header class="panel-heading">
-        Filter
+      <header class="panel-heading" style="background-color: yellow">
+        <b>Lọc theo đánh giá sản phẩm</b>
       </header>
       <div class="panel-body">
-        <form role="form product-form">
-          <div class="form-group">
-            <label>Brand</label>
-            <select class="form-control hasCustomSelect" style="-webkit-appearance: menulist-button; width: 231px; position: absolute; opacity: 0; height: 34px; font-size: 12px;">
-              <option>Wallmart</option>
-              <option>Catseye</option>
-              <option>Moonsoon</option>
-              <option>Textmart</option>
-            </select>
-            <span class="customSelect form-control" style="display: inline-block;"><span class="customSelectInner" style="width: 209px; display: inline-block;">Wallmart</span></span>
-          </div>
-          <div class="form-group">
-            <label>Color</label>
-            <select class="form-control hasCustomSelect" style="-webkit-appearance: menulist-button; width: 231px; position: absolute; opacity: 0; height: 34px; font-size: 12px;">
-              <option>White</option>
-              <option>Black</option>
-              <option>Red</option>
-              <option>Green</option>
-            </select>
-            <span class="customSelect form-control" style="display: inline-block;"><span class="customSelectInner" style="width: 209px; display: inline-block;">White</span></span>
-          </div>
-          <div class="form-group">
-            <label>Type</label>
-            <select class="form-control hasCustomSelect" style="-webkit-appearance: menulist-button; width: 231px; position: absolute; opacity: 0; height: 34px; font-size: 12px;">
-              <option>Small</option>
-              <option>Medium</option>
-              <option>Large</option>
-              <option>Extra Large</option>
-            </select>
-            <span class="customSelect form-control" style="display: inline-block;"><span class="customSelectInner" style="width: 209px; display: inline-block;">Small</span></span>
-          </div>
-          <button class="btn btn-primary" type="submit">Filter</button>
-        </form>
+
+        <div id="rating" >
+          <input type="radio" id="star5" name="rating" value="5" #star1/>
+          <label class = "full" for="star5" title="Awesome - 5 stars"></label>
+
+          <input type="radio" id="star4" name="rating" value="4" #star2/>
+          <label class = "full" for="star4" title="Pretty good - 4 stars" ></label>
+
+          <input type="radio" id="star3" name="rating" value="3" #star3/>
+          <label class = "full" for="star3" title="Meh - 3 stars"></label>
+
+          <input type="radio" id="star2" name="rating" value="2" #star4/>
+          <label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+
+          <input type="radio" id="star1" name="rating" value="1" #star5/>
+          <label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+        </div>
+        <!-- /.sidebar-widget-body -->
+
       </div>
     </section>
     <section class="panel">
-      <header class="panel-heading">
-        Best Seller
-      </header>
-      <div class="panel-body">
-        <div class="best-seller">
-          <article class="media">
-            <a class="pull-left thumb p-thumb">
-              <img src="https://www.bootdey.com/image/250x220/FFB6C1/000000" />
-            </a>
-            <div class="media-body">
-              <a href="#" class="p-head">Item One Tittle</a>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-          </article>
-          <article class="media">
-            <a class="pull-left thumb p-thumb">
-              <img src="https://www.bootdey.com/image/250x220/A2BE2/000000" />
-            </a>
-            <div class="media-body">
-              <a href="#" class="p-head">Item Two Tittle</a>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-          </article>
-          <article class="media">
-            <a class="pull-left thumb p-thumb">
-              <img src="https://www.bootdey.com/image/250x220/6495ED/000000" />
-            </a>
-            <div class="media-body">
-              <a href="#" class="p-head">Item Three Tittle</a>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-          </article>
-        </div>
+      <div align="center" style="margin-top: 20px;" >
+        <button type="button" class="btn btn-warning" style="width: 100%" ><b>Áp dụng</b></button>
       </div>
     </section>
+
   </div>
   <div class="col-md-9">
     <section class="panel">
-      <div class="panel-body">
-        <div class="pull-right">
-          <ul class="pagination pagination-sm pro-page-list">
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">»</a></li>
-          </ul>
-        </div>
-      </div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="container-fluid">
+            <ul class="navbar-nav">
+              <!-- Avatar -->
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle d-flex align-items-center"
+                  href="#"
+                  id="navbarDropdownMenuLink"
+                  role="button"
+                  data-mdb-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <img
+                    src="{{shop.img}}"
+                    class="rounded-circle"
+                    height="50"
+                    alt="Portrait of a Woman"
+                    loading="lazy"
+                  />
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <li>
+                    <a class="dropdown-item" href="#">My profile</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">Settings</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">Logout</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      <h6>Tên shop : {{shop.name}}</h6>
     </section>
 
-    <div class="row product-list">
-
-      <div class="col-md-4"*ngFor="let p of product, index as i">
-        <section class="panel" >
+    <div class="row product-list" >
+      <div class="col-md-4" *ngFor="let c of product">
+        <section class="panel">
           <div class="pro-img-box" >
-            <a [routerLink]="'/product/view/'+ p.id" ><img src="{{p.img}}" style="height: 200px;width: 200px" /></a>
-            <a href="#" class="adtocart">
-              <i class="fa fa-shopping-cart"></i>
-            </a>
+            <img src="{{c.img}}" alt="" width="300px" height="250px"/>
+          </div>
+          <div class="panel-body text-center"><div class="stars">
+            <svg width="120" height="100" viewBox="0 0 940.688 940.688">
+              <path d="M885.344,319.071l-258-3.8l-102.7-264.399c-19.8-48.801-88.899-48.801-108.6,0l-102.7,264.399l-258,3.8 c-53.4,3.101-75.1,70.2-33.7,103.9l209.2,181.4l-71.3,247.7c-14,50.899,41.1,92.899,86.5,65.899l224.3-122.7l224.3,122.601 c45.4,27,100.5-15,86.5-65.9l-71.3-247.7l209.2-181.399C960.443,389.172,938.744,322.071,885.344,319.071z" />
+            </svg>
+            <svg width="120" height="100" viewBox="0 0 940.688 940.688">
+              <path d="M885.344,319.071l-258-3.8l-102.7-264.399c-19.8-48.801-88.899-48.801-108.6,0l-102.7,264.399l-258,3.8 c-53.4,3.101-75.1,70.2-33.7,103.9l209.2,181.4l-71.3,247.7c-14,50.899,41.1,92.899,86.5,65.899l224.3-122.7l224.3,122.601 c45.4,27,100.5-15,86.5-65.9l-71.3-247.7l209.2-181.399C960.443,389.172,938.744,322.071,885.344,319.071z" />
+            </svg>
+            <svg width="120" height="100" viewBox="0 0 940.688 940.688">
+              <path d="M885.344,319.071l-258-3.8l-102.7-264.399c-19.8-48.801-88.899-48.801-108.6,0l-102.7,264.399l-258,3.8 c-53.4,3.101-75.1,70.2-33.7,103.9l209.2,181.4l-71.3,247.7c-14,50.899,41.1,92.899,86.5,65.899l224.3-122.7l224.3,122.601 c45.4,27,100.5-15,86.5-65.9l-71.3-247.7l209.2-181.399C960.443,389.172,938.744,322.071,885.344,319.071z" />
+            </svg>
+            <svg width="120" height="100" viewBox="0 0 940.688 940.688">
+              <path d="M885.344,319.071l-258-3.8l-102.7-264.399c-19.8-48.801-88.899-48.801-108.6,0l-102.7,264.399l-258,3.8 c-53.4,3.101-75.1,70.2-33.7,103.9l209.2,181.4l-71.3,247.7c-14,50.899,41.1,92.899,86.5,65.899l224.3-122.7l224.3,122.601 c45.4,27,100.5-15,86.5-65.9l-71.3-247.7l209.2-181.399C960.443,389.172,938.744,322.071,885.344,319.071z" />
+            </svg>
+            <svg width="120" height="100" viewBox="0 0 940.688 940.688">
+              <path d="M885.344,319.071l-258-3.8l-102.7-264.399c-19.8-48.801-88.899-48.801-108.6,0l-102.7,264.399l-258,3.8 c-53.4,3.101-75.1,70.2-33.7,103.9l209.2,181.4l-71.3,247.7c-14,50.899,41.1,92.899,86.5,65.899l224.3-122.7l224.3,122.601 c45.4,27,100.5-15,86.5-65.9l-71.3-247.7l209.2-181.399C960.443,389.172,938.744,322.071,885.344,319.071z" />
+            </svg>
+            <div class="overlay" style="width: 100%"></div>
+          </div>
           </div>
 
-          <div class="panel-body text-center">
+          <div class="panel-body text-center" style="margin-top: -25px;margin-bottom: -20px">
+
             <h4>
               <a href="#" class="pro-title">
-                {{p.name}}
+                {{c.name}}
               </a>
             </h4>
-            <p class="price">{{p.price}}</p>
+            <p class="price">{{c.price}}</p>
           </div>
+          <button class="btn btn-white" style="width: 100%" [routerLink]="'/product/view/'+ c.id">Xem trực tiếp sản phẩm<i class="fa fa-arrow-right"></i></button>
+
         </section>
       </div>
-
     </div>
   </div>
 </div>
+
 
 

@@ -32,6 +32,11 @@ export class ShopService {
   getallcategory(): Observable<Category[]>{
     return this.http.get<Category[]>(`${API_URL}/showproduct/getcategoryshopproduct`);
   }
+
+
+  getcategoryshopuser(idShop:number): Observable<Category[]>{
+    return this.http.get<Category[]>(`${API_URL}/showproduct/getcategoryshopuser/${idShop}`);
+  }
   ShowMyShop(): Observable<Shop>{
     return this.http.get<Shop>(`${API_URL}/showproduct/showmyshop`);
   }
