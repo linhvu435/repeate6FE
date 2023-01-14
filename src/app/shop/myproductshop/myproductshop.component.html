@@ -284,7 +284,7 @@
     <div class="row product-list" >
       <div class="col-md-4" *ngFor="let c of products">
         <section class="panel">
-          <div class="pro-img-box">
+          <div class="pro-img-box" >
             <img src="{{c.img}}" alt="" />
           </div>
           <div class="panel-body text-center"><div class="stars">
@@ -316,7 +316,7 @@
             </h4>
             <p class="price">{{c.price}}</p>
           </div>
-          <button class="btn btn-white" style="width: 100%">Xem trực tiếp sản phẩm<i class="fa fa-arrow-right"></i></button>
+          <button class="btn btn-white" style="width: 100%" [routerLink]="'/product/view/'+ c.id">Xem trực tiếp sản phẩm<i class="fa fa-arrow-right"></i></button>
 
         </section>
       </div>

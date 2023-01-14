@@ -76,6 +76,10 @@ export class ShopService {
     return this.http.get<Product[]>(`${API_URL}/products/${id}`,);
   }
 
+  danhdaulahethang(id : number): Observable<Product> {
+    return this.http.get<Product>(`${API_URL}/showproduct/hethang/${id}`,);
+  }
+
   getAll(): Observable<Product[]> {
     return this.http.get<Product[]>(API_URL +  '/products');
   }
@@ -108,10 +112,11 @@ export class ShopService {
   getCartTotalPrice(){
     let carts : any = this.GetCarts();
     let total : number = 0;
-    carts.forEach((item: any)=>{
-      total += item.amount*item.price
-    })
+    if (carts!=null){
+      carts.forEach((item: any)=>{
+        total += item.amount*item.price
+      })
+    }
     return total;
   }
-
 }

@@ -4,6 +4,8 @@ import {BillDTO} from "../model/Dtos/BillDTO";
 import {CartService} from "../service/cartservice/cart.service";
 import Swal from "sweetalert2";
 import {Router} from "@angular/router";
+import {Product} from "../model/Product";
+import {ProductService} from "../service/UserService/productservice/product.service";
 
 @Component({
   selector: 'app-cart',
@@ -14,7 +16,12 @@ export class CartComponent {
   carts: any = []
   totalPrice: number = this.productService.getCartTotalPrice()
 
-  constructor(private productService: ShopService, private cartService: CartService, private router: Router) {
+  idProduct!:number;
+
+  amountincart!:number;
+
+  product!:Product;
+  constructor(private productService: ShopService, private cartService: CartService,private  products:ProductService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -46,7 +53,6 @@ export class CartComponent {
     this.carts.forEach((x: { id: any; amount: any; }) => {
       return billdtos.push({idproduct: x.id, amount: x.amount});
     });
-    console.log(billdtos)
     this.cartService.createBill(billdtos).subscribe(res => {
       if (res != null) {
         Swal.fire(
@@ -56,6 +62,11 @@ export class CartComponent {
         this.router.navigate(["/"]);
         localStorage.removeItem("carts")
       }
+    },(error)=>{
+      Swal.fire(
+        ' Có lỗi xảy ra ',
+        '<h2 style="color: green; font-size: 32px">Có lỗi xảy ra vui lòng kiểm tra số lượng</h2>',
+        'warning')
     });
   }
 }

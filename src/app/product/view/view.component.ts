@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {ProductService} from "../../service/UserService/productservice/product.service";
 import {ShopService} from "../../service/shopserviceM/shop.service";
+import {Product} from "../../model/Product";
 
 
 @Component({
@@ -11,8 +12,10 @@ import {ShopService} from "../../service/shopserviceM/shop.service";
 })
 export class ViewComponent {
   id:any;
-  product:any;
+  product!:Product;
   idShop!: number
+
+  idShopDangNhap!: any;
 
   // @ts-ignore
   carts = JSON.parse(localStorage.getItem("carts"));
@@ -31,18 +34,30 @@ export class ViewComponent {
       this.shopService.FindIdShopByProductId(this.id).subscribe((data)=>{
         console.log(data)
         this.idShop = data
-        console.log(this.idShop)
     })
     })
+    this.idShopDangNhap=localStorage.getItem("idShop")
   }
 
+  danhdaulahethang(id : number) :void{
+    this.shopService.danhdaulahethang(id).subscribe((data)=>{
+      console.log(data)
+      this.product=data;
+    })
+  }
 
   pushInCart(product: any) {
     let idx = this.carts.findIndex((item : any)=>{
       return item.id == product.id
     })
     if(idx >=0){
-      this.carts[idx].amount = this.carts[idx].amount + 1;
+      if (this.carts[idx].amount>=this.product.amount){
+        // @ts-ignore
+        document.getElementById("thongbao").hidden=false;
+      }else {
+        this.carts[idx].amount = this.carts[idx].amount + 1;
+
+      }
     }
     else {
       let cartItem: any= {
@@ -54,8 +69,7 @@ export class ViewComponent {
         category: product.category,
         amount: 1,
       }
-      this.carts.push(cartItem)
-
+        this.carts.push(cartItem)
     }
 
     console.log( this.carts)

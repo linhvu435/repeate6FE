@@ -17,14 +17,12 @@ export class HomeComponent implements OnInit,OnChanges{
 
   ngOnInit(): void {
     this.productService.getAll().subscribe((data) => {
-      console.log(data)
       this.products = data
     })
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.productService.getAll().subscribe((data) => {
-      console.log(data)
       this.products = data
     })
   }

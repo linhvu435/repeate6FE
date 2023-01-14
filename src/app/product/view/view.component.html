@@ -25,41 +25,18 @@
             <h3 class="section-title">hot deals</h3>
             <div class="owl-carousel sidebar-carousel custom-carousel owl-theme outer-top-xs" style="opacity: 1; display: block;">
 
-              <div class="owl-wrapper-outer"><div class="owl-wrapper" style="width: 1338px; left: 0px; display: block;"><div class="owl-item" style="width: 223px;"><div class="item">
+              <div class="owl-wrapper-outer">
+                <div class="owl-wrapper" style="width: 1338px; left: 0px; display: block;">
+                  <div class="owl-item" style="width: 223px;">
+                    <div class="item">
                 <div class="products">
                   <div class="hot-deal-wrapper">
                     <div class="image">
                       <img src="assets\images\hot-deals\p5.jpg" alt="">
                     </div>
-                    <div class="sale-offer-tag"><span>35%<br>off</span></div>
+                    <div class="sale-offer-tag"><span>35%<br>off</span>
+                    </div>
                     <div class="timing-wrapper">
-                      <div class="box-wrapper">
-                        <div class="date box">
-                          <span class="key">120</span>
-                          <span class="value">Days</span>
-                        </div>
-                      </div>
-
-                      <div class="box-wrapper">
-                        <div class="hour box">
-                          <span class="key">20</span>
-                          <span class="value">HRS</span>
-                        </div>
-                      </div>
-
-                      <div class="box-wrapper">
-                        <div class="minutes box">
-                          <span class="key">36</span>
-                          <span class="value">MINS</span>
-                        </div>
-                      </div>
-
-                      <div class="box-wrapper hidden-md">
-                        <div class="seconds box">
-                          <span class="key">60</span>
-                          <span class="value">SEC</span>
-                        </div>
-                      </div>
                     </div>
                   </div><!-- /.hot-deal-wrapper -->
 
@@ -236,43 +213,16 @@
           <!-- ============================================== HOT DEALS: END ============================================== -->
 
           <!-- ============================================== NEWSLETTER ============================================== -->
-          <div class="sidebar-widget newsletter wow fadeInUp outer-bottom-small outer-top-vs animated" style="visibility: visible; animation-name: fadeInUp;">
-            <h3 class="section-title">Newsletters</h3>
-            <div class="sidebar-widget-body outer-top-xs">
-              <p>Sign Up for Our Newsletter!</p>
-              <form>
-                <div class="form-group">
-                  <label class="sr-only" for="exampleInputEmail1">Email address</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Subscribe to our newsletter">
-                </div>
-                <button class="btn btn-primary">Subscribe</button>
-              </form>
-            </div><!-- /.sidebar-widget-body -->
-          </div><!-- /.sidebar-widget -->
+       <!-- /.sidebar-widget -->
           <!-- ============================================== NEWSLETTER: END ============================================== -->
 
           <!-- ============================================== Testimonials============================================== -->
-          <div class="sidebar-widget  wow fadeInUp outer-top-vs  animated" style="visibility: visible; animation-name: fadeInUp;">
-            <div id="advertisement" class="advertisement owl-carousel owl-theme" style="opacity: 1; display: block;">
-              <div class="owl-wrapper-outer"><div class="owl-wrapper" style="width: 1338px; left: 0px; display: block;"><div class="owl-item" style="width: 223px;"><div class="item">
-                <div class="avatar"><img src="assets\images\testimonials\member1.png" alt="Image"></div>
-                <div class="testimonials"><em>"</em> Vtae sodales aliq uam morbi non sem lacus port mollis. Nunc condime tum metus eud molest sed consectetuer.<em>"</em></div>
-                <div class="clients_author">John Doe	<span>Abc Company</span>	</div><!-- /.container-fluid -->
-              </div></div><div class="owl-item" style="width: 223px;"><div class="item">
-                <div class="avatar"><img src="assets\images\testimonials\member3.png" alt="Image"></div>
-                <div class="testimonials"><em>"</em>Vtae sodales aliq uam morbi non sem lacus port mollis. Nunc condime tum metus eud molest sed consectetuer.<em>"</em></div>
-                <div class="clients_author">Stephen Doe	<span>Xperia Designs</span>	</div>
-              </div></div><div class="owl-item" style="width: 223px;"><div class="item">
-                <div class="avatar"><img src="assets\images\testimonials\member2.png" alt="Image"></div>
-                <div class="testimonials"><em>"</em> Vtae sodales aliq uam morbi non sem lacus port mollis. Nunc condime tum metus eud molest sed consectetuer.<em>"</em></div>
-                <div class="clients_author">Saraha Smith	<span>Datsun &amp; Co</span>	</div><!-- /.container-fluid -->
-              </div></div></div></div><!-- /.item -->
+          <div >
 
               <!-- /.item -->
 
               <!-- /.item -->
 
-              <div class="owl-controls clickable"><div class="owl-pagination"><div class="owl-page active"><span class=""></span></div><div class="owl-page"><span class=""></span></div><div class="owl-page"><span class=""></span></div></div><div class="owl-buttons"><div class="owl-prev"></div><div class="owl-next"></div></div></div></div><!-- /.owl-carousel -->
           </div>
 
           <!-- ============================================== Testimonials: END ============================================== -->
@@ -281,7 +231,7 @@
 
         </div>
       </div><!-- /.sidebar -->
-      <div class="col-md-9">
+      <div class="col-md-9" *ngIf="product!=null">
         <div class="detail-block">
           <div class="row  wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
 
@@ -290,7 +240,7 @@
 
                 <div id="owl-single-product" class="owl-carousel owl-theme" style="opacity: 1; display: block;">
                   <div class="owl-wrapper-outer"><div class="owl-wrapper" style="width: 5742px; left: 0px; display: block;"><div class="owl-item" style="width: 319px;"><div class="single-product-gallery-item" id="slide1">
-                    <a data-lightbox="image-1" data-title="Gallery" href="assets\images\products\p8.jpg">
+                    <a data-lightbox="image-1" data-title="Gallery" href="assets\images\products\p8.jpg" >
 
 <!--                      ảnh gốc-->
 
@@ -415,7 +365,7 @@
             </div><!-- /.gallery-holder -->
             <div class="col-sm-6 col-md-7 product-info-block">
               <div class="product-info">
-                <h1 class="name">{{product.name}}</h1>
+                <h1 class="name" >{{product.name}}</h1>
 
                 <div class="rating-reviews m-t-20">
                   <div class="row">
@@ -434,7 +384,7 @@
                   <div class="row">
                     <div class="col-sm-2">
                       <div class="stock-box">
-                        <span class="label">Amount:</span>
+                        <span class="label">Còn hàng :</span>
                       </div>
                     </div>
                     <div class="col-sm-9">
@@ -458,8 +408,7 @@
 
 <!--                        giá tiền-->
 
-                        <span class="price">{{product.price}}</span>
-                        <span class="price-strike">$900.00</span>
+                        <h6><span class="price">Giá :{{product.price}}</span></h6>
                       </div>
                     </div>
 
@@ -481,30 +430,30 @@
                 </div><!-- /.price-container -->
 
                 <div class="quantity-container info-container">
-                  <div class="row">
 
+                  <div class="row">
+                    <div id="thongbao" hidden>
+                      <p style="color: red">Vượt quá số lượng cho phép</p>
+                    </div>
                     <div class="col-sm-2">
-                      <span class="label">Qty :</span>
+                      <span class="label"></span>
                     </div>
 
                     <div class="col-sm-2">
-                      <div class="cart-quantity">
-                        <div class="quant-input">
-                          <div class="arrows">
-                            <div class="arrow plus gradient"><span class="ir"><i class="icon fa fa-sort-asc"></i></span></div>
-                            <div class="arrow minus gradient"><span class="ir"><i class="icon fa fa-sort-desc"></i></span></div>
-                          </div>
-                          <input type="text" value="1">
-                        </div>
-                      </div>
+
+
+
                     </div>
 
                     <div class="col-sm-7">
-                      <button  class="btn btn-primary" (click)="pushInCart(product)"><i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</button><br>
+                      <button  class="btn btn-primary" (click)="pushInCart(product)" *ngIf="product.shop.id!=idShopDangNhap&&product.amount!=0"><i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</button><br>
+                      <button  class="btn btn-danger"  *ngIf="product.amount==0"><i></i>Hết hàng</button><br>
+                      <button  class="btn btn-primary" (click)="this.danhdaulahethang(product.id)" *ngIf="product.shop.id==idShopDangNhap&&product.amount!=0"><i ></i> Đánh dấu là hết hàng</button><br>
                       <br>
-                      <a href="/" class="btn btn-primary">Back Home</a><br>
+                      <a href="/" class="btn btn-primary">Về trang chủ</a><br>
                       <br>
-                      <a [routerLink]="'/product/viewShop/'+idShop" class="btn btn-primary">Go To Shop</a>
+                      <a *ngIf="product.shop.id!=idShopDangNhap" [routerLink]="'/product/viewShop/'+idShop" class="btn btn-primary">Xem cửa hàng</a>
+                      <a *ngIf="product.shop.id==idShopDangNhap" routerLink="/shop/myproductshop" class="btn btn-primary">Xem cửa hàng</a>
                     </div>
 
 
@@ -525,9 +474,8 @@
           <div class="row">
             <div class="col-sm-3">
               <ul id="product-tabs" class="nav nav-tabs nav-tab-cell">
-                <li class="active"><a data-toggle="tab" href="#description">DESCRIPTION</a></li>
-                <li><a data-toggle="tab" href="#review">REVIEW</a></li>
-                <li><a data-toggle="tab" href="#tags">TAGS</a></li>
+                <li class="active"><a data-toggle="tab" href="#description">Mô tả</a></li>
+                <li><a data-toggle="tab" href="#review">Đánh giá </a></li>
               </ul><!-- /.nav-tabs #product-tabs -->
             </div>
             <div class="col-sm-9">
