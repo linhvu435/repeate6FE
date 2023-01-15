@@ -40,7 +40,7 @@
       <div class="row merged20">
 
         <div class="col-lg-3 col-md-6 col-sm-6"
-             *ngFor="let p of account | paginate: { itemsPerPage: 5, currentPage: S}">
+             *ngFor="let p of account | paginate: {id: 'account', itemsPerPage: 3, currentPage: S, totalItems: totalItemsS}">
           <div class="friend-block">
             <div class="more-opotnz">
               <i class="fa fa-ellipsis-h"></i>
@@ -67,14 +67,14 @@
         </div>
 
       </div>
-      <pagination-controls (pageChange)="S = ($event)" style="text-align: center"></pagination-controls>
+      <pagination-controls (pageChange)="PAGE($event)" id="account" style="text-align: center"></pagination-controls>
     </div>
   </div>
 </div>
 
 <div>
   <h3 class="section-title"> products</h3>
-  <div class="col-lg-3 col-md-6 col-sm-6" *ngFor="let s of productDTO | paginate: { itemsPerPage: 5, currentPage: S}">
+  <div class="col-lg-3 col-md-6 col-sm-6" *ngFor="let s of productDTO | paginate: {id: 'product', itemsPerPage: 5, currentPage: P, totalItems: totalItemsP}">
 
     <div class="friend-block">
 
@@ -97,8 +97,10 @@
       </div>
     </div>
   </div>
+  <pagination-controls (pageChange)="PAGEP($event)" id='product' style="text-align: center"></pagination-controls>
 </div>
 </body>
+
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" role="dialog">
@@ -170,7 +172,7 @@
 
                       </div>
                       <div class="cart mt-4 align-items-center">
-                      <button class="btn btn-danger text-uppercase mr-2 px-4">Go Your Shop</button>
+                        <button class="btn btn-danger text-uppercase mr-2 px-4">Go Your Shop</button>
                         <i class="fa fa-heart text-muted"></i> <i class="fa fa-share-alt text-muted"></i></div>
                     </div>
                   </div>
@@ -210,11 +212,3 @@
 
   });
 </script>
-
-
-
-
-
-
-
-

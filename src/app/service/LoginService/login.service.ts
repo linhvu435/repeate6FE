@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from "../../../environments/environment";
 import {SocialUser} from "@abacritt/angularx-social-login";
+import {Account} from "../../model/Account";
 const API_URL = `${environment.apiUrl}`;
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,9 @@ export class LoginService {
 
   register(social:SocialUser ): Observable<any>{
     return this.http.post<any>(API_URL+ '/login/register1',social);
+  }
+  register1(account:any ): Observable<any>{
+    return this.http.post<any>(API_URL+ '/login/register',account);
   }
 
   setId(id: any){

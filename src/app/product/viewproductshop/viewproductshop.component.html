@@ -53,6 +53,7 @@
     box-shadow: none;
   }
 
+
   .panel-heading {
     border-color: yellow ;
     font-size: 16px;
@@ -278,47 +279,28 @@
         <button type="button" class="btn btn-warning" style="width: 100%" ><b>Áp dụng</b></button>
       </div>
     </section>
-
   </div>
   <div class="col-md-9">
     <section class="panel">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <div class="container-fluid">
-            <ul class="navbar-nav">
-              <!-- Avatar -->
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle d-flex align-items-center"
-                  href="#"
-                  id="navbarDropdownMenuLink"
-                  role="button"
-                  data-mdb-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  <img
-                    src="{{shop.img}}"
-                    class="rounded-circle"
-                    height="50"
-                    alt="Portrait of a Woman"
-                    loading="lazy"
-                  />
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <li>
-                    <a class="dropdown-item" href="#">My profile</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#">Settings</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#">Logout</a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
+      <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid">
+            <img src="{{shop.img}}" id="imgshop" style="width:90px; border-radius:50%;-moz-border-radius:50%;-webkit-border-radius:50%;height: 80px;">
+          <div style="margin-left: 13%;margin-top: -60px">
+          <span *ngIf="shop.status==1" class="label label-success" >Cửa hàng mới</span>
+          <span *ngIf="shop.status==2"  class="label label-danger">Cửa hàng đã đưọc kiểm chứng</span>
+            <br>
+          Tên cửa hàng : {{shop.name}}<br>
+          Đánh giá :
+            <div class="rating rateit-small rateit" >
+              <div id="rateit-range-91" class="rateit-range" tabindex="0" role="slider" aria-label="rating" aria-owns="rateit-reset-9"  aria-valuenow="3" aria-readonly="true" style="width: 70px; height: 14px;">
+                <div class="rateit-selected"  style="height: 14px; width: 56px;"></div>
+              </div>
+            </div>
           </div>
-        </nav>
-      <h6>Tên shop : {{shop.name}}</h6>
+        </div>
+      </nav>
+
+
     </section>
 
     <div class="row product-list" >
@@ -327,23 +309,9 @@
           <div class="pro-img-box" >
             <img src="{{c.img}}" alt="" width="300px" height="250px"/>
           </div>
-          <div class="panel-body text-center"><div class="stars">
-            <svg width="120" height="100" viewBox="0 0 940.688 940.688">
-              <path d="M885.344,319.071l-258-3.8l-102.7-264.399c-19.8-48.801-88.899-48.801-108.6,0l-102.7,264.399l-258,3.8 c-53.4,3.101-75.1,70.2-33.7,103.9l209.2,181.4l-71.3,247.7c-14,50.899,41.1,92.899,86.5,65.899l224.3-122.7l224.3,122.601 c45.4,27,100.5-15,86.5-65.9l-71.3-247.7l209.2-181.399C960.443,389.172,938.744,322.071,885.344,319.071z" />
-            </svg>
-            <svg width="120" height="100" viewBox="0 0 940.688 940.688">
-              <path d="M885.344,319.071l-258-3.8l-102.7-264.399c-19.8-48.801-88.899-48.801-108.6,0l-102.7,264.399l-258,3.8 c-53.4,3.101-75.1,70.2-33.7,103.9l209.2,181.4l-71.3,247.7c-14,50.899,41.1,92.899,86.5,65.899l224.3-122.7l224.3,122.601 c45.4,27,100.5-15,86.5-65.9l-71.3-247.7l209.2-181.399C960.443,389.172,938.744,322.071,885.344,319.071z" />
-            </svg>
-            <svg width="120" height="100" viewBox="0 0 940.688 940.688">
-              <path d="M885.344,319.071l-258-3.8l-102.7-264.399c-19.8-48.801-88.899-48.801-108.6,0l-102.7,264.399l-258,3.8 c-53.4,3.101-75.1,70.2-33.7,103.9l209.2,181.4l-71.3,247.7c-14,50.899,41.1,92.899,86.5,65.899l224.3-122.7l224.3,122.601 c45.4,27,100.5-15,86.5-65.9l-71.3-247.7l209.2-181.399C960.443,389.172,938.744,322.071,885.344,319.071z" />
-            </svg>
-            <svg width="120" height="100" viewBox="0 0 940.688 940.688">
-              <path d="M885.344,319.071l-258-3.8l-102.7-264.399c-19.8-48.801-88.899-48.801-108.6,0l-102.7,264.399l-258,3.8 c-53.4,3.101-75.1,70.2-33.7,103.9l209.2,181.4l-71.3,247.7c-14,50.899,41.1,92.899,86.5,65.899l224.3-122.7l224.3,122.601 c45.4,27,100.5-15,86.5-65.9l-71.3-247.7l209.2-181.399C960.443,389.172,938.744,322.071,885.344,319.071z" />
-            </svg>
-            <svg width="120" height="100" viewBox="0 0 940.688 940.688">
-              <path d="M885.344,319.071l-258-3.8l-102.7-264.399c-19.8-48.801-88.899-48.801-108.6,0l-102.7,264.399l-258,3.8 c-53.4,3.101-75.1,70.2-33.7,103.9l209.2,181.4l-71.3,247.7c-14,50.899,41.1,92.899,86.5,65.899l224.3-122.7l224.3,122.601 c45.4,27,100.5-15,86.5-65.9l-71.3-247.7l209.2-181.399C960.443,389.172,938.744,322.071,885.344,319.071z" />
-            </svg>
-            <div class="overlay" style="width: 100%"></div>
+          <div class="rating rateit-small rateit" style="margin-left: 35%">
+            <div id="rateit-range-9" class="rateit-range" tabindex="0" role="slider" aria-label="rating" aria-owns="rateit-reset-9"  aria-valuenow="3" aria-readonly="true" style="width: 70px; height: 14px;">
+              <div class="rateit-selected"  style="height: 14px; width: 56px;"></div>
           </div>
           </div>
 

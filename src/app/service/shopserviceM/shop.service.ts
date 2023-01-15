@@ -8,6 +8,7 @@ import {BillStatus} from "../../model/BillStatus";
 import {ProductInBillDTO} from "../../model/DTO/ProductInBillDTO";
 import {Product} from "../../model/Product";
 import {Category} from "../../model/Category";
+import {ImgProduct} from "../../model/ImgProduct";
 const API_URL = `${environment.apiUrl}`;
 
 @Injectable({
@@ -19,6 +20,9 @@ export class ShopService {
 
   constructor(private http:HttpClient) { }
 
+  getallimgproduct(id:number): Observable<ImgProduct[]>{
+    return this.http.get<ImgProduct[]>(`${API_URL}/showproduct/getimgsproduct/${id}`);
+  }
 
 
   getAllBillshop(): Observable<Bill[]>{

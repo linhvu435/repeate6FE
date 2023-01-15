@@ -26,6 +26,7 @@ import { CartComponent } from './cart/cart.component';
 import { CommentandstarComponent } from './commentandstar/commentandstar/commentandstar.component';
 import { MybillComponent } from './mybill/mybill.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { RegistershopComponent } from './registershop/registershop.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     FooterComponent,
     CartComponent,
     CommentandstarComponent,
-    MybillComponent
+    MybillComponent,
+    RegistershopComponent
 
   ],
   imports: [

@@ -3,14 +3,16 @@ import { RouterModule, Routes } from '@angular/router';
 import {HomeComponent} from "./home/home/home.component";
 import {CartComponent} from "./cart/cart.component";
 import {MybillComponent} from "./mybill/mybill.component";
+import {RegistershopComponent} from "./registershop/registershop.component";
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'mybill', component: MybillComponent },
+  { path: 'registershop', component: RegistershopComponent },
 
   { path: '', component: HomeComponent },
 
-  { path: 'cart', component: CartComponent },
+  { path: 'cart', component: CartComponent, },
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then(module => module.LoginModule)

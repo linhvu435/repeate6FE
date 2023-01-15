@@ -6,16 +6,17 @@
       <div class="header-top-inner">
         <div class="cnt-account">
           <ul class="list-unstyled">
-            <li><a routerLink="/login/view"><i class="icon fa fa-user"></i>My Account</a></li>
-            <li><a routerLink="/cart"><i class="icon fa fa-shopping-cart"></i>Giỏ hàng</a></li>
-            <li><a routerLink="/mybill"><i class="icon fa fa-user"></i>Đơn hàng của tôi</a></li>
-            <li ><a (click)="logout()"><i class="icon fa fa-check" id="checkout" hidden></i>Checkout</a></li>
-            <li><a routerLink="/login/create"><i class="icon fa fa-heart" id="register" hidden></i>Register</a></li>
-            <li><a routerLink="/login"><i class="icon fa fa-lock" id="login" hidden></i>Login</a></li>
+            <li><a *ngIf="token!=null&&checkshop==null" routerLink="/registershop"><i class="icon fa fa-user"> </i>Bán hàng</a></li>
+            <li><a *ngIf="token!=null" routerLink="/login/view"><i class="icon fa fa-user"></i>Tài khoản của tôi</a></li>
+            <li><a *ngIf="token!=null" routerLink="/cart"><i class="icon fa fa-shopping-cart"></i>Giỏ hàng</a></li>
+            <li><a *ngIf="token!=null" routerLink="/mybill"><i class="icon fa fa-user"></i>Đơn hàng của tôi</a></li>
+            <li ><a *ngIf="token!=null" (click)="logout()"><i class="icon fa fa-check" id="checkout" hidden></i>Đăng xuất</a></li>
+            <li><a routerLink="/login/create"><i class="icon fa fa-heart" id="register" hidden></i>Đăng kí</a></li>
+            <li><a *ngIf="token==null" routerLink="/login"><i class="icon fa fa-lock" id="login" hidden></i>Đăng nhập</a></li>
           </ul>
         </div>
 
-        <div class="cnt-block">
+        <div class="cnt-block" *ngIf="checkshop!=null">
           <ul class="list-unstyled list-inline">
             <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">Cửa hàng </span><b class="caret"></b></a>
               <ul class="dropdown-menu">

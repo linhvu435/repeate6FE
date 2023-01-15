@@ -22,28 +22,109 @@
         <div class="col-md-6 col-sm-6 create-new-account">
           <h4 class="checkout-subtitle">Create a new account</h4>
           <p class="text title-tag-line">Create your new account.</p>
-          <form class="register-form outer-top-xs" role="form">
+          <form class="register-form outer-top-xs" role="form" [formGroup]="registerForm" (ngSubmit)="register()">
             <div class="form-group">
               <label class="info-title" for="exampleInputEmail2">Email Address <span>*</span></label>
-              <input type="email" class="form-control unicase-form-control text-input" id="exampleInputEmail1">
+              <input type="email" class="form-control unicase-form-control text-input" id="exampleInputEmail1" formControlName="email">
+            </div>
+            <p *ngIf="!registerForm.get('password')?.valid && registerForm.get('password')?.touched" style="color: red">
+              Không được để trống</p>
+            <p
+              *ngIf="!registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)">
+            <p style="color: red" *ngIf="registerForm.get('email')?.errors?.['required']">
+            </p>
+            <p style="color: red" *ngIf="registerForm.get('email')?.errors?.['email']">
+              Email nhập không dúng định dạng
+            </p>
+            <p id="checkMail" style="color: red " *ngIf="!checkDuplicateMail">Email đã tồn tại</p>
+            <div class="form-group">
+              <label class="info-title" for="exampleInputEmail1">Học và tên <span>*</span></label>
+              <input type="text" class="form-control unicase-form-control text-input" id="exampleInputEmail2" formControlName="name">
+            </div>
+            <div style="color: red" *ngIf="registerForm.get('name')?.errors?.['required']">
+              <div>Tên không được bỏ trống</div>
             </div>
             <div class="form-group">
-              <label class="info-title" for="exampleInputEmail1">Name <span>*</span></label>
-              <input type="email" class="form-control unicase-form-control text-input" id="exampleInputEmail2">
+              <label class="info-title" for="exampleInputEmail1">Địa chỉ <span>*</span></label>
+              <input type="text" class="form-control unicase-form-control text-input" id="exampleInputEmail9" formControlName="address">
+            </div>
+            <div style="color: red" *ngIf="registerForm.get('address')?.errors?.['required']">
+              <div>Tên không được bỏ trống</div>
+            </div>
+            <div class="form-group">
+              <label class="info-title" for="exampleInputEmail1">Birthday <span>*</span></label>
+              <input type="date" class="form-control unicase-form-control text-input" id="exampleInputEmail7" formControlName="birthday">
+            </div>
+            <div
+              *ngIf="!registerForm.get('birthday')?.invalid && (registerForm.get('birthday')?.dirty || registerForm.get('birthday')?.touched)">
+              <div style="color: red" *ngIf="registerForm.get('birthday')?.errors?.['required']">
+                <div class="form-group" style="max-width: 100px">
+
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="info-title" for="exampleInputEmail1">Gender <span>*</span></label>
+              <input type="text" class="form-control unicase-form-control text-input" id="exampleInputEmail8" formControlName="gender">
             </div>
             <div class="form-group">
               <label class="info-title" for="exampleInputEmail1">Phone Number <span>*</span></label>
-              <input type="email" class="form-control unicase-form-control text-input" id="exampleInputEmail3">
+              <input type="number" class="form-control unicase-form-control text-input" id="exampleInputEmail3" formControlName="phoneNumber">
             </div>
+            <div
+              *ngIf="!registerForm.get('phoneNumber')?.invalid && (registerForm.get('phoneNumber')?.dirty || registerForm.get('phoneNumber')?.touched)">
+              <div style="color: red" *ngIf="registerForm.get('phoneNumber')?.errors?.['required']">
+                <div>Số điện thoại không được bỏ trống</div>
+              </div>
+            </div>
+            <p style="color: red" *ngIf="registerForm.get('phoneNumber')?.errors?.['pattern']">
+              Số điện thoại không đúng định dạng - 10 so
+            </p>
+            <div class="form-group">
+              <label class="info-title" for="exampleInputEmail1">Name <span>*</span></label>
+              <input type="text" class="form-control unicase-form-control text-input" id="exampleInputEmail6" formControlName="username">
+            </div>
+            <p
+              *ngIf="!registerForm.get('username')?.valid && registerForm.get('username')?.touched">
+            </p>
+            <p style="color: red" *ngIf="registerForm.get('username')?.errors?.['minlength']">
+              Tên tài khoản phải ít nhất 2 kí tự
+            </p>
+            <p style="color: red" *ngIf="registerForm.get('username')?.errors?.['maxlength']">
+              Tên tài khoản tối đa 12 kí tự
+            </p>
+            <p id="checkusername" style="color: red " *ngIf="!checkDuplicateUsername">Người dùng đã tồn tại</p>
             <div class="form-group">
               <label class="info-title" for="exampleInputEmail1">Password <span>*</span></label>
-              <input type="email" class="form-control unicase-form-control text-input" id="exampleInputEmail4">
+              <input type="text" class="form-control unicase-form-control text-input" id="exampleInputEmail4" formControlName="password">
             </div>
+            <p
+              *ngIf="!registerForm.get('password')?.valid && registerForm.get('password')?.touched">
+            </p>
+            <p style="color: red" *ngIf="registerForm.get('password')?.errors?.['minlength']">
+              password phải ít nhất 3 kí tự
+            </p>
+            <p style="color: red" *ngIf="registerForm.get('password')?.errors?.['maxlength']">
+              password tối đa 12 kí tự
+            </p>
             <div class="form-group">
               <label class="info-title" for="exampleInputEmail1">Confirm Password <span>*</span></label>
-              <input type="email" class="form-control unicase-form-control text-input" id="exampleInputEmail5">
+              <input type="text" class="form-control unicase-form-control text-input" id="exampleInputEmail5" formControlName="confirmPassword" (change)="checkConfirmPassword()">
+              <div style="display: none;color: red" id="abc">
+                <div>Mật khẩu nhập lại không đúng</div>
+              </div>
             </div>
-            <button type="submit" class="btn-upper btn btn-primary checkout-page-button">Sign Up</button>
+            <p *ngIf="!registerForm.get('password')?.valid && registerForm.get('password')?.touched" style="color: red">
+              Không được để trống</p>
+            <p
+              *ngIf="!registerForm.get('confirmPassword')?.invalid && (registerForm.get('confirmPassword')?.dirty || registerForm.get('confirmPassword')?.touched)"></p>
+            <p style="color: red" *ngIf="registerForm.get('confirmPassword')?.errors?.['minlength']">
+              mật khẩu phải có ít nhất 3 kí tự
+            </p>
+            <p style="color: red" *ngIf="registerForm.get('confirmPassword')?.errors?.['maxlength']">
+              Xác nhận mật khẩu tối đa 12 kí tự
+            </p>
+            <button type="submit"[disabled]="!registerForm.valid" class="btn-upper btn btn-primary checkout-page-button">Sign Up</button>
           </form>
 
 

@@ -3,6 +3,7 @@ import {ActivatedRoute} from "@angular/router";
 import {ProductService} from "../../service/UserService/productservice/product.service";
 import {ShopService} from "../../service/shopserviceM/shop.service";
 import {Product} from "../../model/Product";
+import {ImgProduct} from "../../model/ImgProduct";
 
 
 @Component({
@@ -17,6 +18,8 @@ export class ViewComponent {
 
   idShopDangNhap!: any;
 
+  imgs!:ImgProduct[];
+
   // @ts-ignore
   carts = JSON.parse(localStorage.getItem("carts"));
   constructor(private route: ActivatedRoute, private productService : ProductService, private shopService:ShopService) {
@@ -30,9 +33,13 @@ export class ViewComponent {
       this.id = paramMap.get('id');
       this.productService.findProductById(this.id).subscribe((data)=>{
         this.product = data
+        let x = this.product.id
+        this.shopService.getallimgproduct(x).subscribe((data)=>{
+          console.log(this.product.id)
+          this.imgs=data;
+        })
       })
       this.shopService.FindIdShopByProductId(this.id).subscribe((data)=>{
-        console.log(data)
         this.idShop = data
     })
     })

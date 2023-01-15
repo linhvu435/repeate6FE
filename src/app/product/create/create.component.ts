@@ -8,6 +8,7 @@ import {Category} from "../../model/Category";
 import {ImgProduct} from "../../model/ImgProduct";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {ImgproductService} from "../../service/UserService/imgproductservice/imgproduct.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-create',
@@ -91,7 +92,11 @@ export class CreateComponent implements OnInit{
           id: new FormControl(localStorage.getItem("idShop"))
         }))
         this.arrayPicture = [];
-        this.router.navigate(["/product/create"]);
+        Swal.fire(
+          ' OK!! ',
+          '<h2 style="color: green; font-size: 32px">Tạo mới sản pẩm thành công </h2>',
+          'success')
+        this.router.navigate(["/shop/myproductshop"]);
       })
     })
   }

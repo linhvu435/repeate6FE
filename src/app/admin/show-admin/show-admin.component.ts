@@ -13,14 +13,17 @@ import {ProductDTO} from "../../model/Dtos/ProductDTO";
   styleUrls: ['./show-admin.component.css']
 })
 export class ShowAdminComponent implements OnInit{
-constructor(private adminservice : AdminService,private router: Router) {
-}
+  constructor(private adminservice : AdminService,private router: Router) {
+  }
   idStatus: number = 1;
   id: number = 1;
   S: number = 1;
   role!: Array<Roles>
   account!: Account[]
   productDTO!: ProductDTO[];
+  P: number = 1;
+  totalItemsS: number = 0;
+  totalItemsP: number = 0;
 
   ngOnInit(): void {
     this.adminservice.showroles().subscribe((data) => {
@@ -34,13 +37,14 @@ constructor(private adminservice : AdminService,private router: Router) {
     this.adminservice.showAccountRoles(this.id).subscribe((data) => {
       console.log(this.id)
       this.account = data
-
+      this.totalItemsS = this.account.length;
     })
   }
   showProduct() {
     this.adminservice.showProduct().subscribe((data) => {
       console.log(this.id)
       this.productDTO = data
+      this.totalItemsP = data.length
       console.log(data);
     })
   }
@@ -68,5 +72,12 @@ constructor(private adminservice : AdminService,private router: Router) {
     }
   }
 
+  PAGE($event: number) {
+    this.S = ($event)
+  }
 
+  PAGEP($event: number) {
+    this.P = ($event)
+    this.showProduct();
+  }
 }

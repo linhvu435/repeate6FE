@@ -1,3 +1,4 @@
+
 <style>
   body{
     color: #1a202c;
@@ -74,10 +75,13 @@
             <div class="d-flex flex-column align-items-center text-center">
               <img src="{{shop.img}}" alt="Admin" class="rounded-circle" width="150">
               <div class="mt-3">
-                <h4>{{shop.account.name}}</h4>
-                <p class="text-secondary mb-1">Full Stack Developer</p>
-                <p class="text-muted font-size-sm">{{shop.account.address}}</p>
-                <button class="btn btn-primary">Follow</button>
+                <h4>{{shop.account.name}}</h4><hr>
+                <span *ngIf="shop.status==1" class="label label-success">Cửa hàng mới</span>
+
+                <span *ngIf="shop.status==2"  class="label label-danger">Cửa hàng đã đưọc kiểm chứng</span>
+                <hr>
+                <p class="text-muted mb-0 mt-2"><i class="mdi mdi-google-maps font-size-15 align-middle pe-2 text-primary" style="color: #0b816a"></i>Địa chỉ :{{shop.shopAddress.name}}</p>
+
               </div>
             </div>
           </div>
@@ -406,7 +410,7 @@
       </div>
     </div>
   </div>
-</div>
+
 
 
 
@@ -434,4 +438,4 @@
 <!-- Page Script -->
 <script src="assets/js/scripts.js"></script>
 
-
+</div>

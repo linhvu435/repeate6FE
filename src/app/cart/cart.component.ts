@@ -3,16 +3,17 @@ import {ShopService} from "../service/shopserviceM/shop.service";
 import {BillDTO} from "../model/Dtos/BillDTO";
 import {CartService} from "../service/cartservice/cart.service";
 import Swal from "sweetalert2";
-import {Router} from "@angular/router";
+import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from "@angular/router";
 import {Product} from "../model/Product";
 import {ProductService} from "../service/UserService/productservice/product.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css']
 })
-export class CartComponent {
+export class CartComponent implements CanActivate{
   carts: any = []
   totalPrice: number = this.productService.getCartTotalPrice()
 
@@ -21,12 +22,29 @@ export class CartComponent {
   amountincart!:number;
 
   product!:Product;
+  oken:any;
+
   constructor(private productService: ShopService, private cartService: CartService,private  products:ProductService, private router: Router) {
   }
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+
+    const token = localStorage.getItem('token')
+
+    if (token==null){
+      this.router.navigate(['/login']);
+      return false;
+    }else {
+      return true;
+    }
+  }
+
 
   ngOnInit(): void {
     // @ts-ignore
     this.carts = JSON.parse(localStorage.getItem("carts"))
+
   }
 
   subTotal(cart: any) {

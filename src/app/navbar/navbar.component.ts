@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import Swal from "sweetalert2";
 import {LoginService} from "../service/LoginService/login.service";
@@ -8,10 +8,14 @@ import {LoginService} from "../service/LoginService/login.service";
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit{
-  token =this.loginservice.getToken();
+  token =localStorage.getItem("token");
+
+  checkshop = localStorage.getItem("idShop")
   constructor(private router: Router,private loginservice:LoginService) {
   }
   ngOnInit(): void {
+    this.checkshop=localStorage.getItem("idShop")
+    this.token=localStorage.getItem("token");
     if (this.token!=""){
 // @ts-ignore
 

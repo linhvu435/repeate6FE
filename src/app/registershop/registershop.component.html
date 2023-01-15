@@ -1,0 +1,54 @@
+
+
+<style>
+  .ok{
+    margin: 300px 45% 300px 45%;
+  }
+</style>
+
+<button class="btn-success ok" id="" data-toggle="modal" data-target="#edit-employee-modal1">
+Đăng kí bán hàng ngay
+</button>
+
+
+
+<div class="modal" id="edit-employee-modal1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Đăng kí bán hàng</h4>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <form action="update.php" id="edit-form1">
+          <div class="form-group">
+            <label >Nhập tên cửa hàng :</label>
+            <input class="form-control" type="text" name="email" placeholder="Tên này sẽ được hiển thị tại cửa hàng của bạn !">
+          </div>
+          <div class="form-group">
+            <label>Chọn nơi bán :</label>
+            <select class="form-select" aria-label="Default select example">
+              <option selected>Open this select menu</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>          </div>
+          <div class="form-group">
+            <label>Chọn ảnh shop :</label>
+            <input class="form-control" type="text" name="last_name">
+          </div>
+
+          <button type="button" class="btn btn-primary" id="btnUpdateSubmit1">Đăng kí ngay </button>
+          <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Close</button>
+        </form>
+
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
