@@ -20,6 +20,10 @@ export class ShopService {
 
   constructor(private http:HttpClient) { }
 
+  registershop(shop :any): Observable<any>{
+    return this.http.post<any>(`${API_URL}/showproduct/registershop`,shop);
+  }
+
   getallimgproduct(id:number): Observable<ImgProduct[]>{
     return this.http.get<ImgProduct[]>(`${API_URL}/showproduct/getimgsproduct/${id}`);
   }
