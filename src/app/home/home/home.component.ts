@@ -11,13 +11,22 @@ import {Product} from "../../model/Product";
 export class HomeComponent implements OnInit,OnChanges{
  constructor(private http: HttpClient,private productService: ProductService) {
  }
-  // @ts-ignore
-  products : Product[] = [{}]
 
+  products : Product[] = [new Product()]
 
-  ngOnInit(): void {
-    this.productService.getAll().subscribe((data) => {
+  newProducts : Product[] = [new Product()]
+  topProduct: Product[] = [new Product()]
+  async ngOnInit()  {
+    await this.productService.getAll().subscribe((data) => {
       this.products = data
+    })
+    await this.productService.findNewProduct().subscribe((data) => {
+      this.newProducts = data
+    })
+    await this.productService.findTopProduct().subscribe((data) => {
+      this.topProduct = data
+  console.log(data)
+      console.log(typeof data)
     })
   }
 

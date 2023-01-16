@@ -41,6 +41,13 @@ export class ProductService {
     return this.http.get<Product>(`${API_URL}/products/findProductById/${id}`);
   }
 
+  findNewProduct(): Observable<Product[]>{
+    return this.http.get<Product[]>(API_URL +  '/showproduct/getnewproduct')
+  }
+  findTopProduct(): Observable<Product[]>{
+    return this.http.get<Product[]>(API_URL +  '/showproduct/gettopsellproduct')
+  }
+
   GetCarts(){
     // @ts-ignore
     let CartJson = JSON.parse(localStorage.getItem("carts"));
