@@ -23,28 +23,19 @@
 
       <!-- Modal body -->
       <div class="modal-body">
-        <form action="update.php" id="edit-form1" [formGroup]="registerShopForm" (ngSubmit)="registershop()">
+        <form action="update.php" id="edit-form1" >
           <div class="form-group">
             <label >Nhập tên cửa hàng :</label>
-            <input class="form-control" type="text" name="email" placeholder="Tên này sẽ được hiển thị tại cửa hàng của bạn !" formGroupName="name">
+            <input class="form-control" type="text" name="email" placeholder="Tên này sẽ được hiển thị tại cửa hàng của bạn !" [(ngModel)]="name">
           </div>
           <div class="form-group">
             <label>Chọn nơi bán :</label>
-            <input class="form-control" type="text" name="email" placeholder="Chojn nơi bán !" formGroupName="address">
-
-<!--            <select class="form-select" aria-label="Default select example">-->
-<!--              <option selected>Open this select menu</option>-->
-<!--              <option value="1">One</option>-->
-<!--              <option value="2">Two</option>-->
-<!--              <option value="3">Three</option>-->
-<!--            </select>     -->
+            <select class="form-select" aria-label="Default select example" >
+              <option selected>Chọn nơi bán</option>
+              <option *ngFor="let p of shopaddresss" [(ngModel)]="ShopAdress" formGroupName="shopAddress">{{p.name}}</option>
+            </select>
           </div>
-          <div class="form-group">
-            <label>Chọn ảnh shop :</label>
-            <input class="form-control" type="file" name="last_name" formGroupName="img" (change)="onFileSelected({event:$event})" >
-          </div>
-
-          <button type="button" class="btn btn-primary" id="btnUpdateSubmit1">Đăng kí ngay </button>
+          <button type="submit" class="btn btn-primary" id="btnUpdateSubmit1">Đăng kí ngay </button>
           <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Close</button>
         </form>
 

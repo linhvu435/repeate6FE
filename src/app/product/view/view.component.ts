@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {ProductService} from "../../service/UserService/productservice/product.service";
 import {ShopService} from "../../service/shopserviceM/shop.service";
@@ -11,7 +11,7 @@ import {ImgProduct} from "../../model/ImgProduct";
   templateUrl: './view.component.html',
   styleUrls: ['./view.component.css']
 })
-export class ViewComponent {
+export class ViewComponent implements OnInit{
   id:any;
   product!:Product;
   idShop!: number

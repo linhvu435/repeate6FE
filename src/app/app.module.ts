@@ -27,6 +27,7 @@ import { CommentandstarComponent } from './commentandstar/commentandstar/comment
 import { MybillComponent } from './mybill/mybill.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { RegistershopComponent } from './registershop/registershop.component';
+import {NgxPaginationModule} from "ngx-pagination";
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { RegistershopComponent } from './registershop/registershop.component';
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig, "cloud"),
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
   ],
   providers: [
     {

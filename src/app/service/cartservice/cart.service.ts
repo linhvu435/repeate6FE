@@ -12,8 +12,7 @@ export class CartService {
   constructor(private http:HttpClient) { }
 
 
-  createBill(billdtos: BillDTO[]): Observable<any> {
-    return this.http.post<any>(API_URL + '/order/createbill', {productBillDTOS: billdtos})
-
+  createBill(billdtos: BillDTO[],voucher:string): Observable<any> {
+    return this.http.post<any>(  `${API_URL}/order/createbill/${voucher}` , {productBillDTOS: billdtos})
   }
 }

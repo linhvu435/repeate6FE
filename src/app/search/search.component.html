@@ -1,1 +1,338 @@
-<p>search works!</p>
+<style>
+  @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+  /*reset css*/
+
+  #rating{border:none;float:left;}
+  #rating>input{display:none;}/*ẩn input radio - vì chúng ta đã có label là GUI*/
+  #rating>label:before{margin:5px;font-size:1.25em;font-family:FontAwesome;display:inline-block;content:"\f005";}/*1 ngôi sao*/
+  #rating>.half:before{content:"\f089";position:absolute;}/*0.5 ngôi sao*/
+  #rating>label{color:#ddd;float:right;}/*float:right để lật ngược các ngôi sao lại đúng theo thứ tự trong thực tế*/
+  /*thêm màu cho sao đã chọn và các ngôi sao phía trước*/
+  #rating>input:checked~label,
+  #rating:not(:checked)>label:hover,
+  #rating:not(:checked)>label:hover~label{color:#FFD700;}
+  /* Hover vào các sao phía trước ngôi sao đã chọn*/
+  #rating>input:checked+label:hover,
+  #rating>input:checked~label:hover,
+  #rating>label:hover~input:checked~label,
+  #rating>input:checked~label:hover~label{color:#FFED85;}
+  body {margin-top:20px;
+    background:#f1f2f7;
+  }
+
+  .stars {
+    display: flex;
+    position: relative;
+    white-space: nowrap;
+    margin-top: -40px;
+    margin-bottom: -50px;
+    margin-left: 25px;
+    align-items: center;
+    text-align: center;
+  }
+  .stars svg {
+    width: 35px;
+  }
+
+  .overlay {
+    background: #fff;
+    height: 70%;
+    overflow: hidden;
+    mix-blend-mode: color;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  svg {
+    fill: gold;
+  }
+  /*panel*/
+  .panel {
+    border: none;
+    box-shadow: none;
+  }
+
+
+  .panel-heading {
+    border-color: yellow ;
+    font-size: 16px;
+    font-weight: 300;
+  }
+
+  .panel-title {
+    color: #2A3542;
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 0;
+    margin-top: 0;
+    font-family: 'Open Sans', sans-serif;
+  }
+
+
+  /*product list*/
+
+  .prod-cat li a{
+    border-bottom: 1px dashed #d9d9d9;
+  }
+
+  .prod-cat li a {
+    color: #3b3b3b;
+  }
+
+  .prod-cat li ul {
+    margin-left: 30px;
+  }
+
+  .prod-cat li ul li a{
+    border-bottom:none;
+  }
+  .prod-cat li ul li a:hover,.prod-cat li ul li a:focus, .prod-cat li ul li.active a , .prod-cat li a:hover,.prod-cat li a:focus, .prod-cat li a.active{
+    background: none;
+    color: #ff7261;
+  }
+
+  .pro-lab{
+    margin-right: 20px;
+    font-weight: normal;
+  }
+
+  .pro-sort {
+    padding-right: 20px;
+    float: left;
+  }
+
+  .pro-page-list {
+    margin: 5px 0 0 0;
+  }
+
+  .product-list img{
+    width: 100%;
+    border-radius: 4px 4px 0 0;
+    -webkit-border-radius: 4px 4px 0 0;
+  }
+
+  .product-list .pro-img-box {
+    position: relative;
+
+  }
+  .adtocart {
+    background: #fc5959;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    color: #fff;
+    display: inline-block;
+    text-align: center;
+    border: 3px solid #fff;
+    left: 45%;
+    bottom: -25px;
+    position: absolute;
+  }
+
+  .adtocart i{
+    color: #fff;
+    font-size: 25px;
+    line-height: 42px;
+  }
+
+  .pro-title {
+    color: #5A5A5A;
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 16px;
+  }
+
+  .product-list .price {
+    color:#fc5959 ;
+    font-size: 15px;
+  }
+
+  .pro-img-details {
+    margin-left: -15px;
+  }
+
+  .pro-img-details img {
+    width: 100%;
+  }
+
+  .pro-d-title {
+    font-size: 16px;
+    margin-top: 0;
+  }
+
+  .product_meta {
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+    margin: 15px 0;
+  }
+
+  .product_meta span {
+    display: block;
+    margin-bottom: 10px;
+  }
+  .product_meta a, .pro-price{
+    color:#fc5959 ;
+  }
+
+  .pro-price, .amount-old {
+    font-size: 18px;
+    padding: 0 10px;
+  }
+
+  .amount-old {
+    text-decoration: line-through;
+  }
+
+  .quantity {
+    width: 120px;
+  }
+
+  .pro-img-list {
+    margin: 10px 0 0 -15px;
+    width: 100%;
+    display: inline-block;
+  }
+
+  .pro-img-list a {
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+
+  .pro-d-head {
+    font-size: 18px;
+    font-weight: 300;
+  }
+</style>
+
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
+<div class="container bootdey">
+  <div class="col-md-3">
+    <section class="panel">
+      <div class="panel-body">
+        <input type="text" placeholder="Tìm kiếm theo từ khóa" class="form-control" [(ngModel)]="nameproduct" />
+      </div>
+    </section>
+    <section class="panel">
+      <header class="panel-heading" style="background-color: yellow">
+        <i class="icon fa fa-align-justify fa-fw"></i>         <b> Danh mục</b>
+
+      </header>
+      <div class="panel-body">
+        <ul class="yamm megamenu-horizontal">
+          <ul class="nav">
+            <li> <a (click)="ghetallproduct()"  style="color: red" class="active"><b style="color: black">Toàn bộ sản phẩm </b> <b>{{dem}}</b> </a> </li>
+
+          </ul>
+
+        </ul>
+        <ul class="yamm megamenu-horizontal" *ngFor="let i of categorys">
+          <ul class="nav">
+            <li> <a (click)="searchbycategory_id(i.id)" style="color: red" class="active"><b style="color: black">{{i.name}}</b> <b></b> </a> </li>
+
+          </ul>
+
+        </ul>
+      </div>
+    </section>
+
+    <section class="panel">
+      <header class="panel-heading" style="background-color: yellow">
+
+        <b>Lọc theo khoảng giá</b>
+      </header>
+      <div class="panel-body sliders">
+        <div class="sidebar-widget-body outer-top-xs">
+          <div class="tag-list">
+            <b>Từ </b>  <input type="number" class="item"  placeholder="Nhập giá min" style="width: 70px" [(ngModel)]="pricemin" >
+            <b>  Đến </b>   <input type="number" class="item"  placeholder="Nhập giá max" style="width: 70px" [(ngModel)]="pricemax" >
+          </div>
+          <!-- /.tag-list -->
+        </div>
+      </div>
+      <p style="color: red;text-align: center" id="loigia" hidden>Lưu ý min < max !</p>
+    </section>
+    <section class="panel">
+      <header class="panel-heading" style="background-color: yellow">
+        <b>Lọc theo đánh giá sản phẩm</b>
+      </header>
+      <div class="panel-body">
+
+        <div id="rating" >
+          <input type="radio" id="star5" name="rating" value="5" #star1/>
+          <label class = "full" for="star5" title="Awesome - 5 stars"></label>
+
+          <input type="radio" id="star4" name="rating" value="4" #star2/>
+          <label class = "full" for="star4" title="Pretty good - 4 stars" ></label>
+
+          <input type="radio" id="star3" name="rating" value="3" #star3/>
+          <label class = "full" for="star3" title="Meh - 3 stars"></label>
+
+          <input type="radio" id="star2" name="rating" value="2" #star4/>
+          <label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+
+          <input type="radio" id="star1" name="rating" value="1" #star5/>
+          <label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+        </div>
+        <!-- /.sidebar-widget-body -->
+
+      </div>
+    </section>
+    <section class="panel">
+      <div align="center" style="margin-top: 20px;" >
+        <button type="button" class="btn btn-warning" style="width: 50%" (click)="search()" ><b>Áp dụng</b></button>
+        <button type="button" class="btn btn-danger" style="width: 50%" (click)="delete()" ><b>Xóa bộ lọc</b></button>
+      </div>
+
+    </section>
+  </div>
+  <div class="col-md-9">
+    <section class="panel">
+      <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid">
+        <h4><b>Toàn bộ sản phẩm</b></h4>
+        <h5 style="color: #0b816a"><b>Tìm kiếm theo danh mục : {{name1}}</b></h5>
+        </div>
+      </nav>
+
+
+    </section>
+
+    <div class="row product-list" >
+      <div class="col-md-4" *ngFor="let c of products | paginate: {itemsPerPage: 6, currentPage: P}">
+        <section class="panel">
+          <div class="pro-img-box" >
+            <img src="{{c.img}}" alt="" width="300px" height="250px"/>
+          </div>
+          <div class="rating rateit-small rateit" style="margin-left: 35%">
+            <div id="rateit-range-9" class="rateit-range" tabindex="0" role="slider" aria-label="rating" aria-owns="rateit-reset-9"  aria-valuenow="3" aria-readonly="true" style="width: 70px; height: 14px;">
+              <div class="rateit-selected"  style="height: 14px; width: 56px;"></div>
+            </div>
+          </div>
+
+          <div class="panel-body text-center" style="margin-top: -25px;margin-bottom: -20px">
+
+            <h4>
+              <a href="#" class="pro-title">
+                <b>{{c.name}}</b>
+              </a>
+            </h4>
+            <p class="price"><b>Giá :{{c.price}}</b></p>
+            <p style="color: #0f6cb2"><b>Số lượng bán ra :{{c.amountsell}}</b></p>
+
+          </div>
+          <button class="btn btn-white" style="width: 100%" [routerLink]="'/product/view/'+ c.id">Xem trực tiếp sản phẩm<i class="fa fa-arrow-right"></i></button>
+        </section>
+      </div>
+    </div>
+    <pagination-controls (pageChange)="P =($event)" style="text-align: center"></pagination-controls>
+
+  </div>
+</div>
+
+
+

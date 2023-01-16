@@ -12,6 +12,8 @@ export class Product {
   amount!: number
   category!: Category;
 
+  amountsell!: number;
+
   shop!: Shop;
 
   listimg!:ImgProduct[];

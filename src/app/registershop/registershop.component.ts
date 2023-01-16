@@ -7,6 +7,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
 import Swal from "sweetalert2";
 import {ShopService} from "../service/shopserviceM/shop.service";
+import {ShopAddress} from "../model/ShopAddress";
+import {Shop} from "../model/Shop";
 
 @Component({
   selector: 'app-registershop',
@@ -15,14 +17,17 @@ import {ShopService} from "../service/shopserviceM/shop.service";
 })
 export class RegistershopComponent {
   id: any;
+  shopaddresss:ShopAddress[]=[];
+
+  shop!:Shop;
 
   downloadURL: Observable<string> | undefined;
 
-  registerShopForm = new FormGroup({
-    name: new FormControl(""),
-    address: new FormControl(""),
-    img: new FormControl(""),
-  });
+  name!:string;
+
+  ShopAdress!:ShopAddress;
+
+
 
   constructor(private adminService: ShopService, private router: Router, private route: ActivatedRoute, private storage: AngularFireStorage) {
 
@@ -30,41 +35,28 @@ export class RegistershopComponent {
 
 
   ngOnInit(): void {
+    this.adminService.getallshopaddress().subscribe((data) => {
+      this.shopaddresss=data;
+    })
   }
 
 
   registershop() {
-    this.adminService.registershop(this.registerShopForm.value).subscribe();
-    this.messagePassSuccess();
+    this.shop.name=this.name;
+    this.shop.shopAddress=this.ShopAdress;
+    this.adminService.registershop(this.shop).subscribe((data) => {
+      this.messagePassSuccess();
+    }
+      ,(error)=>{
+        this.messagePassFail()
+      }
+    )
+
     this.router.navigate(["/myshop"]);
   }
 
-  @ViewChild('uploadFile', {static: true}) public avatarDom1: ElementRef | undefined;
 
-  onFileSelected({event}: { event: any }) {
-    var n = Date.now();
-    const file = event.target.files[0];
-    const filePath = `RoomsImages/${n}`;
-    const fileRef = this.storage.ref(filePath);
-    const task = this.storage.upload(`RoomsImages/${n}`, file);
-    task
-      .snapshotChanges()
-      .pipe(
-        finalize(() => {
-          this.downloadURL = fileRef.getDownloadURL();
-          this.downloadURL.subscribe(url => {
-            if (url) {
-              this.registerShopForm.value.img = url
-            }
-          });
-        })
-      )
-      .subscribe(url => {
-        if (url) {
-          console.log(url);
-        }
-      });
-  }
+
 
 
 
@@ -82,7 +74,7 @@ export class RegistershopComponent {
     Swal.fire({
       position: 'center',
       icon: 'error',
-      title: 'Change password fail ! ',
+      title: 'Có lỗi xảy ra ! ',
       showConfirmButton: false,
       timer: 1500
     })

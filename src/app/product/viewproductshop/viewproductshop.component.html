@@ -319,10 +319,12 @@
 
             <h4>
               <a href="#" class="pro-title">
-                {{c.name}}
+                <b>{{c.name}}</b>
               </a>
             </h4>
-            <p class="price">{{c.price}}</p>
+            <p class="price"><b>Giá :{{c.price}}</b></p>
+            <p style="color: #0f6cb2"><b>Số lượng bán ra :{{c.amountsell}}</b></p>
+
           </div>
           <button class="btn btn-white" style="width: 100%" [routerLink]="'/product/view/'+ c.id">Xem trực tiếp sản phẩm<i class="fa fa-arrow-right"></i></button>
 

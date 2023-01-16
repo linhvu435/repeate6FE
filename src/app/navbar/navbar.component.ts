@@ -8,11 +8,13 @@ import {LoginService} from "../service/LoginService/login.service";
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit{
+
+  constructor(private router: Router,private loginservice:LoginService) {
+  }
   token =localStorage.getItem("token");
 
   checkshop = localStorage.getItem("idShop")
-  constructor(private router: Router,private loginservice:LoginService) {
-  }
+
   ngOnInit(): void {
     this.checkshop=localStorage.getItem("idShop")
     this.token=localStorage.getItem("token");

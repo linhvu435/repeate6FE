@@ -4,12 +4,14 @@ import {HomeComponent} from "./home/home/home.component";
 import {CartComponent} from "./cart/cart.component";
 import {MybillComponent} from "./mybill/mybill.component";
 import {RegistershopComponent} from "./registershop/registershop.component";
+import {ViewproductshopComponent} from "./product/viewproductshop/viewproductshop.component";
+import {SearchComponent} from "./search/search.component";
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'mybill', component: MybillComponent },
   { path: 'registershop', component: RegistershopComponent },
-
+  { path: 'search/:idcategory', component: SearchComponent },
   { path: '', component: HomeComponent },
 
   { path: 'cart', component: CartComponent, },

@@ -54,16 +54,17 @@ export class LoginComponent implements OnChanges,OnInit {
         this.idroles=localStorage.getItem("roles");
         if (this.idroles==1){
           Swal.fire(
-            ' Chào mừng admin!! ',
-            '<h2 style="color: green; font-size: 32px">Successfully </h2>',
+            ' Chào mừng admin! ',
+            '<h2 style="color: green; font-size: 32px">Đăng nhập thành công !  </h2>',
             'success')
           this.router.navigate(["/admin"]);
         }else {
           Swal.fire(
             ' OK!! ',
-            '<h2 style="color: green; font-size: 32px">Successfully </h2>',
+            '<h2 style="color: green; font-size: 32px">Bạn đã đăng nhập thành công !</h2>',
             'success')
           this.router.navigate(["/home"]);
+          location.reload();
         }
       })
     })
@@ -105,17 +106,23 @@ export class LoginComponent implements OnChanges,OnInit {
       if (this.idroles==1){
         Swal.fire(
           ' Chào mừng admin!! ',
-          '<h2 style="color: green; font-size: 32px">Successfully </h2>',
+          '<h2 style="color: green; font-size: 32px">Bạn đã đăng nhập thành công ! </h2>',
           'success')
         this.router.navigate(["/admin"]);
       }else {
         Swal.fire(
-          ' OK!! ',
-          '<h2 style="color: green; font-size: 32px">Successfully </h2>',
+          ' Thành công ! ',
+          '<h2 style="color: green; font-size: 32px">Bạn đã đăng nhập thành công ! </h2>',
           'success')
         this.router.navigate(["/home"]);
+      }
     }
-    })
+      ,(error)=>{
+        Swal.fire(
+          ' Có lỗi xảy ra !',
+          '<h2 style="color: red; font-size: 32px">Sai mật khẩu hoặc tài khoản của bạn đã bị khóa !</h2>',
+          'warning')
+      })
 
   }
 }

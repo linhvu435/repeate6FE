@@ -24,6 +24,9 @@ export class CartComponent implements CanActivate{
   product!:Product;
   oken:any;
 
+
+  voucher!:string;
+
   constructor(private productService: ShopService, private cartService: CartService,private  products:ProductService, private router: Router) {
   }
   canActivate(
@@ -71,7 +74,8 @@ export class CartComponent implements CanActivate{
     this.carts.forEach((x: { id: any; amount: any; }) => {
       return billdtos.push({idproduct: x.id, amount: x.amount});
     });
-    this.cartService.createBill(billdtos).subscribe(res => {
+    console.log(this.voucher);
+    this.cartService.createBill(billdtos,this.voucher).subscribe(res => {
       if (res != null) {
         Swal.fire(
           ' Sucsess ',
