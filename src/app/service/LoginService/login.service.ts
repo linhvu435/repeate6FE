@@ -81,6 +81,12 @@ export class LoginService {
   getGender(){
     return localStorage.getItem("gender")
   }
+  setname(name : string){
+    localStorage.setItem("name",name)
+  }
+  getname(){
+    return localStorage.getItem("name")
+  }
   setDate(date : any){
     localStorage.setItem("date", date)
   }

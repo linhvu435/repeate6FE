@@ -23,6 +23,38 @@ export class ShopService {
 
   constructor(private http:HttpClient) { }
 
+  findById1(id: number): Observable<Shop> {
+    return this.http.get<Shop>(`${API_URL}/shop/${id}`);
+
+  }
+  findShopById(id: number): Observable<Shop> {
+    return this.http.get<Shop>(`${API_URL}/shop/shop/${id}`);
+  }
+  setIdShop(id : any){
+    localStorage.setItem("idShop",id);
+  }
+  getIdShop(){
+    return localStorage.getItem("idShop")
+  }
+  setImgShop(img : any){
+    localStorage.setItem("imgShop",img);
+  }
+  getImgShop(){
+    localStorage.getItem("imgShop")
+  }
+  setAddressShop(address : any){
+    localStorage.setItem("addressShop", address)
+  }
+  getAddressShop(){
+    return localStorage.getItem("addressShop")
+  }
+  setNameShop(nameShop : any){
+    localStorage.setItem("nameShop", nameShop)
+  }
+  setName(name : any){
+    localStorage.setItem("name", name)
+  }
+
   registershop(shop :any): Observable<any>{
     return this.http.post<any>(`${API_URL}/showproduct/registershop`,shop);
   }

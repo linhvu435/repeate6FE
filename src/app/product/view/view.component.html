@@ -28,7 +28,7 @@
                 <div class="owl-wrapper" style="width: 1338px; left: 0px; display: block;">
                   <div class="owl-item" style="width: 223px;">
                     <div class="item">
-                <div class="products">
+                    <div class="products">
                   <div class="hot-deal-wrapper">
                     <div class="image">
                       <img src="assets\images\hot-deals\p5.jpg" alt="">
@@ -135,7 +135,8 @@
                     </div><!-- /.action -->
                   </div><!-- /.cart -->
                 </div>
-              </div></div><div class="owl-item" style="width: 223px;"><div class="item">
+              </div></div>
+                  <div class="owl-item" style="width: 223px;"><div class="item">
                 <div class="products">
                   <div class="hot-deal-wrapper">
                     <div class="image">
@@ -280,51 +281,17 @@
 
                 <div class="single-product-gallery-thumbs gallery-thumbs">
 
-                  <div id="owl-single-product-thumbnails" class="owl-carousel owl-theme" style="opacity: 1; display: block;">
-                    <div class="owl-wrapper-outer"><div class="owl-wrapper" style="width: 1440px; left: 0px; display: block; transition: all 800ms ease 0s; transform: translate3d(-400px, 0px, 0px);"><div class="owl-item" style="width: 80px;"><div class="item">
-                      <a class="horizontal-thumb active" data-target="#owl-single-product" data-slide="1" href="#slide1">
-                        <img class="img-responsive" width="85" alt="" src="assets/images/products/p17.jpg">
-                      </a>
-                    </div></div><div class="owl-item" style="width: 80px;"><div class="item">
-                      <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="2" href="#slide2">
-                        <img class="img-responsive" width="85" alt="" src="assets/images/products/p18.jpg">
-                      </a>
-                    </div></div><div class="owl-item" style="width: 80px;"><div class="item">
+                  <div  class="owl-carousel owl-theme" style="opacity: 1; display: block;">
+                    <div class="owl-wrapper-outer">
+                      <div class="owl-item" style="width: 100px;height: 100px" *ngFor="let i of imgs">
+                        <div class="item">
+                        <img class="img-responsive" style="width: 100px;height: 90px" alt="" src="{{i.name}}">
 
-                      <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="3" href="#slide3">
-                        <img class="img-responsive" width="85" alt="" src="assets/images/products/p19.jpg">
-                      </a>
-                    </div></div><div class="owl-item" style="width: 80px;"><div class="item">
+                    </div>
+                      </div>
 
-                      <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="4" href="#slide4">
-                        <img class="img-responsive" width="85" alt="" src="assets/images/products/p20.jpg">
-                      </a>
-                    </div></div><div class="owl-item" style="width: 80px;"><div class="item">
 
-                      <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="5" href="#slide5">
-                        <img class="img-responsive" width="85" alt="" src="assets/images/products/p21.jpg">
-                      </a>
-                    </div></div><div class="owl-item" style="width: 80px;"><div class="item">
-
-                      <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="6" href="#slide6">
-                        <img class="img-responsive" width="85" alt="" src="assets/images/products/p22.jpg">
-                      </a>
-                    </div></div><div class="owl-item" style="width: 80px;"><div class="item">
-
-                      <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="7" href="#slide7">
-                        <img class="img-responsive" width="85" alt="" src="assets/images/products/p23.jpg">
-                      </a>
-                    </div></div><div class="owl-item" style="width: 80px;"><div class="item">
-
-                      <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="8" href="#slide8">
-                        <img class="img-responsive" width="85" alt="" src="assets/images/products/p24.jpg">
-                      </a>
-                    </div></div><div class="owl-item" style="width: 80px;"><div class="item">
-
-                      <a class="horizontal-thumb" data-target="#owl-single-product" data-slide="9" href="#slide9">
-                        <img class="img-responsive" width="85" alt="" src="assets/images/products/p25.jpg">
-                      </a>
-                    </div></div></div></div>
+                    </div>
 
 
 

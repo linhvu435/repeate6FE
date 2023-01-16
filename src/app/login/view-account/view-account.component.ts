@@ -54,6 +54,7 @@ constructor(private loginService:LoginService) {}
   imgShop!: any
   shopAddress!: any
   shopName!: any
+  name!:any;
   ngOnInit(): void {
     this.userName =localStorage.getItem("username")
     this.email =localStorage.getItem("email")
@@ -66,6 +67,7 @@ constructor(private loginService:LoginService) {}
     this.shopAddress = localStorage.getItem("addressShop")
     this.shopName = localStorage.getItem("nameShop")
     this.idAccount = localStorage.getItem("id")
+    this.name = localStorage.getItem("name")
   }
 
 

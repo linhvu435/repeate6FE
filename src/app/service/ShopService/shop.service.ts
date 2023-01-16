@@ -38,6 +38,12 @@ export class ShopService {
   setNameShop(nameShop : any){
     localStorage.setItem("nameShop", nameShop)
   }
+  setName(name : any){
+    localStorage.setItem("name", name)
+  }
+  getNameS(){
+    return localStorage.getItem("name")
+  }
   getNameShop(){
     return localStorage.getItem("nameShop")
   }

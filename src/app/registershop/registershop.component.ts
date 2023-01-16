@@ -23,11 +23,12 @@ export class RegistershopComponent {
 
   downloadURL: Observable<string> | undefined;
 
-  name!:string;
-
-  ShopAdress!:ShopAddress;
 
 
+  createshopform = new FormGroup({
+    name: new FormControl(""),
+    address: new FormControl(""),
+  })
 
   constructor(private adminService: ShopService, private router: Router, private route: ActivatedRoute, private storage: AngularFireStorage) {
 
@@ -42,17 +43,29 @@ export class RegistershopComponent {
 
 
   registershop() {
-    this.shop.name=this.name;
-    this.shop.shopAddress=this.ShopAdress;
-    this.adminService.registershop(this.shop).subscribe((data) => {
-      this.messagePassSuccess();
-    }
+
+    this.adminService.registershop(this.createshopform.value).subscribe((data) => {
+
+      this.id=data.id;
+        this.adminService.findById1(this.id).subscribe((data)=>{
+          this.adminService.setIdShop(data.id);
+          this.adminService.setImgShop(data.img);
+          this.adminService.setNameShop(data.name);
+          this.adminService.setAddressShop(data.shopAddress.name);
+          this.adminService.ShowMyShop().subscribe((data) => {
+            this.shop=data;
+          })
+        })
+        this.router.navigate(["/shop/myshop"]);
+        location.reload();
+        this.messagePassSuccess();
+      }
       ,(error)=>{
         this.messagePassFail()
       }
     )
 
-    this.router.navigate(["/myshop"]);
+
   }
 
 

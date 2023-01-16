@@ -2,12 +2,13 @@ import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Shop} from "../../model/Shop";
 import {LoginService} from "../../service/LoginService/login.service";
 import {Router} from "@angular/router";
-import {ShopService} from "../../service/ShopService/shop.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import Swal from "sweetalert2";
 import {SocialAuthService, SocialUser} from "@abacritt/angularx-social-login";
 import {HttpClient} from "@angular/common/http";
 import {Register} from "../../model/Register";
+// @ts-ignore
+import {ShopService} from "../../service/ShopService/shop.service";
 
 @Component({
   selector: 'app-login',
@@ -45,6 +46,7 @@ export class LoginComponent implements OnChanges,OnInit {
         this.loginService.setBirthday(data.birthday)
         this.loginService.setRole(JSON.stringify(data.roles[0].id));
         this.id = localStorage.getItem("id")
+        this.loginService.setname(data.name);
         this.shopService.findById(this.id).subscribe((data)=>{
           this.shopService.setIdShop(data.id);
           this.shopService.setImgShop(data.img);
@@ -92,7 +94,8 @@ export class LoginComponent implements OnChanges,OnInit {
       this.loginService.setPhoneNumber(data.phoneNumber);
       this.loginService.setAddress(data.address);
       this.loginService.setGenger(data.gender);
-      this.loginService.setDate(data.date);
+        this.loginService.setname(data.name);
+        this.loginService.setDate(data.date);
       this.loginService.setBirthday(data.birthday)
       this.loginService.setRole(JSON.stringify(data.roles[0].id));
       this.id = localStorage.getItem("id")

@@ -18,7 +18,7 @@ export class ViewComponent implements OnInit{
 
   idShopDangNhap!: any;
 
-  imgs!:ImgProduct[];
+  imgs:ImgProduct[]=[new ImgProduct()];
 
   // @ts-ignore
   carts = JSON.parse(localStorage.getItem("carts"));

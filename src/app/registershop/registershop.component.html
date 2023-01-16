@@ -23,19 +23,19 @@
 
       <!-- Modal body -->
       <div class="modal-body">
-        <form action="update.php" id="edit-form1" >
+        <form action="update.php" id="edit-form1" [formGroup]="createshopform" (ngSubmit)="registershop()">
           <div class="form-group">
             <label >Nhập tên cửa hàng :</label>
-            <input class="form-control" type="text" name="email" placeholder="Tên này sẽ được hiển thị tại cửa hàng của bạn !" [(ngModel)]="name">
+            <input class="form-control" type="text" name="email" placeholder="Tên này sẽ được hiển thị tại cửa hàng của bạn !" formControlName="name">
           </div>
           <div class="form-group">
             <label>Chọn nơi bán :</label>
-            <select class="form-select" aria-label="Default select example" >
+            <select class="form-select" aria-label="Default select example" formControlName="address">
               <option selected>Chọn nơi bán</option>
-              <option *ngFor="let p of shopaddresss" [(ngModel)]="ShopAdress" formGroupName="shopAddress">{{p.name}}</option>
+              <option *ngFor="let p of shopaddresss" [value]="p.id" [ngValue]="p">{{p.name}}</option>
             </select>
           </div>
-          <button type="submit" class="btn btn-primary" id="btnUpdateSubmit1">Đăng kí ngay </button>
+          <button type="submit" class="btn btn-primary" id="btnUpdateSubmit1" >Đăng kí ngay </button>
           <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Close</button>
         </form>
 
