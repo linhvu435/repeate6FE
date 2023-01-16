@@ -83,6 +83,7 @@ export class CartComponent implements CanActivate{
           'success')
         this.router.navigate(["/"]);
         localStorage.removeItem("carts")
+        this.router.navigate(['/mybill']);
       }
     },(error)=>{
       Swal.fire(

@@ -78,6 +78,5 @@ export class ShowAdminComponent implements OnInit{
 
   PAGEP($event: number) {
     this.P = ($event)
-    this.showProduct();
   }
 }

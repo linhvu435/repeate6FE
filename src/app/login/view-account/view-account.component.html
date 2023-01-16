@@ -194,7 +194,7 @@
 
             <hr>
             <div class="col-sm-9 text-secondary">
-              <a class="btn btn-info " data-toggle="modal" data-target="#edit-employee-modal1" style="margin-left: 300px">Chỉnh sửa thông tin</a>
+              <a class="btn btn-info " data-toggle="modal" data-target="#edit-employee-modal1" style="margin-left: 300px" (click)="findUserById()">Chỉnh sửa thông tin</a>
             </div>
           </div>
         </div>
@@ -312,23 +312,28 @@
 
       <!-- Modal body -->
       <div class="modal-body">
-        <form action="update.php" id="edit-form1">
+        <form action="update.php" id="edit-form1" [formGroup]="updateInfo" >
           <input class="form-control" type="hidden" name="id">
+          <div class="form-group">
+            <label>Ngày Sinh</label>
+            <input class="form-control" type="date" name="first_name" [value]="">
+          </div>
           <div class="form-group">
             <label >Email</label>
             <input class="form-control" type="text" name="email">
           </div>
           <div class="form-group">
-            <label>First Name</label>
-            <input class="form-control" type="text" name="first_name">
-          </div>
-          <div class="form-group">
-            <label>Last Name</label>
+            <label>Giới Tính</label>
             <input class="form-control" type="text" name="last_name">
           </div>
           <div class="form-group">
-            <label>Address</label>
-            <textarea class="form-control" type="text" name="address" rows="3"></textarea>
+            <label>Địa chỉ</label>
+            <input class="form-control" type="text" name="last_name">
+          </div>
+          <div class="form-group">
+            <label>Số Điện Thoại</label>
+            <input class="form-control" type="text" name="last_name" >
+
           </div>
           <button type="button" class="btn btn-primary" id="btnUpdateSubmit1">Update</button>
           <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Close</button>

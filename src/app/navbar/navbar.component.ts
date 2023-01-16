@@ -31,7 +31,7 @@ export class NavbarComponent implements OnInit{
       document.getElementById("login").hidden=false;
     }
   }
-logout(){
+  logout(){
   localStorage.clear();
   Swal.fire(
     ' ',

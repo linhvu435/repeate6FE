@@ -398,14 +398,13 @@
                     </div>
                   </div>
 
-
-                    <div class="mt-3 pt-1">
+                    <div class="mt-3 pt-1" >
                       <p class="text-muted mb-0 mt-2"><i class="mdi mdi-google-maps font-size-15 align-middle pe-2 text-primary"></i>{{p.shop.name}}</p>
                     </div>
-                    <input hidden [(ngModel)]="comment.productId" [value]="p.id" >
+                    <input hidden [ngModel]="comment.productId" [value]="p.id" >
                     <!--                  đánh giá sao-->
 
-                    <div id="rating" [(ngModel)]="comment.star" >
+                    <div id="rating" [ngModel]="comment.star" >
                       <input type="radio" id="star5" name="rating" value="5" #star1  (change)="comment.star = 5"/>
                       <label class = "full" for="star5" title="Awesome - 5 stars"></label>
 
@@ -422,7 +421,7 @@
                       <label class = "full" for="star1" title="Sucks big time - 1 star"></label>
                     </div> <br><br>
                     <!--                  comment-->
-                    <input type="text" style="margin-right: 100px" [(ngModel)]="comment.content" > <br>
+                    <input type="text" style="margin-right: 100px"  [(ngModel)]="comment.content"> <br>
                     <div class="d-flex gap-2 pt-4">
                       <button type="button" class="btn btn-primary btn-sm w-50" (click)="Comment()"><i class="bx bx-message-square-dots me-1"></i>Phản Hồi</button>
                     </div>

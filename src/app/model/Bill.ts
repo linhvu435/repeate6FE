@@ -1,6 +1,7 @@
 import {BillStatus} from "./BillStatus";
 import {Account} from "./Account";
 import {Product} from "./Product";
+import {Voucher} from "./Voucher";
 
 export class Bill {
   id!: number
@@ -11,5 +12,7 @@ export class Bill {
   totalprice!:number;
   product! :Product[];
   account!:Account;
+
+  voucher!:Voucher;
 
 }

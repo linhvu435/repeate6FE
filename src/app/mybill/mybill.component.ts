@@ -18,7 +18,7 @@ export class MybillComponent implements OnInit{
 
   billstatus:BillStatus[] = [];
 
-  comment = {productId: 0, star: 0, content: ''}
+  comment = {productId: 0, star: 0, content: '' }
 
 
 
@@ -64,7 +64,6 @@ export class MybillComponent implements OnInit{
 
   Comment(){
     this.commentService.comment(this.comment).subscribe(res => {
-      console.log(res)
     })
   }
 }

@@ -4,6 +4,8 @@ import {Router} from "@angular/router";
 import {Product} from "../../model/Product";
 import {Category} from "../../model/Category";
 import {min} from "rxjs";
+import {Voucher} from "../../model/Voucher";
+import {VoucherType} from "../../model/VoucherType";
 
 @Component({
   selector: 'app-myproductshop',
@@ -18,6 +20,10 @@ export class MyproductshopComponent implements OnInit{
 
   min!:number;
 
+  voucher!:Voucher[];
+
+  vouchertype!:VoucherType[];
+
 
   constructor(private showbillshop: ShopService ,private router:Router) {
   }
@@ -25,14 +31,19 @@ export class MyproductshopComponent implements OnInit{
   ngOnInit(): void {
     this.showbillshop.getAllProductMyShop().subscribe((data) => {
       this.products = data
-      console.log(this.products)
       this.showbillshop.getallcategory().subscribe((data) => {
         this.category = data
-        console.log(this.category)
+      })
+      this.showbillshop.getvoucher().subscribe((data) => {
+        this.voucher = data
+        console.log(this.voucher)
+      })
+      this.showbillshop.getvouchertype().subscribe((data) => {
+        this.vouchertype = data
+        console.log(this.vouchertype)
       })
     })
 
-    console.log(this.min);
   }
 
   search(name:string,pricemin:number,pricemax:number){

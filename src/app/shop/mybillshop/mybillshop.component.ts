@@ -25,6 +25,7 @@ export class MybillshopComponent implements OnInit{
   ngOnInit() {
     this.showbillshop.getAllBillshop().subscribe((data) => {
       this.bills = data
+      console.log(this.bills)
       this.showbillshop.getallBillStatus().subscribe((data) => {
         this.billstatus = data
       })
@@ -46,6 +47,7 @@ export class MybillshopComponent implements OnInit{
     this.showbillshop.setbill(idbill, idstatus).subscribe((data) => {
       this.showbillshop.showbillbystatus(idstatus).subscribe((data) => {
         this.bills=data;
+
       })
     })
   }

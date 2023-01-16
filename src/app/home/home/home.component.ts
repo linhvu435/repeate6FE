@@ -13,19 +13,36 @@ import {Category} from "../../model/Category";
 export class HomeComponent implements OnInit,OnChanges{
  constructor(private http: HttpClient,private productService: ProductService,private  searchservice:SearchService) {
  }
-  // @ts-ignore
-  products : Product[] = [{}]
 
   // @ts-ignore
   category : Category[] = [{}]
 
+  products : Product[] = [new Product()]
 
-  ngOnInit(): void {
-    this.productService.getAll().subscribe((data) => {
+  newProducts : Product[] = [new Product()]
+  topProduct: Product[] = [new Product()]
+
+  P : number=1;
+  S: number = 1;
+  G: number = 1;
+  totalItemsS: number = 0;
+  totalItemsP: number = 0;
+  totalItemsG: number = 0;
+  async ngOnInit()  {
+    await this.productService.getAll().subscribe((data) => {
       this.products = data
+      this.totalItemsP = data.length
       this.searchservice.getallcategory().subscribe((data) => {
         this.category = data
       })
+    })
+    await this.productService.findNewProduct().subscribe((data) => {
+      this.newProducts = data
+      this.totalItemsS = data.length
+    })
+    await this.productService.findTopProduct().subscribe((data) => {
+      this.topProduct = data
+      this.totalItemsG = data.length
     })
   }
 
@@ -34,5 +51,21 @@ export class HomeComponent implements OnInit,OnChanges{
       this.products = data
     })
   }
+
+  PAGE($event: number) {
+    this.S = ($event)
+  }
+
+  PAGEP($event: number) {
+    this.P = ($event)
+  }
+
+  PAGES($event: number) {
+    this.S = ($event)
+  }
+  PAGEG($event: number) {
+    this.G = ($event)
+  }
+
 
 }

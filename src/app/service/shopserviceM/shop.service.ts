@@ -10,6 +10,8 @@ import {Product} from "../../model/Product";
 import {Category} from "../../model/Category";
 import {ImgProduct} from "../../model/ImgProduct";
 import {ShopAddress} from "../../model/ShopAddress";
+import {Voucher} from "../../model/Voucher";
+import {VoucherType} from "../../model/VoucherType";
 const API_URL = `${environment.apiUrl}`;
 
 @Injectable({
@@ -41,6 +43,23 @@ export class ShopService {
     return this.http.get<Product[]>(`${API_URL}/showproduct/showmyshopproduct`);
   }
 
+
+  //voucher
+  getvoucher():Observable<Voucher[]>{
+    return this.http.get<Voucher[]>(`${API_URL}/showvoucher`);
+  }
+  getvouchertype():Observable<VoucherType[]>{
+    return this.http.get<VoucherType[]>(`${API_URL}/getallvouchertype`);
+  }
+
+  getvoucherbyshop_id(idShop:number):Observable<Voucher[]>{
+    return this.http.get<Voucher[]>(`${API_URL}/showvoucher${idShop}`);
+  }
+  create(idVoucher:number,amount:number):Observable<Voucher[]>{
+  return this.http.get<Voucher[]>(`${API_URL}/createvoucher/${idVoucher}/${amount}`);
+  }
+
+  //endvoucher
   getallcategory(): Observable<Category[]>{
     return this.http.get<Category[]>(`${API_URL}/showproduct/getcategoryshopproduct`);
   }
