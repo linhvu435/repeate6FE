@@ -383,7 +383,8 @@
           </div>
 
           <div class="row" >
-            <div class="col-xl-3 col-sm-6" style="height: 400px; width: 350px" *ngFor="let p of product.products">
+            <div class="col-xl-3 col-sm-6" style="height: 400px; width: 350px" *ngFor="let a of productBillComment.products, index as i">
+
               <div class="card"  >
                 <div class="card-body">
                   <div class="dropdown float-end">
@@ -391,47 +392,48 @@
                     <div class="dropdown-menu dropdown-menu-end"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Action</a><a class="dropdown-item" href="#">Remove</a></div>
                   </div>
                   <div class="d-flex align-items-center">
-                    <div><img src="{{p.img}}" alt="" class="avatar-md rounded-circle img-thumbnail" /></div>
+                    <div><img src="{{a.img}}" alt="" class="avatar-md rounded-circle img-thumbnail" /></div>
                     <div class="flex-1 ms-3">
-                      <h5 class="font-size-16 mb-1"><a href="#" class="text-dark">{{p.name}}</a></h5>
+                      <h5 class="font-size-16 mb-1"><a href="#" class="text-dark">{{a.name}}</a></h5>
                       <span class="badge badge-soft-success mb-0">Đánh giá và bình luận sản phẩm</span>
                     </div>
                   </div>
 
                     <div class="mt-3 pt-1" >
-                      <p class="text-muted mb-0 mt-2"><i class="mdi mdi-google-maps font-size-15 align-middle pe-2 text-primary"></i>{{p.shop.name}}</p>
+                      <p class="text-muted mb-0 mt-2"><i class="mdi mdi-google-maps font-size-15 align-middle pe-2 text-primary"></i>{{a.shop.name}}</p>
                     </div>
-                    <input hidden [ngModel]="comment.productId" [value]="p.id" >
+
                     <!--                  đánh giá sao-->
 
-                    <div id="rating" [ngModel]="comment.star" >
-                      <input type="radio" id="star5" name="rating" value="5" #star1  (change)="comment.star = 5"/>
-                      <label class = "full" for="star5" title="Awesome - 5 stars"></label>
+                  <div id="rating">
 
-                      <input type="radio" id="star4" name="rating" value="4" #star2 (change)="comment.star = 4" />
-                      <label class = "full" for="star4" title="Pretty good - 4 stars" ></label>
 
-                      <input type="radio" id="star3" name="rating" value="3" #star3 (change)="comment.star = 3" />
-                      <label class = "full" for="star3" title="Meh - 3 stars"></label>
+                    <input type="radio" [id]="a.id + 'star5'" [name]="a.id + 'rating'" [checked]="a.star == 1" value="5" (change)="star(1,i)"/>
+                    <label class = "full" [for]="a.id + 'star5'" title="Awesome - 5 stars"></label>
+                    <input type="radio" [id]="a.id + 'star4'" [name]="a.id + 'rating'" [checked]="a.star == 2" value="4" (change)="star(2,i)"/>
+                    <label class = "full" [for]="a.id + 'star4'" title="Awesome - 4 stars"></label>
+                    <input type="radio" [id]="a.id + 'star3'" [name]="a.id + 'rating'" [checked]="a.star == 3" value="3" (change)="star(3,i)"/>
+                    <label class = "full" [for]="a.id + 'star3'" title="Awesome - 3 stars"></label>
+                    <input type="radio" [id]="a.id + 'star2'" [name]="a.id + 'rating'" [checked]="a.star == 4" value="2" (change)="star(4,i)"/>
+                    <label class = "full" [for]="a.id + 'star2'" title="Awesome - 2 stars"></label>
+                    <input type="radio" [id]="a.id + 'star1'" [name]="a.id + 'rating'" [checked]="a.star == 5" value="1" (change)="star(5,i)"/>
+                    <label class = "full" [for]="a.id + 'star1'" title="Awesome - 1 stars"></label>
 
-                      <input type="radio" id="star2" name="rating" value="2" #star4 (change)="comment.star = 2"/>
-                      <label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
 
-                      <input type="radio" id="star1" name="rating" value="1" #star5 (change)="comment.star = 1"/>
-                      <label class = "full" for="star1" title="Sucks big time - 1 star"></label>
                     </div> <br><br>
-                    <!--                  comment-->
-                    <input type="text" style="margin-right: 100px"  [(ngModel)]="comment.content"> <br>
+<!--                   cmt-->
+
+                  <input type="text" style="margin-right: 100px" name="cm" (keyup)="writeContent($event, i)"/> <br>
                     <div class="d-flex gap-2 pt-4">
-                      <button type="button" class="btn btn-primary btn-sm w-50" (click)="Comment()"><i class="bx bx-message-square-dots me-1"></i>Phản Hồi</button>
+                      <button type="button" class="btn btn-primary btn-sm w-50" (click)="Comment(i)"><i class="bx bx-message-square-dots me-1"></i>Phản Hồi</button>
                     </div>
 
 
                 </div>
               </div>
+
             </div>
           </div>
-
         </div>
 <!--        hiển thị sản phẩm-->
 
