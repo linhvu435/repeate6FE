@@ -88,13 +88,21 @@ export class ShopService {
     return this.http.get<Voucher[]>(`${API_URL}/showvoucher${idShop}`);
   }
   create(idVoucher:number,amount:number):Observable<Voucher[]>{
-  return this.http.get<Voucher[]>(`${API_URL}/createvoucher/${idVoucher}/${amount}`);
+    return this.http.get<Voucher[]>(`${API_URL}/createvoucher/${idVoucher}/${amount}`);
   }
 
   //endvoucher
   getallcategory(): Observable<Category[]>{
     return this.http.get<Category[]>(`${API_URL}/showproduct/getcategoryshopproduct`);
   }
+  editshop(name :string): Observable<Shop>{
+    return this.http.get<Shop>(`${API_URL}/shop/editnameshop/${name}`);
+  }
+
+  tinhsaosp(): Observable<Product[]>{
+    return this.http.get<Product[]>(`${API_URL}/order/tinhsaosp`);
+  }
+
 
 
   getcategoryshopuser(idShop:number): Observable<Category[]>{

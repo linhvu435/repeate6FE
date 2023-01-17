@@ -14,6 +14,9 @@ import {VoucherType} from "../../model/VoucherType";
 })
 export class MyproductshopComponent implements OnInit{
 
+  stars  = [1,2,3,4,5]
+
+
   products !:Product[];
 
   category!: Category[];
@@ -36,20 +39,15 @@ export class MyproductshopComponent implements OnInit{
       })
       this.showbillshop.getvoucher().subscribe((data) => {
         this.voucher = data
-        console.log(this.voucher)
       })
       this.showbillshop.getvouchertype().subscribe((data) => {
         this.vouchertype = data
-        console.log(this.vouchertype)
+      })
+      this.showbillshop.tinhsaosp().subscribe((data) => {
       })
     })
 
   }
 
-  search(name:string,pricemin:number,pricemax:number){
-    console.log(name)
-    console.log(pricemin)
-    console.log(pricemax)
-  }
 
 }

@@ -1,0 +1,13 @@
+.rating{
+  display: flex;
+  justify-content: center;
+  gap : 5px;
+  margin-top: 10px;
+}
+.i{
+  color: #feffe7;
+  cursor: pointer;
+}
+.active{
+  color: orange;
+}

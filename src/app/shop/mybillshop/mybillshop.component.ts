@@ -12,6 +12,9 @@ import {Product} from "../../model/Product";
   styleUrls: ['./mybillshop.component.css']
 })
 export class MybillshopComponent implements OnInit{
+  stars  = [1,2,3,4,5]
+
+  rating =3;
   bills :Bill[]=[];
 
   product!:ProductInBillDTO;
@@ -28,6 +31,8 @@ export class MybillshopComponent implements OnInit{
       console.log(this.bills)
       this.showbillshop.getallBillStatus().subscribe((data) => {
         this.billstatus = data
+      })
+      this.showbillshop.tinhsaosp().subscribe((data) => {
       })
     })
   }

@@ -220,35 +220,16 @@
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">Edit Employee</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Chỉnh sửa tên cửa hàng</h4>
       </div>
 
       <!-- Modal body -->
       <div class="modal-body">
-        <form action="update.php" id="edit-form">
-          <input class="form-control" type="hidden" name="id">
-          <div class="form-group">
-            <label >Email</label>
-            <input class="form-control" type="text" name="email">
-          </div>
-          <div class="form-group">
-            <label>First Name</label>
-            <input class="form-control" type="text" name="first_name">
-          </div>
-          <div class="form-group">
-            <label>Last Name</label>
-            <input class="form-control" type="text" name="last_name">
-          </div>
-          <div class="form-group">
-            <label>Address</label>
-            <textarea class="form-control" type="text" name="address" rows="3"></textarea>
-          </div>
-          <button type="button" class="btn btn-primary" id="btnUpdateSubmit">Update</button>
-          <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Close</button>
-        </form>
+        Nhập tên cửa hàng mới :<br>
 
+        <input class="form-control" type="text" name="id" [(ngModel)]="nameshop">
 
+        <button type="submit" (click)="editshop()">Xác nhận</button>
       </div>
 
     </div>
@@ -418,24 +399,24 @@
 
 
 
-<script>
-  $(document).ready(function() {
-    $('#cartModal').modal('show');
-  });
-  $(document).ready(function() {
-    $('#cartModal1').modal('show');
-  });
-</script>
+  <script>
+    $(document).ready(function() {
+      $('#cartModal').modal('show');
+    });
+    $(document).ready(function() {
+      $('#cartModal1').modal('show');
+    });
+  </script>
 
-<!-- Must put our javascript files here to fast the page loading -->
+  <!-- Must put our javascript files here to fast the page loading -->
 
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<!-- Popper JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<!-- Bootstrap JS -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<!-- Page Script -->
-<script src="assets/js/scripts.js"></script>
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- Popper JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- Page Script -->
+  <script src="assets/js/scripts.js"></script>
 
 </div>

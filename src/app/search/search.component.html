@@ -308,14 +308,15 @@
           <div class="pro-img-box" >
             <img src="{{c.img}}" alt="" width="300px" height="250px"/>
           </div>
-          <div class="rating rateit-small rateit" style="margin-left: 35%">
-            <div id="rateit-range-9" class="rateit-range" tabindex="0" role="slider" aria-label="rating" aria-owns="rateit-reset-9"  aria-valuenow="3" aria-readonly="true" style="width: 70px; height: 14px;">
-              <div class="rateit-selected"  style="height: 14px; width: 56px;"></div>
-            </div>
-          </div>
+
 
           <div class="panel-body text-center" style="margin-top: -25px;margin-bottom: -20px">
-
+            <div class="rating">
+              <ng-container *ngFor="let i of stars">
+                <i class="fa-solid fa-star " [ngClass]="{'active':i<=c.star}"></i>
+              </ng-container>
+            </div>
+            {{c.star}}/5
             <h4>
               <a href="#" class="pro-title">
                 <b>{{c.name}}</b>

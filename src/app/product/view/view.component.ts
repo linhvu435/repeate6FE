@@ -12,6 +12,8 @@ import {ImgProduct} from "../../model/ImgProduct";
   styleUrls: ['./view.component.css']
 })
 export class ViewComponent implements OnInit{
+  stars  = [1,2,3,4,5]
+
   id:any;
   product!:Product;
   idShop!: number
@@ -41,7 +43,9 @@ export class ViewComponent implements OnInit{
       })
       this.shopService.FindIdShopByProductId(this.id).subscribe((data)=>{
         this.idShop = data
-    })
+      })
+      this.shopService.tinhsaosp().subscribe((data) => {
+      })
     })
     this.idShopDangNhap=localStorage.getItem("idShop")
   }
@@ -76,7 +80,7 @@ export class ViewComponent implements OnInit{
         category: product.category,
         amount: 1,
       }
-        this.carts.push(cartItem)
+      this.carts.push(cartItem)
     }
 
     console.log( this.carts)

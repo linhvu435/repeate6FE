@@ -14,6 +14,7 @@ import {toNumbers} from "@angular/compiler-cli/src/version_helpers";
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit{
+  stars  = [1,2,3,4,5]
 
   id!:any;
 

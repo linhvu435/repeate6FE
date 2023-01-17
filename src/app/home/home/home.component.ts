@@ -4,6 +4,7 @@ import {ProductService} from "../../service/UserService/productservice/product.s
 import {Product} from "../../model/Product";
 import {SearchService} from "../../service/searchservice/search.service";
 import {Category} from "../../model/Category";
+import {ShopService} from "../../service/shopserviceM/shop.service";
 
 @Component({
   selector: 'app-home',
@@ -11,8 +12,9 @@ import {Category} from "../../model/Category";
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit,OnChanges{
- constructor(private http: HttpClient,private productService: ProductService,private  searchservice:SearchService) {
- }
+  constructor(private http: HttpClient,private productService: ProductService,private  searchservice:SearchService,private showbillshop :ShopService) {
+  }
+  stars  = [1,2,3,4,5]
 
   // @ts-ignore
   category : Category[] = [{}]
@@ -29,12 +31,15 @@ export class HomeComponent implements OnInit,OnChanges{
   totalItemsP: number = 0;
   totalItemsG: number = 0;
   async ngOnInit()  {
+    this.showbillshop.tinhsaosp().subscribe((data) => {
+    })
     await this.productService.getAll().subscribe((data) => {
       this.products = data
       this.totalItemsP = data.length
       this.searchservice.getallcategory().subscribe((data) => {
         this.category = data
       })
+
     })
     await this.productService.findNewProduct().subscribe((data) => {
       this.newProducts = data
@@ -49,11 +54,8 @@ export class HomeComponent implements OnInit,OnChanges{
   ngOnChanges(changes: SimpleChanges): void {
     this.productService.getAll().subscribe((data) => {
       this.products = data
+      console.log(this.products)
     })
-  }
-
-  PAGE($event: number) {
-    this.S = ($event)
   }
 
   PAGEP($event: number) {

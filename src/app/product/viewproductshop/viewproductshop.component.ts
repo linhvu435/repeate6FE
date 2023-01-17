@@ -11,6 +11,8 @@ import {Shop} from "../../model/Shop";
   styleUrls: ['./viewproductshop.component.css']
 })
 export class ViewproductshopComponent {
+
+  stars = [1,2,3,4,5]
   // @ts-ignore
   id:number;
   product!:Product[];
@@ -35,6 +37,8 @@ export class ViewproductshopComponent {
         this.productService.getProductByIdShop(this.id).subscribe((data) => {
           this.product = data;
           this.shop= this.product[0].shop;
+        })
+        this.showbillshop.tinhsaosp().subscribe((data) => {
         })
       })
 

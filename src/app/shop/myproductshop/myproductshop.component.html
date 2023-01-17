@@ -1,22 +1,6 @@
 
 <style>
-  @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
-  /*reset css*/
 
-  #rating{border:none;float:left;}
-  #rating>input{display:none;}/*ẩn input radio - vì chúng ta đã có label là GUI*/
-  #rating>label:before{margin:5px;font-size:1.25em;font-family:FontAwesome;display:inline-block;content:"\f005";}/*1 ngôi sao*/
-  #rating>.half:before{content:"\f089";position:absolute;}/*0.5 ngôi sao*/
-  #rating>label{color:#ddd;float:right;}/*float:right để lật ngược các ngôi sao lại đúng theo thứ tự trong thực tế*/
-  /*thêm màu cho sao đã chọn và các ngôi sao phía trước*/
-  #rating>input:checked~label,
-  #rating:not(:checked)>label:hover,
-  #rating:not(:checked)>label:hover~label{color:#FFD700;}
-  /* Hover vào các sao phía trước ngôi sao đã chọn*/
-  #rating>input:checked+label:hover,
-  #rating>input:checked~label:hover,
-  #rating>label:hover~input:checked~label,
-  #rating>input:checked~label:hover~label{color:#FFED85;}
   body {margin-top:20px;
     background:#f1f2f7;
   }
@@ -239,7 +223,7 @@
       <div class="panel-body sliders">
         <div class="sidebar-widget-body outer-top-xs">
           <div class="tag-list">
-           <b>Từ </b>  <input type="number" class="item"  placeholder="Nhập giá min" style="width: 70px" [ngModel]="min">
+            <b>Từ </b>  <input type="number" class="item"  placeholder="Nhập giá min" style="width: 70px" [ngModel]="min">
             <b>  Đến </b>   <input type="number" class="item"  placeholder="Nhập giá max" style="width: 70px" #max>
           </div>
           <!-- /.tag-list -->
@@ -252,23 +236,11 @@
       </header>
       <div class="panel-body">
 
-        <div id="rating" >
-          <input type="radio" id="star5" name="rating" value="5" #star1/>
-          <label class = "full" for="star5" title="Awesome - 5 stars"></label>
-
-          <input type="radio" id="star4" name="rating" value="4" #star2/>
-          <label class = "full" for="star4" title="Pretty good - 4 stars" ></label>
-
-          <input type="radio" id="star3" name="rating" value="3" #star3/>
-          <label class = "full" for="star3" title="Meh - 3 stars"></label>
-
-          <input type="radio" id="star2" name="rating" value="2" #star4/>
-          <label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-
-          <input type="radio" id="star1" name="rating" value="1" #star5/>
-          <label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-        </div>
-        <!-- /.sidebar-widget-body -->
+        <div class="rating">
+          <ng-container *ngFor="let i of stars">
+            <i class="fa-solid fa-star " [ngClass]="{'active':i<=5}"></i>
+          </ng-container>
+        </div>        <!-- /.sidebar-widget-body -->
 
       </div>
     </section>
@@ -291,10 +263,10 @@
           <div class="pro-img-box" >
             <img src="{{c.img}}" alt="" width="300px" height="250px"/>
           </div>
-          <div class="rating rateit-small rateit" style="margin-left: 35%">
-            <div id="rateit-range-9" class="rateit-range" tabindex="0" role="slider" aria-label="rating" aria-owns="rateit-reset-9"  aria-valuenow="3" aria-readonly="true" style="width: 70px; height: 14px;">
-              <div class="rateit-selected"  style="height: 14px; width: 56px;"></div>
-            </div>
+          <div class="rating">
+            <ng-container *ngFor="let i of stars">
+              <i class="fa-solid fa-star " [ngClass]="{'active':i<=c.star}"></i>
+            </ng-container>
           </div>
 
           <div class="panel-body text-center" style="margin-top: -25px;margin-bottom: -20px">
@@ -342,7 +314,7 @@
     <div class="modal-content">
       <div class="modal-header border-bottom-0">
         <h5 class="modal-title" id="exampleModalLabel" >
-<!--          Người mua :{{this.product.name}}-->
+          <!--          Người mua :{{this.product.name}}-->
           <button class="btn btn-white" ><i class="fa fa-arrow-right"></i>Xem thông tin cá nhân</button>
         </h5>
       </div>
@@ -368,14 +340,14 @@
             </div>
           </div>
         </div>
-<!--        <div class="d-flex justify-content-end">-->
-<!--                    <h5>Tạo mã giảm giá </h5>-->
+        <!--        <div class="d-flex justify-content-end">-->
+        <!--                    <h5>Tạo mã giảm giá </h5>-->
 
-<!--          <select >-->
-<!--            <option *ngFor="let vt of vouchertype">{{vt.name}}</option>-->
-<!--          </select>-->
-<!--          <button type="button" class="btn btn-success">Tạo mã</button>-->
-<!--        </div>-->
+        <!--          <select >-->
+        <!--            <option *ngFor="let vt of vouchertype">{{vt.name}}</option>-->
+        <!--          </select>-->
+        <!--          <button type="button" class="btn btn-success">Tạo mã</button>-->
+        <!--        </div>-->
       </div>
       <div class="modal-footer border-top-0 d-flex justify-content-between">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
