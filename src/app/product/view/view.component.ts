@@ -3,6 +3,8 @@ import {ActivatedRoute} from "@angular/router";
 import {ProductService} from "../../service/UserService/productservice/product.service";
 import {ShopService} from "../../service/shopserviceM/shop.service";
 import {Product} from "../../model/Product";
+import {CommentService} from "../../service/commentservice/comment.service";
+import {Comment} from "../../model/Comment";
 
 
 @Component({
@@ -14,12 +16,11 @@ export class ViewComponent {
   id:any;
   product!:Product;
   idShop!: number
-
   idShopDangNhap!: any;
-
+  comment: any;
   // @ts-ignore
   carts = JSON.parse(localStorage.getItem("carts"));
-  constructor(private route: ActivatedRoute, private productService : ProductService, private shopService:ShopService) {
+  constructor(private route: ActivatedRoute, private productService : ProductService, private shopService:ShopService, private commentService : CommentService) {
     if(this.carts == null){
       this.carts = []
     }
@@ -32,16 +33,17 @@ export class ViewComponent {
         this.product = data
       })
       this.shopService.FindIdShopByProductId(this.id).subscribe((data)=>{
-        console.log(data)
         this.idShop = data
     })
     })
     this.idShopDangNhap=localStorage.getItem("idShop")
+    this.commentService.findComment(this.id).subscribe((data)=>{
+      this.comment=data
+    })
   }
 
   danhdaulahethang(id : number) :void{
     this.shopService.danhdaulahethang(id).subscribe((data)=>{
-      console.log(data)
       this.product=data;
     })
   }

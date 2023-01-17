@@ -12,5 +12,7 @@ export class CommentService {
   comment(cmt: any): Observable<any>{
     return this.http.post<any>(API_URL+ '/comment',cmt);
   }
-
+  findComment(id : number): Observable<Comment[]>{
+    return  this.http.get<Comment[]>(`${API_URL}/comment/${id}` )
+  }
 }
