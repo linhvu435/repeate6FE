@@ -383,7 +383,7 @@
           </div>
 
           <div class="row" >
-            <div class="col-xl-3 col-sm-6" style="height: 400px; width: 350px" *ngFor="let a of productBillComment.products, index as i">
+            <div class="col-xl-3 col-sm-6" style="height: 300px; width: 250px" *ngFor="let a of productBillComment.products, index as i">
 
               <div class="card"  >
                 <div class="card-body">
@@ -424,11 +424,6 @@
 <!--                   cmt-->
 
                   <input type="text" style="margin-right: 100px" name="cm" (keyup)="writeContent($event, i)"/> <br>
-                    <div class="d-flex gap-2 pt-4">
-                      <button type="button" class="btn btn-primary btn-sm w-50" (click)="Comment(i)"><i class="bx bx-message-square-dots me-1"></i>Phản Hồi</button>
-                    </div>
-
-
                 </div>
               </div>
 
@@ -441,7 +436,7 @@
       </div>
       <div class="modal-footer border-top-0 d-flex justify-content-between">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-success">Checkout</button>
+        <button type="button" class="btn btn-success" (click)="Comment()">Checkout</button>
       </div>
     </div>
   </div>

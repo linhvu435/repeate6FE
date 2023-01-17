@@ -7,6 +7,7 @@ import {Router} from "@angular/router";
 import {CommentService} from "../service/commentservice/comment.service";
 import {ProductBillComment} from "../model/ProductBillComment";
 import {ProductComment} from "../model/Dtos/ProductComment";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-mybill',
@@ -20,9 +21,13 @@ export class MybillComponent implements OnInit{
 
   billstatus:BillStatus[] = [];
 
-  comment = {productId: 0, star: 0, content: '' }
-
+  comment = [{productId: 0, star: 0, content: '' }];
   productBillComment: ProductBillComment= new ProductBillComment()
+
+  listindex:number[]=[];
+
+
+  idbill:number=0;
 
   constructor(private showbillshop: ShopService ,private router:Router, private commentService: CommentService) {
   }
@@ -58,6 +63,7 @@ export class MybillComponent implements OnInit{
   }
 
   showbillbyidbill(id:number):void{
+    this.idbill=id;
     this.showbillshop.showbillbyidbill1(id).subscribe((data) => {
       this.product = data
       console.log(data)
@@ -86,26 +92,50 @@ export class MybillComponent implements OnInit{
   }
 
 
-  Comment(i: number){
-    let productComment = this.productBillComment.products[i];
-    let comment = {productId: productComment.id, star: 6 - productComment.star, content: productComment.comment }
-    console.log(comment)
-    this.commentService.comment(comment).subscribe(res => {
-
-    })
+  Comment(){
+    const set2 = new Set(this.listindex)
+    console.log(set2)
+    let check = false;
+    if (set2.size==this.productBillComment.products.length){
+      check=true;
+    }
+    if (check) {
+      for (let i = 0; i < set2.size; i++) {
+        let productComment = this.productBillComment.products[i];
+        let comment = {productId: productComment.id, star: 6 - productComment.star, content: productComment.comment}
+        this.commentService.comment(comment).subscribe(res => {
+          this.showbillshop.setbill(this.idbill, 5).subscribe((data) => {
+            this.showbillshop.showbillbystatus(5).subscribe((data) => {
+              this.bills = data;
+            })
+          })
+          Swal.fire(
+            ' Thành công',
+            '<h2 style="color: green; font-size: 32px">Bạn đã đánh giá thành công! </h2>',
+            'success')
+        })
+        this.listindex=[];
+      }
+    }else {
+      Swal.fire(
+        ' Có lỗi xảy ra',
+        '<h2 style="color: green; font-size: 32px">Vui lòng đánh giá hết! </h2>',
+        'warning')
+    }
   }
 
 
   star($event: number, i: number) {
-
     this.productBillComment.products[i].star = $event;
     $event = 6 - $event
-    console.log($event)
     console.log(i)
-    console.log(this.productBillComment)
+    console.log(this.productBillComment.products[i].star)
   }
 
   writeContent($event: any, i: number) {
     this.productBillComment.products[i].comment = $event.target.value
+    this.listindex.push(i)
+    console.log(i)
+    console.log(this.productBillComment.products[i].comment)
   }
 }
