@@ -195,10 +195,32 @@
 <div class="container bootdey" style="margin-top: 50px">
   <div class="col-md-3">
     <section class="panel">
+      <div  style="color: beige;text-align: center" class="label label-warning" >Cửa hàng của tôi</div>
+
+      <div class="panel-body">
+
+        <div class="container-fluid">
+          <img src="{{shop.img}}" id="imgshop" style="width:90px; border-radius:50%;-moz-border-radius:50%;-webkit-border-radius:50%;height: 80px;margin-left: -25px">
+          <div style="margin-left: 40%;margin-top: -80px">
+            <span *ngIf="shop.status==1" class="label label-success" >Cửa hàng mới</span>
+            <span *ngIf="shop.status==2"  class="label label-danger">Cửa hàng đã đưọc kiểm chứng</span>
+            <br>
+            Tên cửa hàng : {{shop.name}}<br>
+            Đánh giá :
+            <div class="rating">
+              <ng-container *ngFor="let i of stars">
+                <i class="fa-solid fa-star " [ngClass]="{'active':i<=starshop}"></i>
+              </ng-container>
+            </div>
+          </div>
+        </div>      </div>
+    </section>
+    <section class="panel">
       <div class="panel-body">
         <input type="text" placeholder="Tìm kiếm theo từ khóa" class="form-control" #name/>
       </div>
     </section>
+
     <section class="panel">
       <header class="panel-heading" style="background-color: yellow">
         <i class="icon fa fa-align-justify fa-fw"></i>         <b> Danh mục</b>

@@ -53,7 +53,7 @@
           <div class="search-area">
             <form>
               <div class="control-group">
-                <input class="search-field" placeholder="Search here...">
+                <input class="search-field" placeholder="Tìm kiếm ...">
                 <a class="search-button" href="#"></a> </div>
             </form>
           </div>
@@ -66,9 +66,8 @@
 
           <div class="dropdown dropdown-cart"> <a href="#" class="dropdown-toggle lnk-cart" data-toggle="dropdown">
             <div class="items-cart-inner">
-              <div class="basket"> <i class="glyphicon glyphicon-shopping-cart"></i> </div>
+              <div class="basket"> <i class="glyphicon glyphicon-shopping-cart" *ngIf="token!=null" routerLink="/cart"></i> </div>
               <div class="basket-item-count"><span class="count">2</span></div>
-              <div class="total-price-basket"> <span class="lbl">cart -</span> <span class="total-price"> <span class="sign">$</span><span class="value">600.00</span> </span> </div>
             </div>
           </a>
             <ul class="dropdown-menu">
@@ -78,20 +77,12 @@
                     <div class="col-xs-4">
                       <div class="image"> <a href="detail.html"><img src="assets\images\cart.jpg" alt=""></a> </div>
                     </div>
-                    <div class="col-xs-7">
-                      <h3 class="name"><a href="index.php?page-detail">Simple Product</a></h3>
-                      <div class="price">$600.00</div>
-                    </div>
-                    <div class="col-xs-1 action"> <a href="#"><i class="fa fa-trash"></i></a> </div>
                   </div>
                 </div>
                 <!-- /.cart-item -->
                 <div class="clearfix"></div>
                 <hr>
-                <div class="clearfix cart-total">
-                  <div class="pull-right"> <span class="text">Sub Total :</span><span class='price'>$600.00</span> </div>
-                  <div class="clearfix"></div>
-                  <a href="checkout.html" class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a> </div>
+
                 <!-- /.cart-total-->
 
               </li>
@@ -125,8 +116,8 @@
           <div class="navbar-collapse collapse" id="mc-horizontal-menu-collapse">
             <div class="nav-outer">
               <ul class="nav navbar-nav">
-                <li class="active dropdown yamm-fw"> <a href="home.html" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">Home</a> </li>
-                <li class="dropdown yamm mega-menu"> <a href="home.html" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">Clothing</a>
+                <li class="active dropdown yamm-fw"> <a href="home.html" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">Trang chủ</a> </li>
+                <li class="dropdown yamm mega-menu"> <a href="home.html" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">Quần áo</a>
                   <ul class="dropdown-menu container">
                     <li>
                       <div class="yamm-content ">
@@ -195,7 +186,7 @@
                   </ul>
                 </li>
                 <li class="dropdown mega-menu">
-                  <a href="category.html" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">Electronics <span class="menu-label hot-menu hidden-xs">hot</span> </a>
+                  <a href="category.html" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">Đồ điện tử <span class="menu-label hot-menu hidden-xs">Hot</span> </a>
                   <ul class="dropdown-menu container">
                     <li>
                       <div class="yamm-content">
@@ -272,12 +263,11 @@
                       <!-- /.yamm-content --> </li>
                   </ul>
                 </li>
-                <li class="dropdown hidden-sm"> <a href="category.html">Health & Beauty <span class="menu-label new-menu hidden-xs">new</span> </a> </li>
-                <li class="dropdown hidden-sm"> <a href="category.html">Watches</a> </li>
-                <li class="dropdown"> <a href="contact.html">Jewellery</a> </li>
-                <li class="dropdown"> <a href="contact.html">Shoes</a> </li>
-                <li class="dropdown"> <a href="contact.html">Kids & Girls</a> </li>
-                <li class="dropdown"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">Pages</a>
+                <li class="dropdown hidden-sm"> <a href="category.html">Sức khỏe và sắc đẹp<span class="menu-label new-menu hidden-xs">mới</span> </a> </li>
+                <li class="dropdown hidden-sm"> <a href="category.html">Đồng hồ</a> </li>
+                <li class="dropdown"> <a href="contact.html">Giày</a> </li>
+                <li class="dropdown"> <a href="contact.html">Trẻ em và nữ</a> </li>
+                <li class="dropdown"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">Trang chính</a>
                   <ul class="dropdown-menu pages">
                     <li>
                       <div class="yamm-content">
@@ -306,7 +296,7 @@
                     </li>
                   </ul>
                 </li>
-                <li class="dropdown  navbar-right special-menu"> <a href="#">Todays offer</a> </li>
+                <li class="dropdown  navbar-right special-menu"> <a href="#">Giảm giá hôm nay</a> </li>
               </ul>
               <!-- /.navbar-nav -->
               <div class="clearfix"></div>

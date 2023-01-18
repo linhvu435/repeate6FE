@@ -137,6 +137,9 @@ export class ShopService {
   showbillbystatus1(id:number):Observable<Bill[]>{
     return this.http.get<Bill[]>(`${API_URL}/orderuser/showBillShop/${id}`);
   }
+  getstarshop(id:number):Observable<any>{
+    return this.http.get<any>(`${API_URL}/showproduct/getstarshop/${id}`);
+  }
 
   getAllBillshop1(): Observable<Bill[]>{
     return this.http.get<Bill[]>(`${API_URL}/orderuser/showBillShop`);

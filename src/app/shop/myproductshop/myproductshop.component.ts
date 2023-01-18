@@ -6,6 +6,7 @@ import {Category} from "../../model/Category";
 import {min} from "rxjs";
 import {Voucher} from "../../model/Voucher";
 import {VoucherType} from "../../model/VoucherType";
+import {Shop} from "../../model/Shop";
 
 @Component({
   selector: 'app-myproductshop',
@@ -27,6 +28,11 @@ export class MyproductshopComponent implements OnInit{
 
   vouchertype!:VoucherType[];
 
+  shop!:Shop;
+
+  starshop!:number;
+
+
 
   constructor(private showbillshop: ShopService ,private router:Router) {
   }
@@ -34,6 +40,10 @@ export class MyproductshopComponent implements OnInit{
   ngOnInit(): void {
     this.showbillshop.getAllProductMyShop().subscribe((data) => {
       this.products = data
+      this.shop=this.products[0].shop
+      this.showbillshop.getstarshop(this.shop.id).subscribe((data) => {
+        this.starshop=data;
+      })
       this.showbillshop.getallcategory().subscribe((data) => {
         this.category = data
       })
@@ -44,6 +54,7 @@ export class MyproductshopComponent implements OnInit{
         this.vouchertype = data
       })
       this.showbillshop.tinhsaosp().subscribe((data) => {
+
       })
     })
 

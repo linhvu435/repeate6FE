@@ -66,6 +66,8 @@ export class MybillComponent implements OnInit{
     })
   }
 
+
+
   showbillbyidbill(id:number):void{
     this.idbill=id;
     this.showbillshop.showbillbyidbill1(id).subscribe((data) => {
@@ -91,6 +93,7 @@ export class MybillComponent implements OnInit{
 
       this.productBillComment.products = temp;
       console.log(this.productBillComment)
+
       // this.comment.productId = this.product.id;
     })
   }

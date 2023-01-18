@@ -291,10 +291,10 @@
             <br>
             Tên cửa hàng : {{shop.name}}<br>
             Đánh giá :
-            <div class="rating rateit-small rateit" >
-              <div id="rateit-range-91" class="rateit-range" tabindex="0" role="slider" aria-label="rating" aria-owns="rateit-reset-9"  aria-valuenow="3" aria-readonly="true" style="width: 70px; height: 14px;">
-                <div class="rateit-selected"  style="height: 14px; width: 56px;"></div>
-              </div>
+            <div class="rating">
+              <ng-container *ngFor="let i of stars">
+                <i class="fa-solid fa-star " [ngClass]="{'active':i<=starshop}"></i>
+              </ng-container>
             </div>
           </div>
         </div>
@@ -310,12 +310,11 @@
             <img src="{{c.img}}" alt="" width="300px" height="250px"/>
           </div>
           <div class="rating-reviews m-t-20">
-            <div class="rating">
+            <div class="rating" align="center">
               <ng-container *ngFor="let i of stars">
                 <i class="fa-solid fa-star " [ngClass]="{'active':i<=c.star}"></i>
               </ng-container>
             </div>
-            {{c.star}}/5
           </div>
 
           <div class="panel-body text-center" style="margin-top: -25px;margin-bottom: -20px">

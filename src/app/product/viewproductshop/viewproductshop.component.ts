@@ -21,6 +21,8 @@ export class ViewproductshopComponent {
   shop!:Shop;
 
   category!:Category[];
+
+  starshop!:number;
   constructor(
     private route: ActivatedRoute,
     private productService : ProductService,
@@ -37,6 +39,9 @@ export class ViewproductshopComponent {
         this.productService.getProductByIdShop(this.id).subscribe((data) => {
           this.product = data;
           this.shop= this.product[0].shop;
+          this.showbillshop.getstarshop(this.shop.id).subscribe((data) => {
+            this.starshop=data;
+          })
         })
         this.showbillshop.tinhsaosp().subscribe((data) => {
         })
