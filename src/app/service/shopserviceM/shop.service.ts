@@ -87,8 +87,12 @@ export class ShopService {
   getvoucherbyshop_id(idShop:number):Observable<Voucher[]>{
     return this.http.get<Voucher[]>(`${API_URL}/showvoucher/${idShop}`);
   }
-  create(idVoucher:number,amount:number):Observable<Voucher[]>{
-    return this.http.get<Voucher[]>(`${API_URL}/createvoucher/${idVoucher}/${amount}`);
+  create(idVoucher:number,amount:number):Observable<Voucher>{
+    return this.http.get<Voucher>(`${API_URL}/createvoucher/${idVoucher}/${amount}`);
+  }
+
+  delete(idVoucher:number):Observable<Voucher[]>{
+    return this.http.get<Voucher[]>(`${API_URL}/deletevoucher/${idVoucher}`);
   }
 
   //endvoucher

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {ShopService} from "../../service/shopserviceM/shop.service";
 import {Router} from "@angular/router";
 import {Product} from "../../model/Product";
@@ -7,6 +7,7 @@ import {min} from "rxjs";
 import {Voucher} from "../../model/Voucher";
 import {VoucherType} from "../../model/VoucherType";
 import {Shop} from "../../model/Shop";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-myproductshop',
@@ -31,6 +32,10 @@ export class MyproductshopComponent implements OnInit{
   shop!:Shop;
 
   starshop!:number;
+
+  amountvoucher:number=0;
+
+  idvouchertype!:number;
 
 
 
@@ -61,4 +66,51 @@ export class MyproductshopComponent implements OnInit{
   }
 
 
+
+  createvoucher(){
+    this.showbillshop.create(this.idvouchertype,this.amountvoucher).subscribe((data) => {
+      this.voucher.push(data);
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Thành công mã voucher của bạn là :' + data.name,
+        showConfirmButton: false,
+        timer: 1500
+      })
+    })
+  }
+
+  deletevoucher(id:number){
+    this.showbillshop.delete(id).subscribe((data) => {
+      this.voucher=data;
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Xóa voucher thành công !',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    })
+  }
+
+  messagePassSuccess() {
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Thêm mới voucher thành công !',
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
+
+  messagePassFail() {
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'Có lỗi xảy ra ! ',
+      showConfirmButton: false,
+      timer: 1500
+    })
+
+  }
 }

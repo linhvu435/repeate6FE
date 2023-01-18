@@ -9,5 +9,7 @@ export class Voucher {
 
   shop!:Shop;
 
+  status!:number;
+
   voucherType!:VoucherType;
 }
