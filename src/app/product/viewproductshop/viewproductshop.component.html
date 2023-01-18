@@ -278,6 +278,9 @@
       <div align="center" style="margin-top: 20px;" >
         <button type="button" class="btn btn-warning" style="width: 100%" ><b>Áp dụng</b></button>
       </div>
+      <div align="center" style="margin-top: 20px;" >
+        <button type="button" class="btn btn-warning" style="width: 100%" data-toggle="modal" data-target="#cartModal" ><b>Xem danh sách khuyến mãi </b></button>
+      </div>
     </section>
   </div>
   <div class="col-md-9">
@@ -335,6 +338,45 @@
     </div>
   </div>
 </div>
+
+
+
+<div class="modal fade" id="cartModal"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header border-bottom-0">
+        <h5 class="modal-title" id="exampleModalLabel" >
+          <button class="btn btn-white" ><i class="fa fa-arrow"></i>Danh sách voucher hiện có của shop</button>
+        </h5>
+      </div>
+      <div class="modal-body">
+        <div class="col-md-9">
+          <div class="row product-list" >
+            <div class="col-md-4"  *ngFor="let v of voucher">
+              <section class="panel">
+                <div class="pro-img-box" >
+                  <img *ngIf="v.amount>0" src="https://mgg.vn/ma-giam-gia-shopee/" alt="" style="width: 200px;height: 150px"/>
+                  <img *ngIf="v.amount<=0" src="http://file.hstatic.net/1000160337/article/diem_thuong_het_han_53741b12df424002867dab87aa4cb7d6_588160c2cd55436b8f8e296990023de6.jpg" alt="" style="width: 200px;height: 150px" />
+
+                </div>
+                <div class="panel-body text-center">
+                  <b>Mã giảm giá : {{v.name}}</b>
+                  <p class="price"><b>Số lượng còn lại :{{v.amount}}</b></p>
+                  <p style="color: #0b816a"><b>{{v.voucherType.name}}</b></p>
+                               </div>
+              </section>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer border-top-0 d-flex justify-content-between">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
 

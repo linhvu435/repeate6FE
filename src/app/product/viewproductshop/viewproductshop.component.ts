@@ -5,6 +5,7 @@ import {Product} from "../../model/Product";
 import {ShopService} from "../../service/shopserviceM/shop.service";
 import {Category} from "../../model/Category";
 import {Shop} from "../../model/Shop";
+import {Voucher} from "../../model/Voucher";
 @Component({
   selector: 'app-viewproductshop',
   templateUrl: './viewproductshop.component.html',
@@ -22,6 +23,8 @@ export class ViewproductshopComponent {
 
   category!:Category[];
 
+  voucher!:Voucher[];
+
   starshop!:number;
   constructor(
     private route: ActivatedRoute,
@@ -36,6 +39,9 @@ export class ViewproductshopComponent {
       this.showbillshop.getcategoryshopuser(this.id).subscribe((data) => {
         this.category = data
         console.log(this.category)
+        this.showbillshop.getvoucherbyshop_id(this.id).subscribe((data) => {
+          this.voucher = data
+        })
         this.productService.getProductByIdShop(this.id).subscribe((data) => {
           this.product = data;
           this.shop= this.product[0].shop;

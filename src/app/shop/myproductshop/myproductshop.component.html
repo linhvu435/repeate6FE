@@ -328,56 +328,62 @@
   </div>
 </div>
 
-
-
-
 <div class="modal fade" id="cartModal"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header border-bottom-0">
         <h5 class="modal-title" id="exampleModalLabel" >
-          <!--          Người mua :{{this.product.name}}-->
-          <button class="btn btn-white" ><i class="fa fa-arrow-right"></i>Xem thông tin cá nhân</button>
+          <button class="btn btn-white" ><i class="fa fa-arrow-right"></i>Tạo mới voucher</button>
         </h5>
       </div>
       <div class="modal-body">
         <div class="col-md-9">
           <div class="row product-list" >
-            <div class="col-md-4"  *ngFor="let v of voucher" >
+            <div class="col-md-4"  *ngFor="let v of voucher">
               <section class="panel">
                 <div class="pro-img-box" >
-                  <img src="https://mgg.vn/ma-giam-gia-shopee/" alt="" />
+                  <img *ngIf="v.amount>0" src="https://mgg.vn/ma-giam-gia-shopee/" alt="" style="width: 200px;height: 150px"/>
+                  <img *ngIf="v.amount<=0" src="http://file.hstatic.net/1000160337/article/diem_thuong_het_han_53741b12df424002867dab87aa4cb7d6_588160c2cd55436b8f8e296990023de6.jpg" alt="" style="width: 200px;height: 150px" />
 
                 </div>
                 <div class="panel-body text-center">
-                  <h4>
-                    <b>
-                      {{v.name}}
-                    </b>
-                  </h4>
-                  <p ><b>Số lượng :{{v.amount}}</b></p>
-                  <p > <b>{{v.vouchertype.name}}</b></p>
+                  <b>Mã giảm giá : {{v.name}}</b>
+                  <p class="price"><b>Số lượng còn lại :{{v.amount}}</b></p>
+                  <p style="color: #0b816a"><b>{{v.voucherType.name}}</b></p>
+                  <div class="romove-item">
+                    <button title="cancel" class="icon"><i class="fa fa-trash-o"></i></button></div>
                 </div>
               </section>
             </div>
           </div>
         </div>
-        <!--        <div class="d-flex justify-content-end">-->
-        <!--                    <h5>Tạo mã giảm giá </h5>-->
+        <div class="d-flex justify-content-end">
+          <h5><b>Tạo mã giảm giá</b></h5>
+          <select>
+            <option><b>Chọn loại mã giảm giá</b></option>
+            <option *ngFor="let vt of vouchertype">{{vt.name}}</option>
+          </select>
+          <br>
+          <br>
+          <b>Nhập số lượng :</b>
 
-        <!--          <select >-->
-        <!--            <option *ngFor="let vt of vouchertype">{{vt.name}}</option>-->
-        <!--          </select>-->
-        <!--          <button type="button" class="btn btn-success">Tạo mã</button>-->
-        <!--        </div>-->
+          <input type="number" placeholder="Chọn số lượng">
+          <br>
+          <br>
+          <button type="button" class="btn btn-success" data-dismiss="modal">Thêm mới mã giảm giá</button>
+<!--          <h5>Tổng :  {{product.products.length}} sản phẩm </h5>-->
+<!--          <h5>Thành tiền : <span class="price text-success">{{product.total}}</span></h5>-->
+        </div>
       </div>
       <div class="modal-footer border-top-0 d-flex justify-content-between">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-success">Checkout</button>
       </div>
     </div>
   </div>
 </div>
+
+
+
 <script>
   $(document).ready(function() {
     $('#cartModal').modal('show');

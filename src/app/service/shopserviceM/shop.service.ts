@@ -85,7 +85,7 @@ export class ShopService {
   }
 
   getvoucherbyshop_id(idShop:number):Observable<Voucher[]>{
-    return this.http.get<Voucher[]>(`${API_URL}/showvoucher${idShop}`);
+    return this.http.get<Voucher[]>(`${API_URL}/showvoucher/${idShop}`);
   }
   create(idVoucher:number,amount:number):Observable<Voucher[]>{
     return this.http.get<Voucher[]>(`${API_URL}/createvoucher/${idVoucher}/${amount}`);
@@ -112,9 +112,14 @@ export class ShopService {
     return this.http.get<Shop>(`${API_URL}/showproduct/showmyshop`);
   }
 
-  getallBillStatus():Observable<BillStatus[]>{
-    return this.http.get<BillStatus[]>(`${API_URL}/order/getallbillstatus`);
+  getallBillStatus():Observable<any>{
+    return this.http.get<any>(`${API_URL}/order/getallbillstatus`);
   }
+
+  getallBillStatus1():Observable<any>{
+    return this.http.get<any>(`${API_URL}/order/showbillstatusmybill`);
+  }
+
 
   setbill(idbill:number,idstatus:number):Observable<Bill>{
     return this.http.get<Bill>(`${API_URL}/order/setbill/${idbill}/${idstatus}`);

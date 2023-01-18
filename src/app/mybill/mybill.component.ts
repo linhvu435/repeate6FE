@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Bill} from "../model/Bill";
 import {ProductInBillDTO} from "../model/DTO/ProductInBillDTO";
 import {BillStatus} from "../model/BillStatus";
@@ -8,13 +8,14 @@ import {CommentService} from "../service/commentservice/comment.service";
 import {ProductBillComment} from "../model/ProductBillComment";
 import {ProductComment} from "../model/Dtos/ProductComment";
 import Swal from "sweetalert2";
+import {BillStatusDTO} from "../model/Dtos/BillStatusDTO";
 
 @Component({
   selector: 'app-mybill',
   templateUrl: './mybill.component.html',
   styleUrls: ['./mybill.component.css']
 })
-export class MybillComponent implements OnInit{
+export class MybillComponent implements OnInit,OnChanges{
   stars  = [1,2,3,4,5]
 
   bills :Bill[]=[];
@@ -31,6 +32,11 @@ export class MybillComponent implements OnInit{
 
   idbill:number=0;
 
+
+  billstatusDTO!:BillStatusDTO[];
+
+  amount:number=0;
+
   constructor(private showbillshop: ShopService ,private router:Router, private commentService: CommentService) {
   }
 
@@ -38,14 +44,27 @@ export class MybillComponent implements OnInit{
     this.showbillshop.getAllBillshop1().subscribe((data) => {
       console.log(data)
       this.bills = data
-      this.showbillshop.getallBillStatus().subscribe((data) => {
+      this.showbillshop.getallBillStatus1().subscribe((data) => {
         this.billstatus = data
-      })
+        this.billstatusDTO=data;
+        for (let i = 0; i < this.billstatusDTO.length; i++) {
+          this.amount+=this.billstatusDTO[i].amount;
+        }      })
       this.showbillshop.tinhsaosp().subscribe((data) => {
       })
     })
 
   }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.showbillshop.getallBillStatus1().subscribe((data) => {
+      this.billstatusDTO=data;
+      for (let i = 0; i < this.billstatusDTO.length; i++) {
+        this.amount+=this.billstatusDTO[i].amount;
+      }    })
+  }
+
+
 
 
   showbillbystatus(id:number):void{
@@ -145,4 +164,6 @@ export class MybillComponent implements OnInit{
     console.log(i)
     console.log(this.productBillComment.products[i].comment)
   }
+
+
 }

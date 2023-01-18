@@ -171,17 +171,18 @@
 
               <nav class="yamm megamenu-horizontal">
                 <ul class="nav">
-                  <li> <a  style="color: red" (click)="showbillshop1()"><b style="color: black">Toàn bộ đơn hàng </b> <b></b> </a> </li>
+                  <li> <a  style="color: red" (click)="showbillshop1()"><b style="color: black">Toàn bộ đơn hàng </b> <b>({{amount}})</b> </a> </li>
 
                 </ul>
                 <!-- /.nav -->
               </nav>
 
-              <div *ngFor="let m of billstatus" >
+              <div *ngFor="let m of billstatusDTO" >
                 <nav class="yamm megamenu-horizontal">
                   <ul class="nav">
                     <li>  <a  style="color: red" (click)="showbillbystatus(m.id)"> <b style="color: black" > {{m.name}} </b>
-                      <b>
+                      <b *ngIf="m.amount!=0">
+                        ({{m.amount}})
                       </b></a></li>
 
                   </ul>
@@ -285,7 +286,7 @@
             <div class="col-md-4"  *ngFor="let c of product.products">
               <section class="panel">
                 <div class="pro-img-box" >
-                  <img src="{{c.img}}" alt="" />
+                  <img src="{{c.img}}" alt="" style="width: 200px;height: 150px"/>
 
                 </div>
                 <div class="panel-body text-center">

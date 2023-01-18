@@ -9,5 +9,5 @@ export class Voucher {
 
   shop!:Shop;
 
- vouchertype!:VoucherType;
+  voucherType!:VoucherType;
 }
